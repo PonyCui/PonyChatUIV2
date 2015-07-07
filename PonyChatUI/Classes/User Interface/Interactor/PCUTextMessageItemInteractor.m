@@ -7,7 +7,16 @@
 //
 
 #import "PCUTextMessageItemInteractor.h"
+#import "PCUTextMessageEntity.h"
 
 @implementation PCUTextMessageItemInteractor
+
+- (instancetype)initWithMessageItem:(PCUMessageEntity *)messageItem {
+    self = [super initWithMessageItem:messageItem];
+    if (self) {
+        _messageText = [(PCUTextMessageEntity *)messageItem messageText];
+    }
+    return self;
+}
 
 @end

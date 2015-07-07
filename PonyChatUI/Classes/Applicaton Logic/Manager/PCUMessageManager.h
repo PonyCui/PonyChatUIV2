@@ -12,7 +12,18 @@
 
 @class PCUMessageEntity;
 
+@protocol PCUMessageManagerDelegate <NSObject>
+
+@required
+- (void)messageManagerItemsDidChanged;
+
+@end
+
 @interface PCUMessageManager : NSObject
+
+@property (nonatomic, weak) id<PCUMessageManagerDelegate> delegate;
+
+@property (nonatomic, copy) NSArray *messageItems;
 
 - (void)didReceiveMessageItem:(PCUMessageEntity *)messageItem;
 

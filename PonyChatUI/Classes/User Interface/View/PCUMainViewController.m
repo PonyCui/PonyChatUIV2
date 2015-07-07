@@ -41,6 +41,7 @@
                                                      green:235.0/255.0
                                                       blue:235.0/255.0
                                                      alpha:1.0];
+    [self.eventHandler updateView];
     // Do any additional setup after loading the view.
 }
 
@@ -61,11 +62,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 80;
+    return [self.eventHandler.messageInteractor.items count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
     return 1;
+}
+
+- (void)reloadData {
+    [self.tableView reloadDataWithCompletion:^{
+        
+    }];
 }
 
 #pragma mark - Getter

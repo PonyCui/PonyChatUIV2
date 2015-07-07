@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) PCUMainPresenter *eventHandler;
 
+- (void)reloadData;
+
 @end

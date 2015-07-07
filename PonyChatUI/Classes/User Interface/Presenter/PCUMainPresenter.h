@@ -16,4 +16,6 @@
 
 @property (nonatomic, strong) PCUMessageInteractor *messageInteractor;
 
+- (void)updateView;
+
 @end

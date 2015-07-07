@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4b0-Nm-DmE">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
@@ -23,7 +24,7 @@
         <!--Chat-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -31,12 +32,69 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIc-GG-Ihv">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="wxS-iS-6fb" kind="embed" id="LvV-So-3OG"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bIc-GG-Ihv" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-64" id="N1J-Na-Wbd">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="bIc-GG-Ihv" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pCD-gq-hoz"/>
+                            <constraint firstAttribute="trailing" secondItem="bIc-GG-Ihv" secondAttribute="trailing" id="rTd-yi-Ffx"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="bIc-GG-Ihv" secondAttribute="bottom" id="sFJ-bD-zVH"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="bIc-GG-Ihv"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="N1J-Na-Wbd"/>
+                                <exclude reference="pCD-gq-hoz"/>
+                                <exclude reference="rTd-yi-Ffx"/>
+                                <exclude reference="sFJ-bD-zVH"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="bIc-GG-Ihv"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="N1J-Na-Wbd"/>
+                                <include reference="pCD-gq-hoz"/>
+                                <include reference="rTd-yi-Ffx"/>
+                                <include reference="sFJ-bD-zVH"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Chat" id="N4G-ca-xkh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="547.5" y="483"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fuG-jg-2Ml">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="wxS-iS-6fb" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rJW-OS-p6l"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dsa-wG-SKw"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="dcC-VF-FlZ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kee-w8-VFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1471.5" y="483"/>
         </scene>
     </scenes>
 </document>

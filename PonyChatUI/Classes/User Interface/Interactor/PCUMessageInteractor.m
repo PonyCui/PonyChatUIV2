@@ -7,13 +7,30 @@
 //
 
 #import "PCUMessageInteractor.h"
+#import "PCUMessageManager.h"
+
+@interface PCUMessageInteractor ()<PCUMessageManagerDelegate>
+
+@end
 
 @implementation PCUMessageInteractor
 
-- (NSArray *)items {
-    return @[
-             [[PCUMessageItemInteractor alloc] init]
-             ];
+#pragma mark - PCUMessageManagerDelegate
+
+- (void)messageManagerItemsDidChanged {
+    NSMutableArray *itemsInteractor = [NSMutableArray array];
+    [self.messageManager.messageItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [itemsInteractor addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:obj]];
+    }];
+    self.items = itemsInteractor;
+    [self.delegate messageInteractorItemsDidUpdated];
+}
+
+#pragma mark - Setter
+
+- (void)setMessageManager:(PCUMessageManager *)messageManager {
+    _messageManager = messageManager;
+    [_messageManager setDelegate:self];
 }
 
 @end

@@ -8,10 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class PCUMessageEntity;
+
 @interface PCUMessageItemInteractor : NSObject
+
++ (PCUMessageItemInteractor *)itemInteractorWithMessageItem:(PCUMessageEntity *)messageItem;
+
+@property (nonatomic, assign) double messageOrder;
 
 @property (nonatomic, copy) NSString *avatarURLString;
 
 @property (nonatomic, copy) NSString *nicknameString;
+
+- (instancetype)initWithMessageItem:(PCUMessageEntity *)messageItem;
 
 @end

@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class PCUMessageManager;
+
 @interface PCUWireframe : NSObject
 
-- (UIView *)addMainViewToViewController:(UIViewController *)viewController;
+- (UIView *)addMainViewToViewController:(UIViewController *)viewController
+                     withMessageManager:(PCUMessageManager *)messageManager;
 
 @end

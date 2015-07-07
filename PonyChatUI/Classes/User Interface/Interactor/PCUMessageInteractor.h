@@ -9,7 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "PCUMessageItemInteractor.h"
 
+@class PCUMessageManager;
+
+@protocol PCUMessageInteractorDelegate <NSObject>
+
+- (void)messageInteractorItemsDidUpdated;
+
+@end
+
 @interface PCUMessageInteractor : NSObject
+
+@property (nonatomic, weak) id<PCUMessageInteractorDelegate> delegate;
+
+@property (nonatomic, strong) PCUMessageManager *messageManager;
 
 @property (nonatomic, copy) NSArray *items;
 

@@ -8,11 +8,15 @@
 
 #import "PCUWireframe.h"
 #import "PCUMainViewController.h"
+#import "PCUMainPresenter.h"
+#import "PCUMessageInteractor.h"
 
 @implementation PCUWireframe
 
-- (UIView *)addMainViewToViewController:(UIViewController *)viewController {
+- (UIView *)addMainViewToViewController:(UIViewController *)viewController
+                     withMessageManager:(PCUMessageManager *)messageManager {
     PCUMainViewController *mainViewController = [[PCUMainViewController alloc] init];
+    mainViewController.eventHandler.messageInteractor.messageManager = messageManager;
     [viewController addChildViewController:mainViewController];
     [viewController.view addSubview:mainViewController.view];
     return mainViewController.view;

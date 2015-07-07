@@ -30,7 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.chatView = [self.core.wireframe addMainViewToViewController:self];
+    self.chatView = [self.core.wireframe addMainViewToViewController:self
+                                                  withMessageManager:self.core.messageManager];
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -42,6 +44,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Debug
+
+- (void)receiveTextMessage {
+    PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
+    textMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
+    textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！ - %u",
+                                   arc4random()];
+    [self.core.messageManager didReceiveMessageItem:textMessageItem];
 }
 
 @end
