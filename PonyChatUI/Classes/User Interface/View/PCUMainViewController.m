@@ -58,7 +58,12 @@
 #pragma mark - ASTableView
 
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [PCUMessageCell cellForMessageInteractor:nil];
+    if (indexPath.row < [self.eventHandler.messageInteractor.items count]) {
+        return [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[indexPath.row]];
+    }
+    else {
+        return [PCUMessageCell cellForMessageInteractor:nil];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

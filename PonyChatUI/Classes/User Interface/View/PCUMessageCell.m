@@ -8,6 +8,7 @@
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "PCUMessageInteractor.h"
+#import "PCUTextMessageItemInteractor.h"
 #import "PCUMessageCell.h"
 #import "PCUTextMessageCell.h"
 
@@ -20,7 +21,12 @@
 @implementation PCUMessageCell
 
 + (PCUMessageCell *)cellForMessageInteractor:(PCUMessageItemInteractor *)messageInteractor {
-    return [[PCUTextMessageCell alloc] initWithMessageInteractor:messageInteractor];
+    if ([messageInteractor isKindOfClass:[PCUTextMessageItemInteractor class]]) {
+        return [[PCUTextMessageCell alloc] initWithMessageInteractor:messageInteractor];
+    }
+    else {
+        return [[PCUMessageCell alloc] initWithMessageInteractor:messageInteractor];
+    }
 }
 
 - (instancetype)initWithMessageInteractor:(PCUMessageItemInteractor *)messageInteractor

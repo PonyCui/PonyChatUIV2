@@ -17,7 +17,9 @@
     if ([messageItem isKindOfClass:[PCUTextMessageEntity class]]) {
         return [[PCUTextMessageItemInteractor alloc] initWithMessageItem:messageItem];
     }
-    return [[PCUMessageItemInteractor alloc] initWithMessageItem:messageItem];
+    else {
+        return [[PCUMessageItemInteractor alloc] initWithMessageItem:messageItem];
+    }
 }
 
 - (instancetype)initWithMessageItem:(PCUMessageEntity *)messageItem

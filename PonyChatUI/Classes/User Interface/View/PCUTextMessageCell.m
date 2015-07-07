@@ -94,9 +94,11 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 - (ASTextNode *)textNode {
     if (_textNode == nil) {
         _textNode = [[ASTextNode alloc] init];
-//        _textNode.attributedString = [[NSAttributedString alloc] initWithString:[[self textMessageInteractor] messageText]];
-        _textNode.attributedString = [[NSAttributedString alloc] initWithString:@"12345678901234567890123456789012345678901234567890123456789012345678901234567890\n你妹"
-                                                                     attributes:[self textStyle]];
+        NSString *text = [[self textMessageInteractor] messageText];
+        if (text == nil) {
+            text = @"";
+        }
+        _textNode.attributedString = [[NSAttributedString alloc] initWithString:text attributes:[self textStyle]];
     }
     return _textNode;
 }
