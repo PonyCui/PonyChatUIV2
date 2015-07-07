@@ -10,12 +10,17 @@
 #import "PCUMessageEntity.h"
 #import "PCUTextMessageEntity.h"
 #import "PCUTextMessageItemInteractor.h"
+#import "PCUSystemMessageEntity.h"
+#import "PCUSystemMessageItemInteractor.h"
 
 @implementation PCUMessageItemInteractor
 
 + (PCUMessageItemInteractor *)itemInteractorWithMessageItem:(PCUMessageEntity *)messageItem {
     if ([messageItem isKindOfClass:[PCUTextMessageEntity class]]) {
         return [[PCUTextMessageItemInteractor alloc] initWithMessageItem:messageItem];
+    }
+    else if ([messageItem isKindOfClass:[PCUSystemMessageEntity class]]) {
+        return [[PCUSystemMessageItemInteractor alloc] initWithMessageItem:messageItem];
     }
     else {
         return [[PCUMessageItemInteractor alloc] initWithMessageItem:messageItem];

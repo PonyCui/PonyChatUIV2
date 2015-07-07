@@ -32,9 +32,9 @@
     [super viewDidLoad];
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
+    [self receiveSystemMessage];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:11.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)viewWillLayoutSubviews {
@@ -48,6 +48,13 @@
 }
 
 #pragma mark - Debug
+
+- (void)receiveSystemMessage {
+    PCUSystemMessageEntity *systemMessageItem = [[PCUSystemMessageEntity alloc] init];
+    systemMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
+    systemMessageItem.messageText = @"Hello, World!";
+    [self.core.messageManager didReceiveMessageItem:systemMessageItem];
+}
 
 - (void)receiveTextMessage {
     PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];

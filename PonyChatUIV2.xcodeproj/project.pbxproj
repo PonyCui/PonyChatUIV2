@@ -45,6 +45,12 @@
 		6388BE9E1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */; };
 		6388BEA11B4B86A900F1D4B9 /* PonyChatUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */; };
 		6388BEA21B4B8ACE00F1D4B9 /* PonyChatUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */; };
+		6399E4B81B4BCD4C00906EEC /* PCUSystemMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6399E4B61B4BCD4C00906EEC /* PCUSystemMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6399E4B91B4BCD4C00906EEC /* PCUSystemMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6399E4B71B4BCD4C00906EEC /* PCUSystemMessageEntity.m */; };
+		6399E4BC1B4BCDE100906EEC /* PCUSystemMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6399E4BA1B4BCDE100906EEC /* PCUSystemMessageCell.h */; };
+		6399E4BD1B4BCDE100906EEC /* PCUSystemMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6399E4BB1B4BCDE100906EEC /* PCUSystemMessageCell.m */; };
+		6399E4C01B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6399E4BE1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h */; };
+		6399E4C11B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6399E4BF1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m */; };
 		A8343E9E5243B6417103DBB9 /* libPods-PonyChatUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +144,12 @@
 		6388BE9B1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUTextMessageItemInteractor.h; sourceTree = "<group>"; };
 		6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUTextMessageItemInteractor.m; sourceTree = "<group>"; };
 		6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PonyChatUI.xcassets; sourceTree = "<group>"; };
+		6399E4B61B4BCD4C00906EEC /* PCUSystemMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSystemMessageEntity.h; sourceTree = "<group>"; };
+		6399E4B71B4BCD4C00906EEC /* PCUSystemMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSystemMessageEntity.m; sourceTree = "<group>"; };
+		6399E4BA1B4BCDE100906EEC /* PCUSystemMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSystemMessageCell.h; sourceTree = "<group>"; };
+		6399E4BB1B4BCDE100906EEC /* PCUSystemMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSystemMessageCell.m; sourceTree = "<group>"; };
+		6399E4BE1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSystemMessageItemInteractor.h; sourceTree = "<group>"; };
+		6399E4BF1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSystemMessageItemInteractor.m; sourceTree = "<group>"; };
 		9C3D2D087BAB03BC067818C6 /* Pods-PonyChatUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PonyChatUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-PonyChatUI/Pods-PonyChatUI.release.xcconfig"; sourceTree = "<group>"; };
 		B145B35D789149B39C8A0C8B /* Pods-PonyChatUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PonyChatUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PonyChatUI/Pods-PonyChatUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PonyChatUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +354,8 @@
 				6388BE701B4A829200F1D4B9 /* PCUMessageEntity.m */,
 				6388BE771B4A83A800F1D4B9 /* PCUTextMessageEntity.h */,
 				6388BE781B4A83A800F1D4B9 /* PCUTextMessageEntity.m */,
+				6399E4B61B4BCD4C00906EEC /* PCUSystemMessageEntity.h */,
+				6399E4B71B4BCD4C00906EEC /* PCUSystemMessageEntity.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -364,6 +378,8 @@
 				6388BE901B4B741500F1D4B9 /* PCUMessageItemInteractor.m */,
 				6388BE9B1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h */,
 				6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */,
+				6399E4BE1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h */,
+				6399E4BF1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -386,6 +402,8 @@
 				6388BE881B4B6EFB00F1D4B9 /* PCUMessageCell.m */,
 				6388BE8B1B4B727400F1D4B9 /* PCUTextMessageCell.h */,
 				6388BE8C1B4B727400F1D4B9 /* PCUTextMessageCell.m */,
+				6399E4BA1B4BCDE100906EEC /* PCUSystemMessageCell.h */,
+				6399E4BB1B4BCDE100906EEC /* PCUSystemMessageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,10 +436,13 @@
 				6388BE6B1B4A819500F1D4B9 /* PCUCore.h in Headers */,
 				6388BE751B4A82A400F1D4B9 /* PCUMessageManager.h in Headers */,
 				6388BE9D1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h in Headers */,
+				6399E4C01B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h in Headers */,
 				6388BE951B4B743500F1D4B9 /* PCUMessageInteractor.h in Headers */,
+				6399E4B81B4BCD4C00906EEC /* PCUSystemMessageEntity.h in Headers */,
 				6388BE911B4B741500F1D4B9 /* PCUMessageItemInteractor.h in Headers */,
 				6388BE891B4B6EFB00F1D4B9 /* PCUMessageCell.h in Headers */,
 				6388BE791B4A83A800F1D4B9 /* PCUTextMessageEntity.h in Headers */,
+				6399E4BC1B4BCDE100906EEC /* PCUSystemMessageCell.h in Headers */,
 				6388BE811B4A8D9B00F1D4B9 /* PCUWireframe.h in Headers */,
 				6388BE711B4A829200F1D4B9 /* PCUMessageEntity.h in Headers */,
 				6388BE991B4B748F00F1D4B9 /* PCUMainPresenter.h in Headers */,
@@ -650,6 +671,7 @@
 			files = (
 				6388BE861B4A8E1F00F1D4B9 /* PCUMainViewController.m in Sources */,
 				6388BE9E1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m in Sources */,
+				6399E4C11B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m in Sources */,
 				6388BE8E1B4B727400F1D4B9 /* PCUTextMessageCell.m in Sources */,
 				6388BE7A1B4A83A800F1D4B9 /* PCUTextMessageEntity.m in Sources */,
 				6388BE821B4A8D9B00F1D4B9 /* PCUWireframe.m in Sources */,
@@ -657,7 +679,9 @@
 				6388BE761B4A82A400F1D4B9 /* PCUMessageManager.m in Sources */,
 				6388BE6C1B4A819500F1D4B9 /* PCUCore.m in Sources */,
 				6388BE721B4A829200F1D4B9 /* PCUMessageEntity.m in Sources */,
+				6399E4B91B4BCD4C00906EEC /* PCUSystemMessageEntity.m in Sources */,
 				6388BE9A1B4B748F00F1D4B9 /* PCUMainPresenter.m in Sources */,
+				6399E4BD1B4BCDE100906EEC /* PCUSystemMessageCell.m in Sources */,
 				6388BE921B4B741500F1D4B9 /* PCUMessageItemInteractor.m in Sources */,
 				6388BE961B4B743500F1D4B9 /* PCUMessageInteractor.m in Sources */,
 			);
@@ -800,6 +824,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PonyChatUIV2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -811,6 +836,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PonyChatUIV2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

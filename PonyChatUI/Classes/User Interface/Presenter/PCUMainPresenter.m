@@ -30,34 +30,26 @@
 
 - (void)updateView {
     isViewDidLoaded = YES;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.userInterface reloadData];
-//    });
+    [self.userInterface reloadData];
 }
 
 #pragma mark - PCUMessageInteractorDelegate
 
 - (void)messageInteractorItemsDidUpdated {
     if (isViewDidLoaded) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.userInterface reloadData];
-//        });
+        [self.userInterface reloadData];
     }
 }
 
 - (void)messageInteractorItemDidPushed {
     if (isViewDidLoaded) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.userInterface pushData];
-//        });
+        [self.userInterface pushData];
     }
 }
 
 - (void)messageInteractorItemDidInserted {
     if (isViewDidLoaded) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.userInterface insertData];
-//        });
+        [self.userInterface insertData];
     }
 }
 

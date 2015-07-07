@@ -37,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    self.tableView.frame = self.view.bounds;
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255.0
                                                      green:235.0/255.0
                                                       blue:235.0/255.0

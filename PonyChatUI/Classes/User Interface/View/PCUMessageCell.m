@@ -9,8 +9,10 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "PCUMessageInteractor.h"
 #import "PCUTextMessageItemInteractor.h"
+#import "PCUSystemMessageItemInteractor.h"
 #import "PCUMessageCell.h"
 #import "PCUTextMessageCell.h"
+#import "PCUSystemMessageCell.h"
 
 @interface PCUMessageCell ()<ASImageCacheProtocol, ASImageDownloaderProtocol>
 
@@ -26,6 +28,9 @@
     if ([messageInteractor isKindOfClass:[PCUTextMessageItemInteractor class]]) {
         return [[PCUTextMessageCell alloc] initWithMessageInteractor:messageInteractor];
     }
+    else if ([messageInteractor isKindOfClass:[PCUSystemMessageItemInteractor class]]) {
+        return [[PCUSystemMessageCell alloc] initWithMessageInteractor:messageInteractor];
+    }
     else {
         return [[PCUMessageCell alloc] initWithMessageInteractor:messageInteractor];
     }
@@ -37,7 +42,9 @@
     if (self) {
         [super setSelectionStyle:UITableViewCellSelectionStyleNone];
         _messageInteractor = messageInteractor;
-        [self addSubnode:self.avatarImageNode];
+        if (![self isKindOfClass:[PCUSystemMessageCell class]]) {
+            [self addSubnode:self.avatarImageNode];
+        }
     }
     return self;
 }

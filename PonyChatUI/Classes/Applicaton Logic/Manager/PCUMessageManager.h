@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PCUMessageEntity.h"
 #import "PCUTextMessageEntity.h"
+#import "PCUSystemMessageEntity.h"
 
 @class PCUMessageEntity;
 
