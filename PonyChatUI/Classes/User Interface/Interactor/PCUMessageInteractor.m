@@ -22,10 +22,10 @@
         [self reloadAllItems];
     }
     else if ([self.messageManager.messageItems count] == [self.items count] + 1) {
-        if ([[self.messageManager.messageItems lastObject] messageOrder] >= [[self.items lastObject] messageOrder]) {
+        if ([[self.messageManager.messageItems lastObject] messageOrder] > [[self.items lastObject] messageOrder]) {
             [self pushItem];
         }
-        else if ([[self.messageManager.messageItems firstObject] messageOrder] <= [[self.items firstObject] messageOrder]) {
+        else if ([[self.messageManager.messageItems firstObject] messageOrder] < [[self.items firstObject] messageOrder]) {
             [self insertItem];
         }
         else {
@@ -55,7 +55,7 @@
 
 - (void)insertItem {
     NSMutableArray *itemsInteractor = [self.items mutableCopy];
-    [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:[self.messageManager.messageItems lastObject]] atIndex:0];
+    [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:[self.messageManager.messageItems firstObject]] atIndex:0];
     self.items = itemsInteractor;
     [self.delegate messageInteractorItemDidInserted];
 }

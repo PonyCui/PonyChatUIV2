@@ -95,6 +95,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
+    [self forceScroll];
 }
 
 - (void)autoScroll {
@@ -105,6 +106,17 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.010 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                        animated:YES];
+        });
+    }
+}
+
+- (void)forceScroll {
+    if (self.tableView.contentOffset.y == self.tableView.contentSize.height - self.tableView.frame.size.height) {
+        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
+                                   animated:NO];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.010 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
+                                       animated:NO];
         });
     }
 }

@@ -33,6 +33,7 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:11.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -52,6 +53,16 @@
     PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
     textMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
     textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！Post:%@",
+                                   [[NSDate date] description]];
+    textMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
+    textMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
+    [self.core.messageManager didReceiveMessageItem:textMessageItem];
+}
+
+- (void)receivePreviousTextMessage {
+    PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
+    textMessageItem.messageOrder = -[[NSDate date] timeIntervalSince1970];
+    textMessageItem.messageText = [NSString stringWithFormat:@"这段文字来自很多年前，谢谢！Post:%@",
                                    [[NSDate date] description]];
     textMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
     textMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
