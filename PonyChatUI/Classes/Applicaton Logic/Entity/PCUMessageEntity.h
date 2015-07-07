@@ -15,6 +15,8 @@ typedef double PCUMessageOrder;
 
 @property (nonatomic, assign) PCUMessageOrder messageOrder;
 
+@property (nonatomic, assign) BOOL ownSender;
+
 @property (nonatomic, copy) NSString *senderNicknameString;
 
 @property (nonatomic, copy) NSString *senderAvatarURLString;

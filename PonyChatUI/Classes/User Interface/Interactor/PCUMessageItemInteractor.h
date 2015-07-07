@@ -14,6 +14,8 @@
 
 + (PCUMessageItemInteractor *)itemInteractorWithMessageItem:(PCUMessageEntity *)messageItem;
 
+@property (nonatomic, assign) BOOL ownSender;
+
 @property (nonatomic, assign) double messageOrder;
 
 @property (nonatomic, copy) NSString *avatarURLString;

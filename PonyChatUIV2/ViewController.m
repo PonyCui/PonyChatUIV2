@@ -53,6 +53,8 @@
     textMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
     textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！Post:%@",
                                    [[NSDate date] description]];
+    textMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
+    textMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
     [self.core.messageManager didReceiveMessageItem:textMessageItem];
 }
 

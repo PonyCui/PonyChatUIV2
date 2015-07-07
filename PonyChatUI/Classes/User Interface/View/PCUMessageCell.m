@@ -66,14 +66,18 @@
     if (_avatarImageNode == nil) {
         _avatarImageNode = [[ASNetworkImageNode alloc] initWithCache:self downloader:self];
         _avatarImageNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
-        _avatarImageNode.URL = [NSURL URLWithString:@"http://tp4.sinaimg.cn/1651799567/180/1290860930/1"];
-//        _avatarImageNode.URL = [NSURL URLWithString:self.messageInteractor.avatarURLString];
+        _avatarImageNode.URL = [NSURL URLWithString:self.messageInteractor.avatarURLString];
     }
     return _avatarImageNode;
 }
 
 - (PCUMessageActionType)actionType {
-    return PCUMessageActionTypeReceive;
+    if (self.messageInteractor.ownSender) {
+        return PCUMessageActionTypeSend;
+    }
+    else {
+        return PCUMessageActionTypeReceive;
+    }
 }
 
 #pragma mark - ASImage Cache and Downloader

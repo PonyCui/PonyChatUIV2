@@ -26,6 +26,7 @@
 {
     self = [super init];
     if (self) {
+        _ownSender = messageItem.ownSender;
         _messageOrder = messageItem.messageOrder;
         _avatarURLString = messageItem.senderAvatarURLString;
         _nicknameString = messageItem.senderNicknameString;
