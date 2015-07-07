@@ -32,7 +32,7 @@
     [super viewDidLoad];
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

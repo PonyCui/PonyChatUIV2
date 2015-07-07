@@ -87,6 +87,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastItemIndex inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
+    [self autoScroll];
 }
 
 - (void)insertData {
@@ -94,6 +95,18 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
+}
+
+- (void)autoScroll {
+    if (self.tableView.isTracking) {
+        return;
+    }
+    else if (self.tableView.contentOffset.y >= self.tableView.contentSize.height - self.tableView.frame.size.height * 2) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
+                                       animated:YES];
+        });
+    }
 }
 
 #pragma mark - Getter
