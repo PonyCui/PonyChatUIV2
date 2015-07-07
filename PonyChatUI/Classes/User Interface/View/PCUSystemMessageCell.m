@@ -10,14 +10,16 @@
 #import "PCUSystemMessageCell.h"
 #import "PCUSystemMessageItemInteractor.h"
 
-static const CGFloat kTextPaddingTop = 6.0f;
-static const CGFloat kTextPaddingLeft = 24.0f;
-static const CGFloat kTextPaddingRight = 24.0f;
-static const CGFloat kTextPaddingBottom = 6.0f;
+static const CGFloat kTextPaddingTop = 3.0f;
+static const CGFloat kTextPaddingLeft = 8.0f;
+static const CGFloat kTextPaddingRight = 8.0f;
+static const CGFloat kTextPaddingBottom = 3.0f;
 
 @interface PCUSystemMessageCell ()
 
 @property (nonatomic, strong) ASTextNode *textNode;
+
+@property (nonatomic, strong) ASDisplayNode *backgroundNode;
 
 @end
 
@@ -27,6 +29,7 @@ static const CGFloat kTextPaddingBottom = 6.0f;
 {
     self = [super initWithMessageInteractor:messageInteractor];
     if (self) {
+        [self addSubnode:self.backgroundNode];
         [self addSubnode:self.textNode];
     }
     return self;
@@ -35,9 +38,6 @@ static const CGFloat kTextPaddingBottom = 6.0f;
 #pragma mark - Node
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-    if (constrainedSize.width == 0.0) {
-        return CGSizeZero;
-    }
     CGSize textSize = [self.textNode measure:CGSizeMake(constrainedSize.width - kTextPaddingLeft - kTextPaddingRight,
                                                         constrainedSize.height)];
     return CGSizeMake(constrainedSize.width, textSize.height + kTextPaddingTop + kTextPaddingBottom + kCellGaps);
@@ -46,8 +46,14 @@ static const CGFloat kTextPaddingBottom = 6.0f;
 - (void)layout {
     self.textNode.frame = CGRectMake((self.calculatedSize.width - self.textNode.calculatedSize.width) / 2.0,
                                      kTextPaddingTop,
-                                     self.calculatedSize.width,
-                                     self.calculatedSize.height);
+                                     self.textNode.calculatedSize.width,
+                                     self.textNode.calculatedSize.height);
+    CGRect backgroundFrame = self.textNode.frame;
+    backgroundFrame.origin.x -= kTextPaddingLeft;
+    backgroundFrame.origin.y -= kTextPaddingTop;
+    backgroundFrame.size.width += kTextPaddingLeft + kTextPaddingRight;
+    backgroundFrame.size.height += kTextPaddingTop + kTextPaddingBottom;
+    self.backgroundNode.frame = backgroundFrame;
 }
 
 #pragma mark - Getter
@@ -68,14 +74,25 @@ static const CGFloat kTextPaddingBottom = 6.0f;
     return _textNode;
 }
 
+- (ASDisplayNode *)backgroundNode {
+    if (_backgroundNode == nil) {
+        _backgroundNode = [[ASDisplayNode alloc] init];
+        _backgroundNode.backgroundColor = [UIColor lightGrayColor];
+        _backgroundNode.layer.cornerRadius = 6.0f;
+        _backgroundNode.alpha = 0.6;
+    }
+    return _backgroundNode;
+}
+
 - (NSDictionary *)textStyle {
-    UIFont *font = [UIFont systemFontOfSize:kFontSize];
+    UIFont *font = [UIFont boldSystemFontOfSize:kFontSize * 0.85];
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.15 * font.lineHeight;
     style.hyphenationFactor = 1.0;
     return @{
              NSFontAttributeName: font,
-             NSParagraphStyleAttributeName: style
+             NSParagraphStyleAttributeName: style,
+             NSForegroundColorAttributeName: [UIColor whiteColor]
              };
 }
 
