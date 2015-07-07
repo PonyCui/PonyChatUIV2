@@ -85,7 +85,7 @@ static const CGFloat kTextPaddingBottom = 3.0f;
 }
 
 - (NSDictionary *)textStyle {
-    UIFont *font = [UIFont boldSystemFontOfSize:kFontSize * 0.85];
+    UIFont *font = [UIFont systemFontOfSize:kFontSize * 0.85];
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.15 * font.lineHeight;
     style.hyphenationFactor = 1.0;

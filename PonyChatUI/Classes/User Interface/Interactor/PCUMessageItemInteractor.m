@@ -12,6 +12,8 @@
 #import "PCUTextMessageItemInteractor.h"
 #import "PCUSystemMessageEntity.h"
 #import "PCUSystemMessageItemInteractor.h"
+#import "PCUImageMessageEntity.h"
+#import "PCUImageMessageItemInteractor.h"
 
 @implementation PCUMessageItemInteractor
 
@@ -21,6 +23,9 @@
     }
     else if ([messageItem isKindOfClass:[PCUSystemMessageEntity class]]) {
         return [[PCUSystemMessageItemInteractor alloc] initWithMessageItem:messageItem];
+    }
+    else if ([messageItem isKindOfClass:[PCUImageMessageEntity class]]) {
+        return [[PCUImageMessageItemInteractor alloc] initWithMessageItem:messageItem];
     }
     else {
         return [[PCUMessageItemInteractor alloc] initWithMessageItem:messageItem];
