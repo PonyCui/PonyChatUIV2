@@ -1,6 +1,6 @@
 //
-//  PonyChatUI_OCTests.m
-//  PonyChatUI-OCTests
+//  PonyChatUITests.m
+//  PonyChatUITests
 //
 //  Created by 崔 明辉 on 15/7/6.
 //  Copyright (c) 2015年 PonyCui. All rights reserved.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface PonyChatUI_OCTests : XCTestCase
+@interface PonyChatUITests : XCTestCase
 
 @end
 
-@implementation PonyChatUI_OCTests
+@implementation PonyChatUITests
 
 - (void)setUp {
     [super setUp];

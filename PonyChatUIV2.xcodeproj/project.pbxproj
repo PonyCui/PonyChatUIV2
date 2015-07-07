@@ -14,16 +14,38 @@
 		6388BDD01B4A7A3300F1D4B9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6388BDCF1B4A7A3300F1D4B9 /* Images.xcassets */; };
 		6388BDD31B4A7A3300F1D4B9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6388BDD11B4A7A3300F1D4B9 /* LaunchScreen.xib */; };
 		6388BDDF1B4A7A3300F1D4B9 /* PonyChatUIV2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDDE1B4A7A3300F1D4B9 /* PonyChatUIV2Tests.m */; };
-		6388BDF21B4A7AE600F1D4B9 /* PonyChatUI-OC.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BDF11B4A7AE600F1D4B9 /* PonyChatUI-OC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6388BDF81B4A7AE600F1D4B9 /* PonyChatUI-OC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BDED1B4A7AE600F1D4B9 /* PonyChatUI-OC.framework */; };
-		6388BE011B4A7AE700F1D4B9 /* PonyChatUI_OCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE001B4A7AE700F1D4B9 /* PonyChatUI_OCTests.m */; };
-		6388BE041B4A7AE700F1D4B9 /* PonyChatUI-OC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BDED1B4A7AE600F1D4B9 /* PonyChatUI-OC.framework */; };
-		6388BE051B4A7AE700F1D4B9 /* PonyChatUI-OC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BDED1B4A7AE600F1D4B9 /* PonyChatUI-OC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6388BE171B4A7B5E00F1D4B9 /* PonyChatUI-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE161B4A7B5E00F1D4B9 /* PonyChatUI-Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6388BE1D1B4A7B5F00F1D4B9 /* PonyChatUI-Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BE121B4A7B5E00F1D4B9 /* PonyChatUI-Swift.framework */; };
-		6388BE261B4A7B5F00F1D4B9 /* PonyChatUI_SwiftTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE251B4A7B5F00F1D4B9 /* PonyChatUI_SwiftTests.m */; };
-		6388BE291B4A7B5F00F1D4B9 /* PonyChatUI-Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BE121B4A7B5E00F1D4B9 /* PonyChatUI-Swift.framework */; };
-		6388BE2A1B4A7B5F00F1D4B9 /* PonyChatUI-Swift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BE121B4A7B5E00F1D4B9 /* PonyChatUI-Swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6388BE431B4A7C5C00F1D4B9 /* PonyChatUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE421B4A7C5C00F1D4B9 /* PonyChatUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6388BE491B4A7C5C00F1D4B9 /* PonyChatUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BE3E1B4A7C5C00F1D4B9 /* PonyChatUI.framework */; };
+		6388BE521B4A7C5C00F1D4B9 /* PonyChatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE511B4A7C5C00F1D4B9 /* PonyChatUITests.m */; };
+		6388BE561B4A7C5C00F1D4B9 /* PonyChatUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BE3E1B4A7C5C00F1D4B9 /* PonyChatUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6388BE651B4A7DB600F1D4B9 /* PonyChatUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6388BE3E1B4A7C5C00F1D4B9 /* PonyChatUI.framework */; };
+		6388BE6B1B4A819500F1D4B9 /* PCUCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE671B4A819500F1D4B9 /* PCUCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6388BE6C1B4A819500F1D4B9 /* PCUCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE681B4A819500F1D4B9 /* PCUCore.m */; };
+		6388BE711B4A829200F1D4B9 /* PCUMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE6F1B4A829200F1D4B9 /* PCUMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6388BE721B4A829200F1D4B9 /* PCUMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE701B4A829200F1D4B9 /* PCUMessageEntity.m */; };
+		6388BE751B4A82A400F1D4B9 /* PCUMessageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE731B4A82A400F1D4B9 /* PCUMessageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6388BE761B4A82A400F1D4B9 /* PCUMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE741B4A82A400F1D4B9 /* PCUMessageManager.m */; };
+		6388BE791B4A83A800F1D4B9 /* PCUTextMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE771B4A83A800F1D4B9 /* PCUTextMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6388BE7A1B4A83A800F1D4B9 /* PCUTextMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE781B4A83A800F1D4B9 /* PCUTextMessageEntity.m */; };
+		6388BE811B4A8D9B00F1D4B9 /* PCUWireframe.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE7F1B4A8D9B00F1D4B9 /* PCUWireframe.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6388BE821B4A8D9B00F1D4B9 /* PCUWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE801B4A8D9B00F1D4B9 /* PCUWireframe.m */; };
+		6388BE851B4A8E1F00F1D4B9 /* PCUMainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE831B4A8E1F00F1D4B9 /* PCUMainViewController.h */; };
+		6388BE861B4A8E1F00F1D4B9 /* PCUMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE841B4A8E1F00F1D4B9 /* PCUMainViewController.m */; };
+		6388BE891B4B6EFB00F1D4B9 /* PCUMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE871B4B6EFA00F1D4B9 /* PCUMessageCell.h */; };
+		6388BE8A1B4B6EFB00F1D4B9 /* PCUMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE881B4B6EFB00F1D4B9 /* PCUMessageCell.m */; };
+		6388BE8D1B4B727400F1D4B9 /* PCUTextMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE8B1B4B727400F1D4B9 /* PCUTextMessageCell.h */; };
+		6388BE8E1B4B727400F1D4B9 /* PCUTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE8C1B4B727400F1D4B9 /* PCUTextMessageCell.m */; };
+		6388BE911B4B741500F1D4B9 /* PCUMessageItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE8F1B4B741500F1D4B9 /* PCUMessageItemInteractor.h */; };
+		6388BE921B4B741500F1D4B9 /* PCUMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE901B4B741500F1D4B9 /* PCUMessageItemInteractor.m */; };
+		6388BE951B4B743500F1D4B9 /* PCUMessageInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE931B4B743500F1D4B9 /* PCUMessageInteractor.h */; };
+		6388BE961B4B743500F1D4B9 /* PCUMessageInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE941B4B743500F1D4B9 /* PCUMessageInteractor.m */; };
+		6388BE991B4B748F00F1D4B9 /* PCUMainPresenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE971B4B748F00F1D4B9 /* PCUMainPresenter.h */; };
+		6388BE9A1B4B748F00F1D4B9 /* PCUMainPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE981B4B748F00F1D4B9 /* PCUMainPresenter.m */; };
+		6388BE9D1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE9B1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h */; };
+		6388BE9E1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */; };
+		6388BEA11B4B86A900F1D4B9 /* PonyChatUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */; };
+		6388BEA21B4B8ACE00F1D4B9 /* PonyChatUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */; };
+		A8343E9E5243B6417103DBB9 /* libPods-PonyChatUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,47 +56,26 @@
 			remoteGlobalIDString = 6388BDBE1B4A7A3300F1D4B9;
 			remoteInfo = PonyChatUIV2;
 		};
-		6388BDF91B4A7AE600F1D4B9 /* PBXContainerItemProxy */ = {
+		6388BE4A1B4A7C5C00F1D4B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6388BDB71B4A7A3300F1D4B9 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6388BDEC1B4A7AE600F1D4B9;
-			remoteInfo = "PonyChatUI-OC";
+			remoteGlobalIDString = 6388BE3D1B4A7C5C00F1D4B9;
+			remoteInfo = PonyChatUI;
 		};
-		6388BDFB1B4A7AE700F1D4B9 /* PBXContainerItemProxy */ = {
+		6388BE4C1B4A7C5C00F1D4B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6388BDB71B4A7A3300F1D4B9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6388BDBE1B4A7A3300F1D4B9;
 			remoteInfo = PonyChatUIV2;
 		};
-		6388BE021B4A7AE700F1D4B9 /* PBXContainerItemProxy */ = {
+		6388BE531B4A7C5C00F1D4B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6388BDB71B4A7A3300F1D4B9 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6388BDEC1B4A7AE600F1D4B9;
-			remoteInfo = "PonyChatUI-OC";
-		};
-		6388BE1E1B4A7B5F00F1D4B9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6388BDB71B4A7A3300F1D4B9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6388BE111B4A7B5E00F1D4B9;
-			remoteInfo = "PonyChatUI-Swift";
-		};
-		6388BE201B4A7B5F00F1D4B9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6388BDB71B4A7A3300F1D4B9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6388BDBE1B4A7A3300F1D4B9;
-			remoteInfo = PonyChatUIV2;
-		};
-		6388BE271B4A7B5F00F1D4B9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6388BDB71B4A7A3300F1D4B9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6388BE111B4A7B5E00F1D4B9;
-			remoteInfo = "PonyChatUI-Swift";
+			remoteGlobalIDString = 6388BE3D1B4A7C5C00F1D4B9;
+			remoteInfo = PonyChatUI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -85,8 +86,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6388BE2A1B4A7B5F00F1D4B9 /* PonyChatUI-Swift.framework in Embed Frameworks */,
-				6388BE051B4A7AE700F1D4B9 /* PonyChatUI-OC.framework in Embed Frameworks */,
+				6388BE561B4A7C5C00F1D4B9 /* PonyChatUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,18 +107,40 @@
 		6388BDD81B4A7A3300F1D4B9 /* PonyChatUIV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PonyChatUIV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6388BDDD1B4A7A3300F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6388BDDE1B4A7A3300F1D4B9 /* PonyChatUIV2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyChatUIV2Tests.m; sourceTree = "<group>"; };
-		6388BDED1B4A7AE600F1D4B9 /* PonyChatUI-OC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "PonyChatUI-OC.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6388BDF01B4A7AE600F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6388BDF11B4A7AE600F1D4B9 /* PonyChatUI-OC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PonyChatUI-OC.h"; sourceTree = "<group>"; };
-		6388BDF71B4A7AE600F1D4B9 /* PonyChatUI-OCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PonyChatUI-OCTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6388BDFF1B4A7AE700F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6388BE001B4A7AE700F1D4B9 /* PonyChatUI_OCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyChatUI_OCTests.m; sourceTree = "<group>"; };
-		6388BE121B4A7B5E00F1D4B9 /* PonyChatUI-Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "PonyChatUI-Swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6388BE151B4A7B5E00F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6388BE161B4A7B5E00F1D4B9 /* PonyChatUI-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PonyChatUI-Swift.h"; sourceTree = "<group>"; };
-		6388BE1C1B4A7B5F00F1D4B9 /* PonyChatUI-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PonyChatUI-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6388BE241B4A7B5F00F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6388BE251B4A7B5F00F1D4B9 /* PonyChatUI_SwiftTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyChatUI_SwiftTests.m; sourceTree = "<group>"; };
+		6388BE3E1B4A7C5C00F1D4B9 /* PonyChatUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PonyChatUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6388BE411B4A7C5C00F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6388BE421B4A7C5C00F1D4B9 /* PonyChatUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PonyChatUI.h; sourceTree = "<group>"; };
+		6388BE481B4A7C5C00F1D4B9 /* PonyChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PonyChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6388BE501B4A7C5C00F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6388BE511B4A7C5C00F1D4B9 /* PonyChatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PonyChatUITests.m; sourceTree = "<group>"; };
+		6388BE671B4A819500F1D4B9 /* PCUCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUCore.h; sourceTree = "<group>"; };
+		6388BE681B4A819500F1D4B9 /* PCUCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUCore.m; sourceTree = "<group>"; };
+		6388BE6F1B4A829200F1D4B9 /* PCUMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMessageEntity.h; sourceTree = "<group>"; };
+		6388BE701B4A829200F1D4B9 /* PCUMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUMessageEntity.m; sourceTree = "<group>"; };
+		6388BE731B4A82A400F1D4B9 /* PCUMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMessageManager.h; sourceTree = "<group>"; };
+		6388BE741B4A82A400F1D4B9 /* PCUMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUMessageManager.m; sourceTree = "<group>"; };
+		6388BE771B4A83A800F1D4B9 /* PCUTextMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUTextMessageEntity.h; sourceTree = "<group>"; };
+		6388BE781B4A83A800F1D4B9 /* PCUTextMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUTextMessageEntity.m; sourceTree = "<group>"; };
+		6388BE7F1B4A8D9B00F1D4B9 /* PCUWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUWireframe.h; sourceTree = "<group>"; };
+		6388BE801B4A8D9B00F1D4B9 /* PCUWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUWireframe.m; sourceTree = "<group>"; };
+		6388BE831B4A8E1F00F1D4B9 /* PCUMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMainViewController.h; sourceTree = "<group>"; };
+		6388BE841B4A8E1F00F1D4B9 /* PCUMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUMainViewController.m; sourceTree = "<group>"; };
+		6388BE871B4B6EFA00F1D4B9 /* PCUMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMessageCell.h; sourceTree = "<group>"; };
+		6388BE881B4B6EFB00F1D4B9 /* PCUMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUMessageCell.m; sourceTree = "<group>"; };
+		6388BE8B1B4B727400F1D4B9 /* PCUTextMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUTextMessageCell.h; sourceTree = "<group>"; };
+		6388BE8C1B4B727400F1D4B9 /* PCUTextMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUTextMessageCell.m; sourceTree = "<group>"; };
+		6388BE8F1B4B741500F1D4B9 /* PCUMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMessageItemInteractor.h; sourceTree = "<group>"; };
+		6388BE901B4B741500F1D4B9 /* PCUMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUMessageItemInteractor.m; sourceTree = "<group>"; };
+		6388BE931B4B743500F1D4B9 /* PCUMessageInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMessageInteractor.h; sourceTree = "<group>"; };
+		6388BE941B4B743500F1D4B9 /* PCUMessageInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUMessageInteractor.m; sourceTree = "<group>"; };
+		6388BE971B4B748F00F1D4B9 /* PCUMainPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMainPresenter.h; sourceTree = "<group>"; };
+		6388BE981B4B748F00F1D4B9 /* PCUMainPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUMainPresenter.m; sourceTree = "<group>"; };
+		6388BE9B1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUTextMessageItemInteractor.h; sourceTree = "<group>"; };
+		6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUTextMessageItemInteractor.m; sourceTree = "<group>"; };
+		6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PonyChatUI.xcassets; sourceTree = "<group>"; };
+		9C3D2D087BAB03BC067818C6 /* Pods-PonyChatUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PonyChatUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-PonyChatUI/Pods-PonyChatUI.release.xcconfig"; sourceTree = "<group>"; };
+		B145B35D789149B39C8A0C8B /* Pods-PonyChatUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PonyChatUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PonyChatUI/Pods-PonyChatUI.debug.xcconfig"; sourceTree = "<group>"; };
+		F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PonyChatUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6388BE291B4A7B5F00F1D4B9 /* PonyChatUI-Swift.framework in Frameworks */,
-				6388BE041B4A7AE700F1D4B9 /* PonyChatUI-OC.framework in Frameworks */,
+				6388BE651B4A7DB600F1D4B9 /* PonyChatUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,49 +159,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6388BDE91B4A7AE600F1D4B9 /* Frameworks */ = {
+		6388BE3A1B4A7C5C00F1D4B9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8343E9E5243B6417103DBB9 /* libPods-PonyChatUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6388BDF41B4A7AE600F1D4B9 /* Frameworks */ = {
+		6388BE451B4A7C5C00F1D4B9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6388BDF81B4A7AE600F1D4B9 /* PonyChatUI-OC.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6388BE0E1B4A7B5E00F1D4B9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6388BE191B4A7B5F00F1D4B9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6388BE1D1B4A7B5F00F1D4B9 /* PonyChatUI-Swift.framework in Frameworks */,
+				6388BE491B4A7C5C00F1D4B9 /* PonyChatUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FEA162B1AF87FED238F2045 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E1E5EB67D81AF3505DF0F5A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B145B35D789149B39C8A0C8B /* Pods-PonyChatUI.debug.xcconfig */,
+				9C3D2D087BAB03BC067818C6 /* Pods-PonyChatUI.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6388BDB61B4A7A3300F1D4B9 = {
 			isa = PBXGroup;
 			children = (
 				6388BDC11B4A7A3300F1D4B9 /* PonyChatUIV2 */,
 				6388BDDB1B4A7A3300F1D4B9 /* PonyChatUIV2Tests */,
-				6388BDEE1B4A7AE600F1D4B9 /* PonyChatUI-OC */,
-				6388BDFD1B4A7AE700F1D4B9 /* PonyChatUI-OCTests */,
-				6388BE131B4A7B5E00F1D4B9 /* PonyChatUI-Swift */,
-				6388BE221B4A7B5F00F1D4B9 /* PonyChatUI-SwiftTests */,
+				6388BE3F1B4A7C5C00F1D4B9 /* PonyChatUI */,
+				6388BE4E1B4A7C5C00F1D4B9 /* PonyChatUITests */,
 				6388BDC01B4A7A3300F1D4B9 /* Products */,
+				5E1E5EB67D81AF3505DF0F5A /* Pods */,
+				0FEA162B1AF87FED238F2045 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,10 +213,8 @@
 			children = (
 				6388BDBF1B4A7A3300F1D4B9 /* PonyChatUIV2.app */,
 				6388BDD81B4A7A3300F1D4B9 /* PonyChatUIV2Tests.xctest */,
-				6388BDED1B4A7AE600F1D4B9 /* PonyChatUI-OC.framework */,
-				6388BDF71B4A7AE600F1D4B9 /* PonyChatUI-OCTests.xctest */,
-				6388BE121B4A7B5E00F1D4B9 /* PonyChatUI-Swift.framework */,
-				6388BE1C1B4A7B5F00F1D4B9 /* PonyChatUI-SwiftTests.xctest */,
+				6388BE3E1B4A7C5C00F1D4B9 /* PonyChatUI.framework */,
+				6388BE481B4A7C5C00F1D4B9 /* PonyChatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,90 +260,173 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6388BDEE1B4A7AE600F1D4B9 /* PonyChatUI-OC */ = {
+		6388BE3F1B4A7C5C00F1D4B9 /* PonyChatUI */ = {
 			isa = PBXGroup;
 			children = (
-				6388BDF11B4A7AE600F1D4B9 /* PonyChatUI-OC.h */,
-				6388BDEF1B4A7AE600F1D4B9 /* Supporting Files */,
+				6388BE421B4A7C5C00F1D4B9 /* PonyChatUI.h */,
+				6388BE5D1B4A7C9700F1D4B9 /* Classes */,
+				6388BE9F1B4B869700F1D4B9 /* Resources */,
+				6388BE401B4A7C5C00F1D4B9 /* Supporting Files */,
 			);
-			path = "PonyChatUI-OC";
+			path = PonyChatUI;
 			sourceTree = "<group>";
 		};
-		6388BDEF1B4A7AE600F1D4B9 /* Supporting Files */ = {
+		6388BE401B4A7C5C00F1D4B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6388BDF01B4A7AE600F1D4B9 /* Info.plist */,
+				6388BE411B4A7C5C00F1D4B9 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6388BDFD1B4A7AE700F1D4B9 /* PonyChatUI-OCTests */ = {
+		6388BE4E1B4A7C5C00F1D4B9 /* PonyChatUITests */ = {
 			isa = PBXGroup;
 			children = (
-				6388BE001B4A7AE700F1D4B9 /* PonyChatUI_OCTests.m */,
-				6388BDFE1B4A7AE700F1D4B9 /* Supporting Files */,
+				6388BE511B4A7C5C00F1D4B9 /* PonyChatUITests.m */,
+				6388BE4F1B4A7C5C00F1D4B9 /* Supporting Files */,
 			);
-			path = "PonyChatUI-OCTests";
+			path = PonyChatUITests;
 			sourceTree = "<group>";
 		};
-		6388BDFE1B4A7AE700F1D4B9 /* Supporting Files */ = {
+		6388BE4F1B4A7C5C00F1D4B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6388BDFF1B4A7AE700F1D4B9 /* Info.plist */,
+				6388BE501B4A7C5C00F1D4B9 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6388BE131B4A7B5E00F1D4B9 /* PonyChatUI-Swift */ = {
+		6388BE5D1B4A7C9700F1D4B9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6388BE161B4A7B5E00F1D4B9 /* PonyChatUI-Swift.h */,
-				6388BE141B4A7B5E00F1D4B9 /* Supporting Files */,
+				6388BE661B4A819500F1D4B9 /* Application Interface */,
+				6388BE691B4A819500F1D4B9 /* Applicaton Logic */,
+				6388BE6A1B4A819500F1D4B9 /* User Interface */,
 			);
-			path = "PonyChatUI-Swift";
+			path = Classes;
 			sourceTree = "<group>";
 		};
-		6388BE141B4A7B5E00F1D4B9 /* Supporting Files */ = {
+		6388BE661B4A819500F1D4B9 /* Application Interface */ = {
 			isa = PBXGroup;
 			children = (
-				6388BE151B4A7B5E00F1D4B9 /* Info.plist */,
+				6388BE671B4A819500F1D4B9 /* PCUCore.h */,
+				6388BE681B4A819500F1D4B9 /* PCUCore.m */,
 			);
-			name = "Supporting Files";
+			path = "Application Interface";
 			sourceTree = "<group>";
 		};
-		6388BE221B4A7B5F00F1D4B9 /* PonyChatUI-SwiftTests */ = {
+		6388BE691B4A819500F1D4B9 /* Applicaton Logic */ = {
 			isa = PBXGroup;
 			children = (
-				6388BE251B4A7B5F00F1D4B9 /* PonyChatUI_SwiftTests.m */,
-				6388BE231B4A7B5F00F1D4B9 /* Supporting Files */,
+				6388BE6D1B4A822400F1D4B9 /* Entity */,
+				6388BE6E1B4A822400F1D4B9 /* Manager */,
 			);
-			path = "PonyChatUI-SwiftTests";
+			path = "Applicaton Logic";
 			sourceTree = "<group>";
 		};
-		6388BE231B4A7B5F00F1D4B9 /* Supporting Files */ = {
+		6388BE6A1B4A819500F1D4B9 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				6388BE241B4A7B5F00F1D4B9 /* Info.plist */,
+				6388BE7B1B4A8D8400F1D4B9 /* Interactor */,
+				6388BE7C1B4A8D8400F1D4B9 /* Presenter */,
+				6388BE7D1B4A8D8400F1D4B9 /* View */,
+				6388BE7E1B4A8D8400F1D4B9 /* Wireframe */,
 			);
-			name = "Supporting Files";
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		6388BE6D1B4A822400F1D4B9 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				6388BE6F1B4A829200F1D4B9 /* PCUMessageEntity.h */,
+				6388BE701B4A829200F1D4B9 /* PCUMessageEntity.m */,
+				6388BE771B4A83A800F1D4B9 /* PCUTextMessageEntity.h */,
+				6388BE781B4A83A800F1D4B9 /* PCUTextMessageEntity.m */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		6388BE6E1B4A822400F1D4B9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6388BE731B4A82A400F1D4B9 /* PCUMessageManager.h */,
+				6388BE741B4A82A400F1D4B9 /* PCUMessageManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		6388BE7B1B4A8D8400F1D4B9 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6388BE931B4B743500F1D4B9 /* PCUMessageInteractor.h */,
+				6388BE941B4B743500F1D4B9 /* PCUMessageInteractor.m */,
+				6388BE8F1B4B741500F1D4B9 /* PCUMessageItemInteractor.h */,
+				6388BE901B4B741500F1D4B9 /* PCUMessageItemInteractor.m */,
+				6388BE9B1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h */,
+				6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6388BE7C1B4A8D8400F1D4B9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6388BE971B4B748F00F1D4B9 /* PCUMainPresenter.h */,
+				6388BE981B4B748F00F1D4B9 /* PCUMainPresenter.m */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6388BE7D1B4A8D8400F1D4B9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6388BE831B4A8E1F00F1D4B9 /* PCUMainViewController.h */,
+				6388BE841B4A8E1F00F1D4B9 /* PCUMainViewController.m */,
+				6388BE871B4B6EFA00F1D4B9 /* PCUMessageCell.h */,
+				6388BE881B4B6EFB00F1D4B9 /* PCUMessageCell.m */,
+				6388BE8B1B4B727400F1D4B9 /* PCUTextMessageCell.h */,
+				6388BE8C1B4B727400F1D4B9 /* PCUTextMessageCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6388BE7E1B4A8D8400F1D4B9 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				6388BE7F1B4A8D9B00F1D4B9 /* PCUWireframe.h */,
+				6388BE801B4A8D9B00F1D4B9 /* PCUWireframe.m */,
+			);
+			path = Wireframe;
+			sourceTree = "<group>";
+		};
+		6388BE9F1B4B869700F1D4B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		6388BDEA1B4A7AE600F1D4B9 /* Headers */ = {
+		6388BE3B1B4A7C5C00F1D4B9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6388BDF21B4A7AE600F1D4B9 /* PonyChatUI-OC.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6388BE0F1B4A7B5E00F1D4B9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6388BE171B4A7B5E00F1D4B9 /* PonyChatUI-Swift.h in Headers */,
+				6388BE851B4A8E1F00F1D4B9 /* PCUMainViewController.h in Headers */,
+				6388BE6B1B4A819500F1D4B9 /* PCUCore.h in Headers */,
+				6388BE751B4A82A400F1D4B9 /* PCUMessageManager.h in Headers */,
+				6388BE9D1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h in Headers */,
+				6388BE951B4B743500F1D4B9 /* PCUMessageInteractor.h in Headers */,
+				6388BE911B4B741500F1D4B9 /* PCUMessageItemInteractor.h in Headers */,
+				6388BE891B4B6EFB00F1D4B9 /* PCUMessageCell.h in Headers */,
+				6388BE791B4A83A800F1D4B9 /* PCUTextMessageEntity.h in Headers */,
+				6388BE811B4A8D9B00F1D4B9 /* PCUWireframe.h in Headers */,
+				6388BE711B4A829200F1D4B9 /* PCUMessageEntity.h in Headers */,
+				6388BE991B4B748F00F1D4B9 /* PCUMainPresenter.h in Headers */,
+				6388BE431B4A7C5C00F1D4B9 /* PonyChatUI.h in Headers */,
+				6388BE8D1B4B727400F1D4B9 /* PCUTextMessageCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,8 +445,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6388BE031B4A7AE700F1D4B9 /* PBXTargetDependency */,
-				6388BE281B4A7B5F00F1D4B9 /* PBXTargetDependency */,
+				6388BE541B4A7C5C00F1D4B9 /* PBXTargetDependency */,
 			);
 			name = PonyChatUIV2;
 			productName = PonyChatUIV2;
@@ -366,78 +470,43 @@
 			productReference = 6388BDD81B4A7A3300F1D4B9 /* PonyChatUIV2Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6388BDEC1B4A7AE600F1D4B9 /* PonyChatUI-OC */ = {
+		6388BE3D1B4A7C5C00F1D4B9 /* PonyChatUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6388BE0A1B4A7AE700F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-OC" */;
+			buildConfigurationList = 6388BE571B4A7C5C00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI" */;
 			buildPhases = (
-				6388BDE81B4A7AE600F1D4B9 /* Sources */,
-				6388BDE91B4A7AE600F1D4B9 /* Frameworks */,
-				6388BDEA1B4A7AE600F1D4B9 /* Headers */,
-				6388BDEB1B4A7AE600F1D4B9 /* Resources */,
+				B7A43747679F627EBA8CD863 /* Check Pods Manifest.lock */,
+				6388BE391B4A7C5C00F1D4B9 /* Sources */,
+				6388BE3A1B4A7C5C00F1D4B9 /* Frameworks */,
+				6388BE3B1B4A7C5C00F1D4B9 /* Headers */,
+				6388BE3C1B4A7C5C00F1D4B9 /* Resources */,
+				7F3A614C6C6359B84CEAEEDC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "PonyChatUI-OC";
-			productName = "PonyChatUI-OC";
-			productReference = 6388BDED1B4A7AE600F1D4B9 /* PonyChatUI-OC.framework */;
+			name = PonyChatUI;
+			productName = PonyChatUI;
+			productReference = 6388BE3E1B4A7C5C00F1D4B9 /* PonyChatUI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6388BDF61B4A7AE600F1D4B9 /* PonyChatUI-OCTests */ = {
+		6388BE471B4A7C5C00F1D4B9 /* PonyChatUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6388BE0C1B4A7AE700F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-OCTests" */;
+			buildConfigurationList = 6388BE5A1B4A7C5C00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUITests" */;
 			buildPhases = (
-				6388BDF31B4A7AE600F1D4B9 /* Sources */,
-				6388BDF41B4A7AE600F1D4B9 /* Frameworks */,
-				6388BDF51B4A7AE600F1D4B9 /* Resources */,
+				6388BE441B4A7C5C00F1D4B9 /* Sources */,
+				6388BE451B4A7C5C00F1D4B9 /* Frameworks */,
+				6388BE461B4A7C5C00F1D4B9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6388BDFA1B4A7AE600F1D4B9 /* PBXTargetDependency */,
-				6388BDFC1B4A7AE700F1D4B9 /* PBXTargetDependency */,
+				6388BE4B1B4A7C5C00F1D4B9 /* PBXTargetDependency */,
+				6388BE4D1B4A7C5C00F1D4B9 /* PBXTargetDependency */,
 			);
-			name = "PonyChatUI-OCTests";
-			productName = "PonyChatUI-OCTests";
-			productReference = 6388BDF71B4A7AE600F1D4B9 /* PonyChatUI-OCTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		6388BE111B4A7B5E00F1D4B9 /* PonyChatUI-Swift */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6388BE2B1B4A7B5F00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-Swift" */;
-			buildPhases = (
-				6388BE0D1B4A7B5E00F1D4B9 /* Sources */,
-				6388BE0E1B4A7B5E00F1D4B9 /* Frameworks */,
-				6388BE0F1B4A7B5E00F1D4B9 /* Headers */,
-				6388BE101B4A7B5E00F1D4B9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "PonyChatUI-Swift";
-			productName = "PonyChatUI-Swift";
-			productReference = 6388BE121B4A7B5E00F1D4B9 /* PonyChatUI-Swift.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		6388BE1B1B4A7B5F00F1D4B9 /* PonyChatUI-SwiftTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6388BE2E1B4A7B5F00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-SwiftTests" */;
-			buildPhases = (
-				6388BE181B4A7B5F00F1D4B9 /* Sources */,
-				6388BE191B4A7B5F00F1D4B9 /* Frameworks */,
-				6388BE1A1B4A7B5F00F1D4B9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6388BE1F1B4A7B5F00F1D4B9 /* PBXTargetDependency */,
-				6388BE211B4A7B5F00F1D4B9 /* PBXTargetDependency */,
-			);
-			name = "PonyChatUI-SwiftTests";
-			productName = "PonyChatUI-SwiftTests";
-			productReference = 6388BE1C1B4A7B5F00F1D4B9 /* PonyChatUI-SwiftTests.xctest */;
+			name = PonyChatUITests;
+			productName = PonyChatUITests;
+			productReference = 6388BE481B4A7C5C00F1D4B9 /* PonyChatUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -446,6 +515,7 @@
 		6388BDB71B4A7A3300F1D4B9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PCU;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = PonyCui;
 				TargetAttributes = {
@@ -456,17 +526,10 @@
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = 6388BDBE1B4A7A3300F1D4B9;
 					};
-					6388BDEC1B4A7AE600F1D4B9 = {
+					6388BE3D1B4A7C5C00F1D4B9 = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					6388BDF61B4A7AE600F1D4B9 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 6388BDBE1B4A7A3300F1D4B9;
-					};
-					6388BE111B4A7B5E00F1D4B9 = {
-						CreatedOnToolsVersion = 6.4;
-					};
-					6388BE1B1B4A7B5F00F1D4B9 = {
+					6388BE471B4A7C5C00F1D4B9 = {
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = 6388BDBE1B4A7A3300F1D4B9;
 					};
@@ -487,10 +550,8 @@
 			targets = (
 				6388BDBE1B4A7A3300F1D4B9 /* PonyChatUIV2 */,
 				6388BDD71B4A7A3300F1D4B9 /* PonyChatUIV2Tests */,
-				6388BDEC1B4A7AE600F1D4B9 /* PonyChatUI-OC */,
-				6388BDF61B4A7AE600F1D4B9 /* PonyChatUI-OCTests */,
-				6388BE111B4A7B5E00F1D4B9 /* PonyChatUI-Swift */,
-				6388BE1B1B4A7B5F00F1D4B9 /* PonyChatUI-SwiftTests */,
+				6388BE3D1B4A7C5C00F1D4B9 /* PonyChatUI */,
+				6388BE471B4A7C5C00F1D4B9 /* PonyChatUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -500,6 +561,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6388BEA21B4B8ACE00F1D4B9 /* PonyChatUI.xcassets in Resources */,
 				6388BDCE1B4A7A3300F1D4B9 /* Main.storyboard in Resources */,
 				6388BDD31B4A7A3300F1D4B9 /* LaunchScreen.xib in Resources */,
 				6388BDD01B4A7A3300F1D4B9 /* Images.xcassets in Resources */,
@@ -513,28 +575,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6388BDEB1B4A7AE600F1D4B9 /* Resources */ = {
+		6388BE3C1B4A7C5C00F1D4B9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6388BEA11B4B86A900F1D4B9 /* PonyChatUI.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6388BDF51B4A7AE600F1D4B9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6388BE101B4A7B5E00F1D4B9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6388BE1A1B4A7B5F00F1D4B9 /* Resources */ = {
+		6388BE461B4A7C5C00F1D4B9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -542,6 +591,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7F3A614C6C6359B84CEAEEDC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PonyChatUI/Pods-PonyChatUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7A43747679F627EBA8CD863 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6388BDBB1B4A7A3300F1D4B9 /* Sources */ = {
@@ -562,33 +644,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6388BDE81B4A7AE600F1D4B9 /* Sources */ = {
+		6388BE391B4A7C5C00F1D4B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6388BE861B4A8E1F00F1D4B9 /* PCUMainViewController.m in Sources */,
+				6388BE9E1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m in Sources */,
+				6388BE8E1B4B727400F1D4B9 /* PCUTextMessageCell.m in Sources */,
+				6388BE7A1B4A83A800F1D4B9 /* PCUTextMessageEntity.m in Sources */,
+				6388BE821B4A8D9B00F1D4B9 /* PCUWireframe.m in Sources */,
+				6388BE8A1B4B6EFB00F1D4B9 /* PCUMessageCell.m in Sources */,
+				6388BE761B4A82A400F1D4B9 /* PCUMessageManager.m in Sources */,
+				6388BE6C1B4A819500F1D4B9 /* PCUCore.m in Sources */,
+				6388BE721B4A829200F1D4B9 /* PCUMessageEntity.m in Sources */,
+				6388BE9A1B4B748F00F1D4B9 /* PCUMainPresenter.m in Sources */,
+				6388BE921B4B741500F1D4B9 /* PCUMessageItemInteractor.m in Sources */,
+				6388BE961B4B743500F1D4B9 /* PCUMessageInteractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6388BDF31B4A7AE600F1D4B9 /* Sources */ = {
+		6388BE441B4A7C5C00F1D4B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6388BE011B4A7AE700F1D4B9 /* PonyChatUI_OCTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6388BE0D1B4A7B5E00F1D4B9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6388BE181B4A7B5F00F1D4B9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6388BE261B4A7B5F00F1D4B9 /* PonyChatUI_SwiftTests.m in Sources */,
+				6388BE521B4A7C5C00F1D4B9 /* PonyChatUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,35 +679,20 @@
 			target = 6388BDBE1B4A7A3300F1D4B9 /* PonyChatUIV2 */;
 			targetProxy = 6388BDD91B4A7A3300F1D4B9 /* PBXContainerItemProxy */;
 		};
-		6388BDFA1B4A7AE600F1D4B9 /* PBXTargetDependency */ = {
+		6388BE4B1B4A7C5C00F1D4B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6388BDEC1B4A7AE600F1D4B9 /* PonyChatUI-OC */;
-			targetProxy = 6388BDF91B4A7AE600F1D4B9 /* PBXContainerItemProxy */;
+			target = 6388BE3D1B4A7C5C00F1D4B9 /* PonyChatUI */;
+			targetProxy = 6388BE4A1B4A7C5C00F1D4B9 /* PBXContainerItemProxy */;
 		};
-		6388BDFC1B4A7AE700F1D4B9 /* PBXTargetDependency */ = {
+		6388BE4D1B4A7C5C00F1D4B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6388BDBE1B4A7A3300F1D4B9 /* PonyChatUIV2 */;
-			targetProxy = 6388BDFB1B4A7AE700F1D4B9 /* PBXContainerItemProxy */;
+			targetProxy = 6388BE4C1B4A7C5C00F1D4B9 /* PBXContainerItemProxy */;
 		};
-		6388BE031B4A7AE700F1D4B9 /* PBXTargetDependency */ = {
+		6388BE541B4A7C5C00F1D4B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6388BDEC1B4A7AE600F1D4B9 /* PonyChatUI-OC */;
-			targetProxy = 6388BE021B4A7AE700F1D4B9 /* PBXContainerItemProxy */;
-		};
-		6388BE1F1B4A7B5F00F1D4B9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6388BE111B4A7B5E00F1D4B9 /* PonyChatUI-Swift */;
-			targetProxy = 6388BE1E1B4A7B5F00F1D4B9 /* PBXContainerItemProxy */;
-		};
-		6388BE211B4A7B5F00F1D4B9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6388BDBE1B4A7A3300F1D4B9 /* PonyChatUIV2 */;
-			targetProxy = 6388BE201B4A7B5F00F1D4B9 /* PBXContainerItemProxy */;
-		};
-		6388BE281B4A7B5F00F1D4B9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6388BE111B4A7B5E00F1D4B9 /* PonyChatUI-Swift */;
-			targetProxy = 6388BE271B4A7B5F00F1D4B9 /* PBXContainerItemProxy */;
+			target = 6388BE3D1B4A7C5C00F1D4B9 /* PonyChatUI */;
+			targetProxy = 6388BE531B4A7C5C00F1D4B9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -786,8 +850,9 @@
 			};
 			name = Release;
 		};
-		6388BE061B4A7AE700F1D4B9 /* Debug */ = {
+		6388BE581B4A7C5C00F1D4B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B145B35D789149B39C8A0C8B /* Pods-PonyChatUI.debug.xcconfig */;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -798,7 +863,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "PonyChatUI-OC/Info.plist";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = PonyChatUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -809,89 +878,20 @@
 			};
 			name = Debug;
 		};
-		6388BE071B4A7AE700F1D4B9 /* Release */ = {
+		6388BE591B4A7C5C00F1D4B9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C3D2D087BAB03BC067818C6 /* Pods-PonyChatUI.release.xcconfig */;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "PonyChatUI-OC/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6388BE081B4A7AE700F1D4B9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
+				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PonyChatUI-OCTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PonyChatUIV2.app/PonyChatUIV2";
-			};
-			name = Debug;
-		};
-		6388BE091B4A7AE700F1D4B9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PonyChatUI-OCTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PonyChatUIV2.app/PonyChatUIV2";
-			};
-			name = Release;
-		};
-		6388BE2C1B4A7B5F00F1D4B9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PonyChatUI-Swift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		6388BE2D1B4A7B5F00F1D4B9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "PonyChatUI-Swift/Info.plist";
+				INFOPLIST_FILE = PonyChatUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -902,7 +902,7 @@
 			};
 			name = Release;
 		};
-		6388BE2F1B4A7B5F00F1D4B9 /* Debug */ = {
+		6388BE5B1B4A7C5C00F1D4B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -913,21 +913,21 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "PonyChatUI-SwiftTests/Info.plist";
+				INFOPLIST_FILE = PonyChatUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PonyChatUIV2.app/PonyChatUIV2";
 			};
 			name = Debug;
 		};
-		6388BE301B4A7B5F00F1D4B9 /* Release */ = {
+		6388BE5C1B4A7C5C00F1D4B9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "PonyChatUI-SwiftTests/Info.plist";
+				INFOPLIST_FILE = PonyChatUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PonyChatUIV2.app/PonyChatUIV2";
@@ -964,37 +964,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6388BE0A1B4A7AE700F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-OC" */ = {
+		6388BE571B4A7C5C00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6388BE061B4A7AE700F1D4B9 /* Debug */,
-				6388BE071B4A7AE700F1D4B9 /* Release */,
+				6388BE581B4A7C5C00F1D4B9 /* Debug */,
+				6388BE591B4A7C5C00F1D4B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		6388BE0C1B4A7AE700F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-OCTests" */ = {
+		6388BE5A1B4A7C5C00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6388BE081B4A7AE700F1D4B9 /* Debug */,
-				6388BE091B4A7AE700F1D4B9 /* Release */,
+				6388BE5B1B4A7C5C00F1D4B9 /* Debug */,
+				6388BE5C1B4A7C5C00F1D4B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		6388BE2B1B4A7B5F00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-Swift" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6388BE2C1B4A7B5F00F1D4B9 /* Debug */,
-				6388BE2D1B4A7B5F00F1D4B9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		6388BE2E1B4A7B5F00F1D4B9 /* Build configuration list for PBXNativeTarget "PonyChatUI-SwiftTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6388BE2F1B4A7B5F00F1D4B9 /* Debug */,
-				6388BE301B4A7B5F00F1D4B9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
