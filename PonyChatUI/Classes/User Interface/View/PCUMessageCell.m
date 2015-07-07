@@ -133,4 +133,8 @@
     return nil;
 }
 
+- (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier {
+    
+}
+
 @end
