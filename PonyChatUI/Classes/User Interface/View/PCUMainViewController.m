@@ -75,9 +75,25 @@
 }
 
 - (void)reloadData {
-    [self.tableView reloadDataWithCompletion:^{
-        
-    }];
+    [self.tableView reloadData];
+}
+
+- (void)pushData {
+    NSInteger lastItemIndex = [self.eventHandler.messageInteractor.items count] - 1;
+    if (lastItemIndex < 0) {
+        lastItemIndex = 0;
+    }
+    [self.tableView beginUpdates];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastItemIndex inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+}
+
+- (void)insertData {
+    [self.tableView beginUpdates];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Getter

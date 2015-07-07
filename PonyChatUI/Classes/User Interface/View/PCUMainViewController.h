@@ -16,4 +16,8 @@
 
 - (void)reloadData;
 
+- (void)pushData;
+
+- (void)insertData;
+
 @end

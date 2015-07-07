@@ -38,7 +38,7 @@
             return NSOrderedSame;
         }
         else {
-            return obj1.messageOrder > obj2.messageOrder ? NSOrderedAscending : NSOrderedDescending;
+            return obj1.messageOrder > obj2.messageOrder ? NSOrderedDescending : NSOrderedAscending;
         }
     }];
 }

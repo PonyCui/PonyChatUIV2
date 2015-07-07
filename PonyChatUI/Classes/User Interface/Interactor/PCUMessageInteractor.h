@@ -15,6 +15,10 @@
 
 - (void)messageInteractorItemsDidUpdated;
 
+- (void)messageInteractorItemDidInserted;
+
+- (void)messageInteractorItemDidPushed;
+
 @end
 
 @interface PCUMessageInteractor : NSObject

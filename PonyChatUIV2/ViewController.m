@@ -51,8 +51,8 @@
 - (void)receiveTextMessage {
     PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
     textMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
-    textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！ - %u",
-                                   arc4random()];
+    textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！Post:%@",
+                                   [[NSDate date] description]];
     [self.core.messageManager didReceiveMessageItem:textMessageItem];
 }
 

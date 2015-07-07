@@ -12,9 +12,11 @@
 #import "PCUMessageCell.h"
 #import "PCUTextMessageCell.h"
 
-@interface PCUMessageCell ()
+@interface PCUMessageCell ()<ASImageCacheProtocol, ASImageDownloaderProtocol>
 
 @property (nonatomic, strong) ASNetworkImageNode *avatarImageNode;
+
+@property (nonatomic, copy) NSDictionary *avatarCacheObject;
 
 @end
 
@@ -62,7 +64,7 @@
 
 - (ASNetworkImageNode *)avatarImageNode {
     if (_avatarImageNode == nil) {
-        _avatarImageNode = [[ASNetworkImageNode alloc] init];
+        _avatarImageNode = [[ASNetworkImageNode alloc] initWithCache:self downloader:self];
         _avatarImageNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
         _avatarImageNode.URL = [NSURL URLWithString:@"http://tp4.sinaimg.cn/1651799567/180/1290860930/1"];
 //        _avatarImageNode.URL = [NSURL URLWithString:self.messageInteractor.avatarURLString];
@@ -71,15 +73,60 @@
 }
 
 - (PCUMessageActionType)actionType {
-    if (_actionType == 0) {
-        if (arc4random() % 2 == 0) {
-            _actionType = PCUMessageActionTypeSend;
+    return PCUMessageActionTypeReceive;
+}
+
+#pragma mark - ASImage Cache and Downloader
+
+- (void)fetchCachedImageWithURL:(NSURL *)URL callbackQueue:(dispatch_queue_t)callbackQueue completion:(void (^)(CGImageRef))completion {
+    NSData *data = [self.avatarCacheObject valueForKey:URL.absoluteString];
+    if (data != nil) {
+        CGImageRef imageRef = [[UIImage imageWithData:data] CGImage];
+        CFRetain(imageRef);
+        if (imageRef != nil) {
+            [self.avatarCacheObject setValue:data forKey:URL.absoluteString];
+            dispatch_async(callbackQueue, ^{
+                completion(imageRef);
+            });
         }
         else {
-            _actionType = PCUMessageActionTypeReceive;
+            dispatch_async(callbackQueue, ^{
+                completion(nil);
+            });
         }
     }
-    return _actionType;
+    else {
+        dispatch_async(callbackQueue, ^{
+            completion(nil);
+        });
+    }
+}
+
+- (id)downloadImageWithURL:(NSURL *)URL callbackQueue:(dispatch_queue_t)callbackQueue downloadProgressBlock:(void (^)(CGFloat))downloadProgressBlock completion:(void (^)(CGImageRef, NSError *))completion {
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:URL] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError == nil && [data isKindOfClass:[NSData class]]) {
+            CGImageRef imageRef = [[UIImage imageWithData:data] CGImage];
+            CFRetain(imageRef);
+            if (imageRef != nil) {
+                [self.avatarCacheObject setValue:data forKey:URL.absoluteString];
+                dispatch_async(callbackQueue, ^{
+                    completion(imageRef, nil);
+                });
+            }
+            else {
+                dispatch_async(callbackQueue, ^{
+                    completion(nil, [NSError errorWithDomain:@"CGImage" code:-1 userInfo:nil]);
+                });
+                
+            }
+        }
+        else {
+            dispatch_async(callbackQueue, ^{
+                completion(nil, connectionError);
+            });
+        }
+    }];
+    return nil;
 }
 
 @end
