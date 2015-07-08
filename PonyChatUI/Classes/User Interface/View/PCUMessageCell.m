@@ -11,10 +11,12 @@
 #import "PCUTextMessageItemInteractor.h"
 #import "PCUSystemMessageItemInteractor.h"
 #import "PCUImageMessageItemInteractor.h"
+#import "PCUVoiceMessageItemInteractor.h"
 #import "PCUMessageCell.h"
 #import "PCUTextMessageCell.h"
 #import "PCUSystemMessageCell.h"
 #import "PCUImageMessageCell.h"
+#import "PCUVoiceMessageCell.h"
 
 @interface PCUMessageCell ()<ASImageCacheProtocol, ASImageDownloaderProtocol>
 
@@ -35,6 +37,9 @@
     }
     else if ([messageInteractor isKindOfClass:[PCUImageMessageItemInteractor class]]) {
         return [[PCUImageMessageCell alloc] initWithMessageInteractor:messageInteractor];
+    }
+    else if ([messageInteractor isKindOfClass:[PCUVoiceMessageItemInteractor class]]) {
+        return [[PCUVoiceMessageCell alloc] initWithMessageInteractor:messageInteractor];
     }
     else {
         return [[PCUMessageCell alloc] initWithMessageInteractor:messageInteractor];

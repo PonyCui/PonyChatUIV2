@@ -11,6 +11,7 @@
 #import "PCUTextMessageEntity.h"
 #import "PCUSystemMessageEntity.h"
 #import "PCUImageMessageEntity.h"
+#import "PCUVoiceMessageEntity.h"
 
 @class PCUMessageEntity;
 

@@ -33,6 +33,7 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
+    [self receiveVoiceMessage];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:11.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
@@ -85,6 +86,10 @@
     imageMessageItem.imageURLString = @"http://ww1.sinaimg.cn/mw1024/4923db2bjw1etpf22s9mbj20xr1o0e82.jpg";
     imageMessageItem.imageSize = CGSizeMake(1024, 1820);
     [self.core.messageManager didReceiveMessageItem:imageMessageItem];
+}
+
+- (void)receiveVoiceMessage {
+    
 }
 
 @end
