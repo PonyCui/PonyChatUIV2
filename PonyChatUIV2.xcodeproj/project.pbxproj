@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6335A9901B4CD53C001DD64E /* PCUVoiceMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6335A98E1B4CD53C001DD64E /* PCUVoiceMessageCell.h */; };
+		6335A9911B4CD53C001DD64E /* PCUVoiceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A98F1B4CD53C001DD64E /* PCUVoiceMessageCell.m */; };
+		6335A9941B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6335A9921B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h */; };
+		6335A9951B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */; };
+		6335A9981B4CD54A001DD64E /* PCUVoiceMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6335A9991B4CD54A001DD64E /* PCUVoiceMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */; };
 		6388BDC51B4A7A3300F1D4B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDC41B4A7A3300F1D4B9 /* main.m */; };
 		6388BDC81B4A7A3300F1D4B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDC71B4A7A3300F1D4B9 /* AppDelegate.m */; };
 		6388BDCB1B4A7A3300F1D4B9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDCA1B4A7A3300F1D4B9 /* ViewController.m */; };
@@ -106,6 +112,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6335A98E1B4CD53C001DD64E /* PCUVoiceMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUVoiceMessageCell.h; sourceTree = "<group>"; };
+		6335A98F1B4CD53C001DD64E /* PCUVoiceMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageCell.m; sourceTree = "<group>"; };
+		6335A9921B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUVoiceMessageItemInteractor.h; sourceTree = "<group>"; };
+		6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageItemInteractor.m; sourceTree = "<group>"; };
+		6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUVoiceMessageEntity.h; sourceTree = "<group>"; };
+		6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageEntity.m; sourceTree = "<group>"; };
 		6388BDBF1B4A7A3300F1D4B9 /* PonyChatUIV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PonyChatUIV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6388BDC31B4A7A3300F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6388BDC41B4A7A3300F1D4B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -370,6 +382,8 @@
 				6399E4B71B4BCD4C00906EEC /* PCUSystemMessageEntity.m */,
 				6396A4931B4BDA0E00C2903E /* PCUImageMessageEntity.h */,
 				6396A4941B4BDA0E00C2903E /* PCUImageMessageEntity.m */,
+				6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */,
+				6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -396,6 +410,8 @@
 				6399E4BF1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m */,
 				6396A4971B4BDA6C00C2903E /* PCUImageMessageItemInteractor.h */,
 				6396A4981B4BDA6C00C2903E /* PCUImageMessageItemInteractor.m */,
+				6335A9921B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h */,
+				6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -422,6 +438,8 @@
 				6399E4BB1B4BCDE100906EEC /* PCUSystemMessageCell.m */,
 				6396A49B1B4BDADA00C2903E /* PCUImageMessageCell.h */,
 				6396A49C1B4BDADA00C2903E /* PCUImageMessageCell.m */,
+				6335A98E1B4CD53C001DD64E /* PCUVoiceMessageCell.h */,
+				6335A98F1B4CD53C001DD64E /* PCUVoiceMessageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -457,13 +475,16 @@
 				6388BE9D1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h in Headers */,
 				6396A4951B4BDA0E00C2903E /* PCUImageMessageEntity.h in Headers */,
 				6399E4C01B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h in Headers */,
+				6335A9981B4CD54A001DD64E /* PCUVoiceMessageEntity.h in Headers */,
 				6388BE951B4B743500F1D4B9 /* PCUMessageInteractor.h in Headers */,
 				6399E4B81B4BCD4C00906EEC /* PCUSystemMessageEntity.h in Headers */,
 				6388BE911B4B741500F1D4B9 /* PCUMessageItemInteractor.h in Headers */,
 				6388BE891B4B6EFB00F1D4B9 /* PCUMessageCell.h in Headers */,
 				6388BE791B4A83A800F1D4B9 /* PCUTextMessageEntity.h in Headers */,
+				6335A9941B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h in Headers */,
 				6399E4BC1B4BCDE100906EEC /* PCUSystemMessageCell.h in Headers */,
 				6388BE811B4A8D9B00F1D4B9 /* PCUWireframe.h in Headers */,
+				6335A9901B4CD53C001DD64E /* PCUVoiceMessageCell.h in Headers */,
 				6388BE711B4A829200F1D4B9 /* PCUMessageEntity.h in Headers */,
 				6388BE991B4B748F00F1D4B9 /* PCUMainPresenter.h in Headers */,
 				6388BE431B4A7C5C00F1D4B9 /* PonyChatUI.h in Headers */,
@@ -697,12 +718,15 @@
 				6388BE8E1B4B727400F1D4B9 /* PCUTextMessageCell.m in Sources */,
 				6388BE7A1B4A83A800F1D4B9 /* PCUTextMessageEntity.m in Sources */,
 				6388BE821B4A8D9B00F1D4B9 /* PCUWireframe.m in Sources */,
+				6335A9951B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m in Sources */,
 				6388BE8A1B4B6EFB00F1D4B9 /* PCUMessageCell.m in Sources */,
+				6335A9991B4CD54A001DD64E /* PCUVoiceMessageEntity.m in Sources */,
 				6388BE761B4A82A400F1D4B9 /* PCUMessageManager.m in Sources */,
 				6388BE6C1B4A819500F1D4B9 /* PCUCore.m in Sources */,
 				6388BE721B4A829200F1D4B9 /* PCUMessageEntity.m in Sources */,
 				6399E4B91B4BCD4C00906EEC /* PCUSystemMessageEntity.m in Sources */,
 				6388BE9A1B4B748F00F1D4B9 /* PCUMainPresenter.m in Sources */,
+				6335A9911B4CD53C001DD64E /* PCUVoiceMessageCell.m in Sources */,
 				6399E4BD1B4BCDE100906EEC /* PCUSystemMessageCell.m in Sources */,
 				6396A49E1B4BDADA00C2903E /* PCUImageMessageCell.m in Sources */,
 				6388BE921B4B741500F1D4B9 /* PCUMessageItemInteractor.m in Sources */,
@@ -850,7 +874,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PonyChatUIV2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -862,7 +886,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PonyChatUIV2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -921,7 +945,7 @@
 				);
 				INFOPLIST_FILE = PonyChatUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -946,7 +970,7 @@
 				);
 				INFOPLIST_FILE = PonyChatUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -33,9 +33,9 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
-    [self receiveVoiceMessage];
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:11.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 }
 
@@ -89,7 +89,13 @@
 }
 
 - (void)receiveVoiceMessage {
-    
+    PCUVoiceMessageEntity *voiceMessageItem = [[PCUVoiceMessageEntity alloc] init];
+    voiceMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
+    voiceMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
+    voiceMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
+    voiceMessageItem.voiceURLString = @"";
+    voiceMessageItem.voiceDuration = arc4random() % 60;
+    [self.core.messageManager didReceiveMessageItem:voiceMessageItem];
 }
 
 @end
