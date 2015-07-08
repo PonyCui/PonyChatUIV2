@@ -3,9 +3,11 @@ PonyChatUI is an easy to use Chatting Flow UI Library. It constructed on AsyncDi
 
 ## Why we built PonyChatUI
 Almost all open source chatting library have the same issue, that is performance. When messages grow as a large number. The memory and CPU usage rate will be really high.
-PonyChatUI focus on performance and architectrue, brings you an in-believable developping experience.
+PonyChatUI focus on performance and architectrue, brings you an in-believable developing experience.
 
 ## Preview
+
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/DemoVideo.gif)
 
 ## Sample Code
 
@@ -59,3 +61,8 @@ The easist way to use PonyChatUI is
 @end
 
 ```
+
+## Installation
+
+* Just have a look, we don't provide any installation guide now. While we finished development, will add it to CocoaPods.
+* Feel free to fork and fix it by yourself, and add it to your project.
