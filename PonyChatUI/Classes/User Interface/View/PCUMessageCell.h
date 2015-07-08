@@ -20,7 +20,11 @@ typedef NS_ENUM(NSInteger, PCUMessageActionType) {
 
 @class PCUMessageItemInteractor;
 
+@protocol PCUDelegate;
+
 @interface PCUMessageCell : ASCellNode
+
+@property (nonatomic, weak) id<PCUDelegate> delegate;
 
 @property (nonatomic, assign) PCUMessageActionType actionType;
 

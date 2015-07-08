@@ -11,7 +11,10 @@
 #import "PCUVoiceMessageItemInteractor.h"
 #import "PCUVoiceMessageEntity.h"
 
-@interface PCUVoiceMessageCell ()
+@interface PCUVoiceMessageCell ()<PCUVoiceStatus> {
+    NSInteger currentPlayingFrame;
+    BOOL isCurrentPlaying;
+}
 
 @property (nonatomic, strong) ASImageNode *voiceImageNode;
 
@@ -19,9 +22,16 @@
 
 @property (nonatomic, strong) ASImageNode *backgroundImageNode;
 
+@property (nonatomic, strong) CADisplayLink *displayLink;
+
 @end
 
 @implementation PCUVoiceMessageCell
+
+- (void)dealloc
+{
+    [self.displayLink invalidate];
+}
 
 - (instancetype)initWithMessageInteractor:(PCUMessageItemInteractor *)messageInteractor
 {
@@ -32,6 +42,48 @@
         [self addSubnode:self.voiceLengthTextNode];
     }
     return self;
+}
+
+#pragma mark - Event 
+
+- (void)handleVoiceTapped {
+    if ([self.delegate respondsToSelector:@selector(PCUVoiceMessageItemTapped:voiceStatus:)]) {
+        [self.delegate PCUVoiceMessageItemTapped:(id)self.messageInteractor.messageItem
+                                     voiceStatus:self];
+    }
+}
+
+- (void)handleDisplayLinkTrigger {
+    if (currentPlayingFrame < 1 || currentPlayingFrame > 3) {
+        currentPlayingFrame = 1;
+    }
+    if ([super actionType] == PCUMessageActionTypeSend) {
+        self.voiceImageNode.image = [UIImage imageNamed:[NSString stringWithFormat:@"SenderVoiceNodePlaying00%ld",
+                                                         (long)currentPlayingFrame]];
+    }
+    else if ([super actionType] == PCUMessageActionTypeReceive) {
+        self.voiceImageNode.image = [UIImage imageNamed:[NSString stringWithFormat:@"ReceiverVoiceNodePlaying00%ld",
+                                                         (long)currentPlayingFrame]];
+    }
+    currentPlayingFrame++;
+}
+
+- (void)loopPlayingAnimation {
+    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+}
+
+- (void)stopPlayingAnimation {
+    if (isCurrentPlaying) {
+        [self.displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        self.displayLink = nil;
+        currentPlayingFrame = 0;
+    }
+    if ([super actionType] == PCUMessageActionTypeSend) {
+        self.voiceImageNode.image = [UIImage imageNamed:@"SenderVoiceNodePlaying"];
+    }
+    else if ([super actionType] == PCUMessageActionTypeReceive) {
+        self.voiceImageNode.image = [UIImage imageNamed:@"ReceiverVoiceNodePlaying"];
+    }
 }
 
 #pragma mark - Node
@@ -63,6 +115,22 @@
     else {
         self.backgroundImageNode.hidden = YES;
     }
+}
+
+#pragma mark - PCUVoiceStatus
+
+- (BOOL)isPlaying {
+    return isCurrentPlaying;
+}
+
+- (void)setPlay {
+    isCurrentPlaying = YES;
+    [self loopPlayingAnimation];
+}
+
+- (void)setPause {
+    [self stopPlayingAnimation];
+    isCurrentPlaying = NO;
 }
 
 #pragma mark - Getter
@@ -97,8 +165,17 @@
     if (_backgroundImageNode == nil) {
         _backgroundImageNode = [[ASImageNode alloc] init];
         _backgroundImageNode.backgroundColor = [UIColor clearColor];
+        [_backgroundImageNode addTarget:self action:@selector(handleVoiceTapped) forControlEvents:ASControlNodeEventTouchUpInside];
     }
     return _backgroundImageNode;
+}
+
+- (CADisplayLink *)displayLink {
+    if (_displayLink == nil) {
+        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(handleDisplayLinkTrigger)];
+        _displayLink.frameInterval = 30;
+    }
+    return _displayLink;
 }
 
 @end

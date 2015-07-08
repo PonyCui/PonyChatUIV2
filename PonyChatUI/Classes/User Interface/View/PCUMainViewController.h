@@ -10,7 +10,11 @@
 
 @class PCUMainPresenter;
 
+@protocol PCUDelegate;
+
 @interface PCUMainViewController : UIViewController
+
+@property (nonatomic, weak) id<PCUDelegate> delegate;
 
 @property (nonatomic, strong) PCUMainPresenter *eventHandler;
 

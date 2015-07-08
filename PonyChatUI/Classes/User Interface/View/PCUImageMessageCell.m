@@ -9,6 +9,7 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "PCUImageMessageCell.h"
 #import "PCUImageMessageItemInteractor.h"
+#import "PCUCore.h"
 
 @interface PCUImageMessageCell ()
 
@@ -28,6 +29,14 @@
         [self addSubnode:self.maskNode];
     }
     return self;
+}
+
+#pragma mark - Event
+
+- (void)handleImageNodeTapped {
+    if ([self.delegate respondsToSelector:@selector(PCUImageMessageItemTapped:)]) {
+        [self.delegate PCUImageMessageItemTapped:(id)self.messageInteractor.messageItem];
+    }
 }
 
 #pragma mark - Node
@@ -72,6 +81,7 @@
 - (ASNetworkImageNode *)imageNode {
     if (_imageNode == nil) {
         _imageNode = [[ASNetworkImageNode alloc] init];
+        [_imageNode addTarget:self action:@selector(handleImageNodeTapped) forControlEvents:ASControlNodeEventTouchUpInside];
         _imageNode.contentMode = UIViewContentModeScaleAspectFill;
         _imageNode.URL = [NSURL URLWithString:[[self imageMessageInteractor] imageURLString]];
         _imageNode.backgroundColor = [UIColor clearColor];

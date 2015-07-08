@@ -7,6 +7,7 @@
 //
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import "PCUCore.h"
 #import "PCUMainViewController.h"
 #import "PCUMainPresenter.h"
 #import "PCUMessageInteractor.h"
@@ -66,7 +67,9 @@
 
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [self.eventHandler.messageInteractor.items count]) {
-        return [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[indexPath.row]];
+        PCUMessageCell *cell = [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[indexPath.row]];
+        cell.delegate = self.delegate;
+        return cell;
     }
     else {
         return [PCUMessageCell cellForMessageInteractor:nil];

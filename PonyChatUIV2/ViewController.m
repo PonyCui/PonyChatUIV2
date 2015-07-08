@@ -9,7 +9,7 @@
 #import "ViewController.h"
 @import PonyChatUI;
 
-@interface ViewController ()
+@interface ViewController ()<PCUDelegate>
 
 @property (nonatomic, strong) PCUCore *core;
 
@@ -49,7 +49,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-//#pragma mark - Debug
+#pragma mark - Debug
 
 - (void)receiveSystemMessage {
     PCUSystemMessageEntity *systemMessageItem = [[PCUSystemMessageEntity alloc] init];
@@ -96,6 +96,26 @@
     voiceMessageItem.voiceURLString = @"";
     voiceMessageItem.voiceDuration = arc4random() % 60;
     [self.core.messageManager didReceiveMessageItem:voiceMessageItem];
+}
+
+#pragma mark - PCUDelegate
+
+- (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem {
+    NSLog(@"Image Tapped, Do Something.");
+}
+
+- (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
+                      voiceStatus:(id<PCUVoiceStatus>)voiceStatus {
+    NSLog(@"Voice Tapped, Do Something.");
+    if (![voiceStatus isPlaying]) {
+        [voiceStatus setPlay];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [voiceStatus setPause];
+        });
+    }
+    else {
+        [voiceStatus setPause];
+    }
 }
 
 @end

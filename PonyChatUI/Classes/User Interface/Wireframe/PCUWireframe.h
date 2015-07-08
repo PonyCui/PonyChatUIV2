@@ -11,9 +11,11 @@
 
 @class PCUMessageManager;
 
+@protocol PCUDelegate;
+
 @interface PCUWireframe : NSObject
 
-- (UIView *)addMainViewToViewController:(UIViewController *)viewController
+- (UIView *)addMainViewToViewController:(UIViewController<PCUDelegate> *)viewController
                      withMessageManager:(PCUMessageManager *)messageManager;
 
 @end

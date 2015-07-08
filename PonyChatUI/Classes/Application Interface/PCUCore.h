@@ -10,6 +10,26 @@
 #import "PCUMessageManager.h"
 #import "PCUWireframe.h"
 
+@class PCUImageMessageEntity, PCUVoiceMessageEntity;
+
+@protocol PCUVoiceStatus <NSObject>
+
+@required
+- (BOOL)isPlaying;
+- (void)setPlay;
+- (void)setPause;
+
+@end
+
+@protocol PCUDelegate <NSObject>
+
+@optional
+- (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem;
+- (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
+                      voiceStatus:(id<PCUVoiceStatus>)voiceStatus;
+
+@end
+
 @interface PCUCore : NSObject
 
 @property (nonatomic, strong) PCUMessageManager *messageManager;

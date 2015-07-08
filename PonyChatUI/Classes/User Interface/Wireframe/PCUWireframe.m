@@ -13,9 +13,10 @@
 
 @implementation PCUWireframe
 
-- (UIView *)addMainViewToViewController:(UIViewController *)viewController
+- (UIView *)addMainViewToViewController:(UIViewController<PCUDelegate> *)viewController
                      withMessageManager:(PCUMessageManager *)messageManager {
     PCUMainViewController *mainViewController = [[PCUMainViewController alloc] init];
+    mainViewController.delegate = viewController;
     mainViewController.eventHandler.messageInteractor.messageManager = messageManager;
     [viewController addChildViewController:mainViewController];
     [viewController.view addSubview:mainViewController.view];
