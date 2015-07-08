@@ -3,7 +3,7 @@ PonyChatUI is an easy to use Chatting Flow UI Library. It constructed on AsyncDi
 
 ## Why we built PonyChatUI
 Almost all open source chatting library have the same issue, that is performance. When messages grow as a large number. The memory and CPU usage rate will be really high.
-PonyChatUI focus on performance and architectrue, brings you an in-believable developing experience.
+PonyChatUI focus on performance and architecture, brings you an in-believable developing experience.
 
 ## Preview
 
