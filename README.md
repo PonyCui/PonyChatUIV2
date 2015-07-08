@@ -64,5 +64,5 @@ The easist way to use PonyChatUI is
 
 ## Installation
 
-* Just have a look, we don't provide any installation guide now. While we finished development, will add it to CocoaPods.
+* Just have a look, we don't provide any installation guide now. When we finishing development, will add it to CocoaPods.
 * Feel free to fork and fix it by yourself, and add it to your project.
