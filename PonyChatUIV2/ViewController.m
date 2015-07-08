@@ -9,6 +9,7 @@
 #import "ViewController.h"
 @import PonyChatUI;
 
+// PonyChatUI 仅仅是一个聊天时间轴界面，不包含底部的输入框，这将带给开发者更多的控制权。
 @interface ViewController ()<PCUDelegate>
 
 @property (nonatomic, strong) PCUCore *core;
@@ -33,10 +34,10 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
-    [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -102,11 +103,15 @@
 
 - (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem {
     NSLog(@"Image Tapped, Do Something.");
+    /* PonyChatUI希望做到的是，把更多的控制权交回给开发者手上，因此，PonyChatUI并不会将Gallery类集成到里面，你可以自行响应这个方法。
+     * 你可以子类化PCUImageMessageEntity，PCU将原封不动的将你的子类返回给你。
+     */
 }
 
 - (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
                       voiceStatus:(id<PCUVoiceStatus>)voiceStatus {
     NSLog(@"Voice Tapped, Do Something.");
+    /* 你可以自行获取对应音频文件或本地已经缓存好的文件，并播放，使用voiceStatus控制cell的UI状态。*/
     if (![voiceStatus isPlaying]) {
         [voiceStatus setPlay];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
