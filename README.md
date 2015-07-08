@@ -11,7 +11,7 @@ PonyChatUI focus on performance and architecture, brings you an in-believable de
 
 ## Sample Code
 
-The easist way to use PonyChatUI is
+A simple way to use PonyChatUI is
 
 ```objective-c
 @import PonyChatUI;
