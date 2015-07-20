@@ -12,7 +12,7 @@
 
 static const CGFloat kTextPaddingLeft = 18.0f;
 static const CGFloat kTextPaddingRight = 18.0f;
-static const CGFloat kTextPaddingTop = 10.0f;
+static const CGFloat kTextPaddingTop = 12.0f;
 static const CGFloat kTextPaddingBottom = 10.0f;
 
 @interface PCUTextMessageCell ()
@@ -39,25 +39,45 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
     CGSize superSize = [super calculateSizeThatFits:constrainedSize];
-    CGSize textSize = [self.textNode measure:CGSizeMake(constrainedSize.width - kAvatarSize - 10.0 - kTextPaddingLeft - kTextPaddingRight,
+    CGSize textSize = [self.textNode measure:CGSizeMake(constrainedSize.width - kAvatarSize - 10.0 - kTextPaddingLeft - kTextPaddingRight - 60.0,
                                                         constrainedSize.height)];
-    CGFloat requiredHeight = MAX(superSize.height, textSize.height);
-    return CGSizeMake(constrainedSize.width, requiredHeight + kTextPaddingTop + kTextPaddingBottom + kCellGaps);
+    CGFloat requiredHeight = MAX(superSize.height, textSize.height + kTextPaddingTop + kTextPaddingBottom);
+    return CGSizeMake(constrainedSize.width, requiredHeight + kCellGaps);
 }
 
 - (void)layout {
     [super layout];
     if ([super actionType] == PCUMessageActionTypeSend) {
-        self.textNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - kTextPaddingRight - self.textNode.calculatedSize.width,
-                                         kTextPaddingTop,
-                                         self.textNode.calculatedSize.width,
-                                         self.textNode.calculatedSize.height);
+        CGRect textNodeFrame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - kTextPaddingRight - self.textNode.calculatedSize.width,
+                                          kTextPaddingTop,
+                                          self.textNode.calculatedSize.width,
+                                          self.textNode.calculatedSize.height);
+        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+            textNodeFrame.origin.y += 8.0;
+        }
+        else if (self.textNode.lineCount == 1) {
+            textNodeFrame.origin.y += 3.0;
+        }
+        else {
+            textNodeFrame.origin.y += 2.0;
+        }
+        self.textNode.frame = textNodeFrame;
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
-        self.textNode.frame = CGRectMake(kAvatarSize + 10.0 + kTextPaddingLeft,
-                                         kTextPaddingTop,
-                                         self.textNode.calculatedSize.width,
-                                         self.textNode.calculatedSize.height);
+        CGRect textNodeFrame = CGRectMake(kAvatarSize + 10.0 + kTextPaddingLeft,
+                                          kTextPaddingTop,
+                                          self.textNode.calculatedSize.width,
+                                          self.textNode.calculatedSize.height);
+        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+            textNodeFrame.origin.y += 8.0;
+        }
+        else if (self.textNode.lineCount == 1) {
+            textNodeFrame.origin.y += 3.0;
+        }
+        else {
+            textNodeFrame.origin.y += 2.0;
+        }
+        self.textNode.frame = textNodeFrame;
     }
     else {
         self.textNode.frame = CGRectZero;
@@ -69,6 +89,10 @@ static const CGFloat kTextPaddingBottom = 10.0f;
         frame.origin.y -= kTextPaddingTop;
         frame.size.width += kTextPaddingLeft + kTextPaddingRight;
         frame.size.height += kTextPaddingTop + kTextPaddingBottom + kTextPaddingBottom;
+        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+            frame.size.height += 6.0;
+            frame.origin.y -= 3.0;
+        }
         self.backgroundImageNode.frame = frame;
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
@@ -78,6 +102,10 @@ static const CGFloat kTextPaddingBottom = 10.0f;
         frame.origin.y -= kTextPaddingTop;
         frame.size.width += kTextPaddingLeft + kTextPaddingRight;
         frame.size.height += kTextPaddingTop + kTextPaddingBottom + kTextPaddingBottom;
+        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+            frame.size.height += 6.0;
+            frame.origin.y -= 3.0;
+        }
         self.backgroundImageNode.frame = frame;
     }
     else {
@@ -115,6 +143,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
     UIFont *font = [UIFont systemFontOfSize:kFontSize];
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.25 * font.lineHeight;
+    style.lineSpacing = 6.0f;
     style.hyphenationFactor = 1.0;
     return @{
              NSFontAttributeName: font,

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 PonyCui. All rights reserved.
 //
 
-#import <PonyChatUI/PonyChatUI.h>
+#import "PonyChatUI.h"
 
 @interface PCUVoiceMessageEntity : PCUMessageEntity
 

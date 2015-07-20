@@ -115,7 +115,7 @@
         return;
     }
     else if (self.tableView.contentOffset.y >= self.tableView.contentSize.height - self.tableView.frame.size.height * 2) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.010 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                        animated:YES];
         });
@@ -136,7 +136,7 @@
 - (ASTableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain asyncDataFetching:YES];
-        _tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(8, 0, 8, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.asyncDataSource = self;
         _tableView.asyncDelegate = self;

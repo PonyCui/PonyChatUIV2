@@ -10,7 +10,7 @@
 
 static const CGFloat kCellGaps = 8.0f;
 static const CGFloat kAvatarSize = 40.0f;
-static const CGFloat kFontSize = 15.0f;
+static const CGFloat kFontSize = 16.0f;
 
 typedef NS_ENUM(NSInteger, PCUMessageActionType) {
     PCUMessageActionTypeUnknown = 0,

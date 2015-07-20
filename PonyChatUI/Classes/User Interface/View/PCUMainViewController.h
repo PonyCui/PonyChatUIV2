@@ -24,4 +24,6 @@
 
 - (void)insertData;
 
+- (void)autoScroll;
+
 @end
