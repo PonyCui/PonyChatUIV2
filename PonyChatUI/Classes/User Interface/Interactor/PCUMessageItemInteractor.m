@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 PonyCui. All rights reserved.
 //
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "PCUMessageItemInteractor.h"
 #import "PCUMessageEntity.h"
 #import "PCUTextMessageEntity.h"
@@ -46,8 +47,28 @@
         _messageOrder = messageItem.messageOrder;
         _avatarURLString = messageItem.senderAvatarURLString;
         _nicknameString = messageItem.senderNicknameString;
+        _sendingStatus = messageItem.sendingStatus;
+        [self configureReactiveCocoa];
     }
     return self;
+}
+
+- (void)configureReactiveCocoa {
+    @weakify(self);
+    if (self.sendingStatus != PCUMessageItemSendingStatusSucceed) {
+        [RACObserve(self.messageItem, sendingStatus) subscribeNext:^(id x) {
+            @strongify(self);
+            self.sendingStatus = [x integerValue];
+        }];
+    }
+    [RACObserve(self.messageItem, senderNicknameString) subscribeNext:^(id x) {
+        @strongify(self);
+        self.nicknameString = self.messageItem.senderNicknameString;
+    }];
+    [RACObserve(self.messageItem, senderAvatarURLString) subscribeNext:^(id x) {
+        @strongify(self);
+        self.avatarURLString = self.messageItem.senderAvatarURLString;
+    }];
 }
 
 @end

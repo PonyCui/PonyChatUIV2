@@ -11,7 +11,16 @@
 
 typedef double PCUMessageOrder;
 
+typedef NS_ENUM(NSInteger, PCUMessageItemSendingStatus) {
+    PCUMessageItemSendingStatusFailure = -1,
+    PCUMessageItemSendingStatusUnknown = 0,
+    PCUMessageItemSendingStatusProcessing = 1,
+    PCUMessageItemSendingStatusSucceed = 2
+};
+
 @interface PCUMessageEntity : NSObject
+
+@property (nonatomic, copy) NSString *messageID;
 
 @property (nonatomic, assign) PCUMessageOrder messageOrder;
 
@@ -20,5 +29,9 @@ typedef double PCUMessageOrder;
 @property (nonatomic, copy) NSString *senderNicknameString;
 
 @property (nonatomic, copy) NSString *senderAvatarURLString;
+
+@property (nonatomic, assign) PCUMessageItemSendingStatus sendingStatus;
+
+@property (nonatomic, copy) NSDictionary *attributes;
 
 @end

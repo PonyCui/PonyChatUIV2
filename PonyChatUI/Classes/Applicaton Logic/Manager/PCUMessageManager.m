@@ -15,7 +15,7 @@
 @implementation PCUMessageManager
 
 - (void)didReceiveMessageItem:(PCUMessageEntity *)messageItem {
-    if (messageItem != nil) {
+    if (messageItem != nil && ![self.messageItems containsObject:messageItem]) {
         NSMutableArray *messageItems = [self.messageItems mutableCopy];
         [messageItems addObject:messageItem];
         self.messageItems = [self sortedItems:messageItems];

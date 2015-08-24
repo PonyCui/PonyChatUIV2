@@ -7,6 +7,9 @@
 //
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import "PCUCore.h"
+#import "PCUImageManager.h"
 #import "PCUMessageInteractor.h"
 #import "PCUTextMessageItemInteractor.h"
 #import "PCUSystemMessageItemInteractor.h"
@@ -17,12 +20,19 @@
 #import "PCUSystemMessageCell.h"
 #import "PCUImageMessageCell.h"
 #import "PCUVoiceMessageCell.h"
+#import "PCUMessageActivityIndicatorView.h"
 
-@interface PCUMessageCell ()<ASImageCacheProtocol, ASImageDownloaderProtocol>
+@interface PCUMessageCell ()
+
+@property (nonatomic, strong) ASTextNode *nicknameNode;
 
 @property (nonatomic, strong) ASNetworkImageNode *avatarImageNode;
 
-@property (nonatomic, copy) NSDictionary *avatarCacheObject;
+@property (nonatomic, strong) PCUMessageActivityIndicatorView *sendingActivityIndicatorView;
+
+@property (nonatomic, strong) ASImageNode *sendingErrorNode;
+
+@property (nonatomic, strong) RACDisposable *sendingSingal;
 
 @end
 
@@ -53,37 +63,209 @@
         [super setSelectionStyle:UITableViewCellSelectionStyleNone];
         _messageInteractor = messageInteractor;
         if (![self isKindOfClass:[PCUSystemMessageCell class]]) {
+            [self addSubnode:self.nicknameNode];
             [self addSubnode:self.avatarImageNode];
+            [self addSubnode:self.upscriptTextNode];
+            [self addSubnode:self.subscriptTextNode];
+            [self addSubnode:self.sendingErrorNode];
+            [self configureReacitiveCocoa];
+            [self configureSendingStatus];
         }
     }
     return self;
 }
 
+- (void)configureReacitiveCocoa {
+    @weakify(self);
+    [RACObserve(self.messageInteractor, avatarURLString) subscribeNext:^(id x) {
+        @strongify(self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.avatarImageNode.URL = [NSURL URLWithString:self.messageInteractor.avatarURLString];
+        });
+    }];
+    [RACObserve(self.messageInteractor.messageItem, senderNicknameString) subscribeNext:^(id x) {
+        @strongify(self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *text = @"";
+            if ([[[[self messageInteractor] messageItem] senderNicknameString] isKindOfClass:[NSString class]]) {
+                text = [[[self messageInteractor] messageItem] senderNicknameString];
+            }
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            paragraphStyle.alignment = NSTextAlignmentRight;
+            if (self.actionType == PCUMessageActionTypeReceive) {
+                paragraphStyle.alignment = NSTextAlignmentLeft;
+            }
+            NSAttributedString *attributedString = [[NSAttributedString alloc]
+                                                    initWithString:text
+                                                    attributes:@{
+                                                                 NSFontAttributeName: [UIFont systemFontOfSize:11.0],
+                                                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                                                 NSParagraphStyleAttributeName: paragraphStyle
+                                                                 }];
+            [_nicknameNode setAttributedString:attributedString];
+        });
+    }];
+}
+
+#pragma mark - Events
+
+- (void)handleErrorNodeTapped {
+    if ([self.delegate respondsToSelector:@selector(PCUFailableMessageItemTapped:)]) {
+        [self.delegate PCUFailableMessageItemTapped:[[self messageInteractor] messageItem]];
+    }
+}
+
+- (void)handleAvatarTapped {
+    if ([self.delegate respondsToSelector:@selector(PCUAvatarTappedWithMessageItem:)]) {
+        [self.delegate PCUAvatarTappedWithMessageItem:[[self messageInteractor] messageItem]];
+    }
+}
+
+#pragma mark - Sending Status
+
+- (void)configureSendingStatus {
+    if (self.actionType == PCUMessageActionTypeSend) {
+        if (self.messageInteractor.sendingStatus != PCUMessageItemSendingStatusSucceed) {
+            [self.sendingActivityIndicatorView startAnimating];
+            self.sendingErrorNode.hidden = YES;
+            @weakify(self);
+            self.sendingSingal = [RACObserve(self.messageInteractor, sendingStatus) subscribeNext:^(id x) {
+                @strongify(self);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self updateSendingStatus];
+                });
+            }];
+        }
+        else if (self.messageInteractor.sendingStatus == PCUMessageItemSendingStatusFailure) {
+            self.sendingErrorNode.hidden = NO;
+            [self.sendingActivityIndicatorView stopAnimating];
+        }
+        else if (self.messageInteractor.sendingStatus == PCUMessageItemSendingStatusSucceed) {
+            [self.sendingActivityIndicatorView stopAnimating];
+        }
+    }
+}
+
+- (void)updateSendingStatus {
+    if (self.messageInteractor.sendingStatus == PCUMessageItemSendingStatusFailure) {
+        self.sendingErrorNode.hidden = NO;
+        [self.sendingActivityIndicatorView stopAnimating];
+    }
+    else if (self.messageInteractor.sendingStatus == PCUMessageItemSendingStatusProcessing) {
+        [self.sendingActivityIndicatorView startAnimating];
+        self.sendingErrorNode.hidden = YES;
+    }
+    else if (self.messageInteractor.sendingStatus == PCUMessageItemSendingStatusSucceed) {
+        [self.sendingActivityIndicatorView stopAnimating];
+        [self.sendingSingal dispose];
+    }
+}
+
 #pragma mark - Node
 
+- (void)didLoad {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.view addSubview:self.sendingActivityIndicatorView];
+    });
+}
+
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
+    self.sendingActivityIndicatorView.frame = CGRectMake(0, 0, 44, 44);
     return CGSizeMake(constrainedSize.width, kAvatarSize + kCellGaps);
 }
 
 - (void)layout {
     if (self.actionType == PCUMessageActionTypeSend) {
         self.avatarImageNode.frame = CGRectMake(self.calculatedSize.width - 10 - kAvatarSize, 5, kAvatarSize, kAvatarSize);
+        if (self.showNickname) {
+            self.nicknameNode.frame = CGRectMake(0,
+                                                 4.0,
+                                                 self.avatarImageNode.frame.origin.x - 8.0,
+                                                 14.0);
+            self.nicknameNode.hidden = NO;
+        }
     }
     else if (self.actionType == PCUMessageActionTypeReceive) {
         self.avatarImageNode.frame = CGRectMake(10, 5, kAvatarSize, kAvatarSize);
+        if (self.showNickname) {
+            self.nicknameNode.frame = CGRectMake(self.avatarImageNode.frame.origin.x + self.avatarImageNode.frame.size.width + 8.0,
+                                                 4.0,
+                                                 self.calculatedSize.width - (self.avatarImageNode.frame.origin.x + self.avatarImageNode.frame.size.width + 8.0),
+                                                 14.0);
+            self.nicknameNode.hidden = NO;
+        }
     }
     else {
         self.avatarImageNode.frame = CGRectZero;
     }
 }
 
+- (void)updateLayoutWithContentFrame:(CGRect)frame {
+    CGFloat topSpace = 0.0;
+    if (self.showNickname) {
+        topSpace = 18.0;
+    }
+    [self.upscriptTextNode measure:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)];
+    [self.subscriptTextNode measure:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)];
+    if (self.actionType == PCUMessageActionTypeSend) {
+        self.upscriptTextNode.frame = CGRectMake(frame.origin.x - self.upscriptTextNode.calculatedSize.width,
+                                                 8.0 + topSpace,
+                                                 self.upscriptTextNode.calculatedSize.width,
+                                                 self.upscriptTextNode.calculatedSize.height);
+        self.subscriptTextNode.frame = CGRectMake(frame.origin.x - self.subscriptTextNode.calculatedSize.width,
+                                                  frame.size.height - 26.0 + topSpace,
+                                                  self.subscriptTextNode.calculatedSize.width,
+                                                  self.subscriptTextNode.calculatedSize.height);
+        self.sendingActivityIndicatorView.frame = CGRectMake(frame.origin.x - 44.0,
+                                                             frame.size.height / 2.0 - 22.0 + topSpace,
+                                                             44.0,
+                                                             44.0);
+        self.sendingErrorNode.frame = self.sendingActivityIndicatorView.frame;
+    }
+    else if (self.actionType == PCUMessageActionTypeReceive) {
+        self.upscriptTextNode.frame = CGRectMake(frame.origin.x + frame.size.width,
+                                                 8.0 + topSpace,
+                                                 self.upscriptTextNode.calculatedSize.width,
+                                                 self.upscriptTextNode.calculatedSize.height);
+        self.subscriptTextNode.frame = CGRectMake(frame.origin.x + frame.size.width,
+                                                  frame.size.height - 26.0 + topSpace,
+                                                  self.subscriptTextNode.calculatedSize.width,
+                                                  self.subscriptTextNode.calculatedSize.height);
+    }
+}
+
+- (void)resume {
+    if (self.messageInteractor.sendingStatus == PCUMessageItemSendingStatusFailure) {
+        self.sendingErrorNode.hidden = NO;
+        [self.sendingActivityIndicatorView stopAnimating];
+    }
+    else if (self.messageInteractor.sendingStatus == PCUMessageItemSendingStatusProcessing) {
+        [self.sendingActivityIndicatorView startAnimating];
+    }
+    else {
+        [self.sendingActivityIndicatorView stopAnimating];
+    }
+}
+
 #pragma mark - Getter
+
+- (ASTextNode *)nicknameNode {
+    if (_nicknameNode == nil) {
+        _nicknameNode = [[ASTextNode alloc] init];
+        _nicknameNode.maximumLineCount = 1;
+        _nicknameNode.hidden = YES;
+    }
+    return _nicknameNode;
+}
 
 - (ASNetworkImageNode *)avatarImageNode {
     if (_avatarImageNode == nil) {
-        _avatarImageNode = [[ASNetworkImageNode alloc] initWithCache:self downloader:self];
+        _avatarImageNode = [[ASNetworkImageNode alloc] initWithCache:[PCUImageManager sharedInstance]
+                                                          downloader:[PCUImageManager sharedInstance]];
         _avatarImageNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
-        _avatarImageNode.URL = [NSURL URLWithString:self.messageInteractor.avatarURLString];
+        [_avatarImageNode addTarget:self
+                             action:@selector(handleAvatarTapped)
+                   forControlEvents:ASControlNodeEventTouchUpInside];
     }
     return _avatarImageNode;
 }
@@ -97,61 +279,40 @@
     }
 }
 
-#pragma mark - ASImage Cache and Downloader
-
-- (void)fetchCachedImageWithURL:(NSURL *)URL callbackQueue:(dispatch_queue_t)callbackQueue completion:(void (^)(CGImageRef))completion {
-    NSData *data = [self.avatarCacheObject valueForKey:URL.absoluteString];
-    if (data != nil) {
-        CGImageRef imageRef = [[UIImage imageWithData:data] CGImage];
-        CFRetain(imageRef);
-        if (imageRef != nil) {
-            [self.avatarCacheObject setValue:data forKey:URL.absoluteString];
-            dispatch_async(callbackQueue, ^{
-                completion(imageRef);
-            });
-        }
-        else {
-            dispatch_async(callbackQueue, ^{
-                completion(nil);
-            });
-        }
+- (ASTextNode *)upscriptTextNode {
+    if (_upscriptTextNode == nil) {
+        _upscriptTextNode = [[ASTextNode alloc] init];
     }
-    else {
-        dispatch_async(callbackQueue, ^{
-            completion(nil);
-        });
-    }
+    return _upscriptTextNode;
 }
 
-- (id)downloadImageWithURL:(NSURL *)URL callbackQueue:(dispatch_queue_t)callbackQueue downloadProgressBlock:(void (^)(CGFloat))downloadProgressBlock completion:(void (^)(CGImageRef, NSError *))completion {
-    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:URL] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (connectionError == nil && [data isKindOfClass:[NSData class]]) {
-            CGImageRef imageRef = [[UIImage imageWithData:data] CGImage];
-            CFRetain(imageRef);
-            if (imageRef != nil) {
-                [self.avatarCacheObject setValue:data forKey:URL.absoluteString];
-                dispatch_async(callbackQueue, ^{
-                    completion(imageRef, nil);
-                });
-            }
-            else {
-                dispatch_async(callbackQueue, ^{
-                    completion(nil, [NSError errorWithDomain:@"CGImage" code:-1 userInfo:nil]);
-                });
-                
-            }
-        }
-        else {
-            dispatch_async(callbackQueue, ^{
-                completion(nil, connectionError);
-            });
-        }
-    }];
-    return nil;
+- (ASTextNode *)subscriptTextNode {
+    if (_subscriptTextNode == nil) {
+        _subscriptTextNode = [[ASTextNode alloc] init];
+    }
+    return _subscriptTextNode;
 }
 
-- (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier {
-    
+- (ASImageNode *)sendingErrorNode {
+    if (_sendingErrorNode == nil) {
+        _sendingErrorNode = [[ASImageNode alloc] init];
+        _sendingErrorNode.image = [UIImage imageNamed:@"SenderNodeError"];
+        _sendingErrorNode.contentMode = UIViewContentModeCenter;
+        _sendingErrorNode.hidden = YES;
+        [_sendingErrorNode addTarget:self
+                              action:@selector(handleErrorNodeTapped)
+                    forControlEvents:ASControlNodeEventTouchUpInside];
+    }
+    return _sendingErrorNode;
+}
+
+- (UIActivityIndicatorView *)sendingActivityIndicatorView {
+    if (_sendingActivityIndicatorView == nil) {
+        _sendingActivityIndicatorView = [[PCUMessageActivityIndicatorView alloc] initWithFrame:CGRectZero];
+        _sendingActivityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        _sendingActivityIndicatorView.hidesWhenStopped = YES;
+    }
+    return _sendingActivityIndicatorView;
 }
 
 @end

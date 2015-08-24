@@ -12,6 +12,7 @@ end
 target 'PonyChatUI' do
 
 pod 'AsyncDisplayKit'
+pod 'ReactiveCocoa'
 
 end
 

@@ -15,6 +15,9 @@
     self = [super initWithMessageItem:messageItem];
     if (self) {
         _imageURLString = [(PCUImageMessageEntity *)messageItem imageURLString];
+        _thumbURLString = [(PCUImageMessageEntity *)messageItem thumbURLString];
+        _imageWidth = [(PCUImageMessageEntity *)messageItem imageSize].width;
+        _imageHeight = [(PCUImageMessageEntity *)messageItem imageSize].height;
         if ([(PCUImageMessageEntity *)messageItem imageSize].width > 120.0) {
             _imageWidth = 120.0;
             _imageHeight = 120.0 * [(PCUImageMessageEntity *)messageItem imageSize].height / [(PCUImageMessageEntity *)messageItem imageSize].width;

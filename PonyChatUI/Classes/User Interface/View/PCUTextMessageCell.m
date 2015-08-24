@@ -9,17 +9,20 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "PCUTextMessageCell.h"
 #import "PCUTextMessageItemInteractor.h"
+#import "PCUPopMenuViewController.h"
 
 static const CGFloat kTextPaddingLeft = 18.0f;
 static const CGFloat kTextPaddingRight = 18.0f;
 static const CGFloat kTextPaddingTop = 12.0f;
 static const CGFloat kTextPaddingBottom = 10.0f;
 
-@interface PCUTextMessageCell ()
+@interface PCUTextMessageCell ()<PCUPopMenuViewControllerDelegate>
 
 @property (nonatomic, strong) ASTextNode *textNode;
 
 @property (nonatomic, strong) ASImageNode *backgroundImageNode;
+
+@property (nonatomic, strong) PCUPopMenuViewController *popMenuViewController;
 
 @end
 
@@ -38,18 +41,26 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 #pragma mark - Node
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
+    CGFloat topSpace = 0.0;
+    if (self.showNickname) {
+        topSpace = 18.0;
+    }
     CGSize superSize = [super calculateSizeThatFits:constrainedSize];
     CGSize textSize = [self.textNode measure:CGSizeMake(constrainedSize.width - kAvatarSize - 10.0 - kTextPaddingLeft - kTextPaddingRight - 60.0,
                                                         constrainedSize.height)];
     CGFloat requiredHeight = MAX(superSize.height, textSize.height + kTextPaddingTop + kTextPaddingBottom);
-    return CGSizeMake(constrainedSize.width, requiredHeight + kCellGaps);
+    return CGSizeMake(constrainedSize.width, requiredHeight + kCellGaps + topSpace);
 }
 
 - (void)layout {
     [super layout];
+    CGFloat topSpace = 0.0;
+    if (self.showNickname) {
+        topSpace = 18.0;
+    }
     if ([super actionType] == PCUMessageActionTypeSend) {
-        CGRect textNodeFrame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - kTextPaddingRight - self.textNode.calculatedSize.width,
-                                          kTextPaddingTop,
+        CGRect textNodeFrame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - kTextPaddingRight - self.textNode.calculatedSize.width,
+                                          kTextPaddingTop + topSpace,
                                           self.textNode.calculatedSize.width,
                                           self.textNode.calculatedSize.height);
         if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
@@ -64,8 +75,8 @@ static const CGFloat kTextPaddingBottom = 10.0f;
         self.textNode.frame = textNodeFrame;
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
-        CGRect textNodeFrame = CGRectMake(kAvatarSize + 10.0 + kTextPaddingLeft,
-                                          kTextPaddingTop,
+        CGRect textNodeFrame = CGRectMake(kAvatarSize + 14.0 + kTextPaddingLeft,
+                                          kTextPaddingTop + topSpace,
                                           self.textNode.calculatedSize.width,
                                           self.textNode.calculatedSize.height);
         if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
@@ -111,6 +122,28 @@ static const CGFloat kTextPaddingBottom = 10.0f;
     else {
         self.backgroundImageNode.hidden = YES;
     }
+    [self updateLayoutWithContentFrame:self.backgroundImageNode.frame];
+}
+
+#pragma mark - PCUPopMenuViewControllerDelegate
+
+- (void)handleBackgroundImageNodeTapped:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        self.backgroundImageNode.alpha = 0.5;
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint thePoint = [sender.view.superview convertPoint:sender.view.frame.origin toView:[[UIApplication sharedApplication] keyWindow]];
+        thePoint.x += CGRectGetWidth(sender.view.frame) / 2.0;
+        [self.popMenuViewController presentMenuViewControllerWithReferencePoint:thePoint];
+        self.backgroundImageNode.alpha = 1.0;
+    }
+}
+
+- (void)menuItemDidPressed:(PCUPopMenuViewController *)menuViewController itemIndex:(NSUInteger)itemIndex {
+    if (itemIndex == 0 && [[[self textMessageInteractor] messageText] isKindOfClass:[NSString class]]) {
+        [[UIPasteboard generalPasteboard] setPersistent:YES];
+        [[UIPasteboard generalPasteboard] setString:[[self textMessageInteractor] messageText]];
+    }
 }
 
 #pragma mark - Getter
@@ -135,6 +168,10 @@ static const CGFloat kTextPaddingBottom = 10.0f;
     if (_backgroundImageNode == nil) {
         _backgroundImageNode = [[ASImageNode alloc] init];
         _backgroundImageNode.backgroundColor = [UIColor clearColor];
+        _backgroundImageNode.userInteractionEnabled = YES;
+        UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundImageNodeTapped:)];
+        gesture.minimumPressDuration = 0.15;
+        [_backgroundImageNode.view addGestureRecognizer:gesture];
     }
     return _backgroundImageNode;
 }
@@ -149,6 +186,15 @@ static const CGFloat kTextPaddingBottom = 10.0f;
              NSFontAttributeName: font,
              NSParagraphStyleAttributeName: style
              };
+}
+
+- (PCUPopMenuViewController *)popMenuViewController {
+    if (_popMenuViewController == nil) {
+        _popMenuViewController = [[PCUPopMenuViewController alloc] init];
+        _popMenuViewController.titles = @[@"复制"];
+        _popMenuViewController.delegate = self;
+    }
+    return _popMenuViewController;
 }
 
 @end

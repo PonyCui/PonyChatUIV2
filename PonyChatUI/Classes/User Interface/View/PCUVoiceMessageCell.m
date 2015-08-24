@@ -18,8 +18,6 @@
 
 @property (nonatomic, strong) ASImageNode *voiceImageNode;
 
-@property (nonatomic, strong) ASTextNode *voiceLengthTextNode;
-
 @property (nonatomic, strong) ASImageNode *backgroundImageNode;
 
 @property (nonatomic, strong) CADisplayLink *displayLink;
@@ -30,7 +28,7 @@
 
 - (void)dealloc
 {
-    [self.displayLink invalidate];
+    [self stopPlayingAnimation];
 }
 
 - (instancetype)initWithMessageInteractor:(PCUMessageItemInteractor *)messageInteractor
@@ -39,7 +37,7 @@
     if (self) {
         [self addSubnode:self.backgroundImageNode];
         [self addSubnode:self.voiceImageNode];
-        [self addSubnode:self.voiceLengthTextNode];
+        [self configureScriptNode];
     }
     return self;
 }
@@ -88,33 +86,48 @@
 
 #pragma mark - Node
 
+- (void)configureScriptNode {
+    self.upscriptTextNode.attributedString = [[NSAttributedString alloc]
+                                              initWithString:[NSString stringWithFormat:@"%.0f''", [[self voiceMessageInteractor] voiceDuration]]
+                                              attributes:@{
+                                                           NSFontAttributeName: [UIFont systemFontOfSize:12.0],
+                                                           NSForegroundColorAttributeName: [UIColor grayColor]
+                                                           }];
+}
+
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
+    CGFloat topSpace = 0.0;
+    if (self.showNickname) {
+        topSpace = 18.0;
+    }
     CGSize superSize = [super calculateSizeThatFits:constrainedSize];
-    superSize.height += kCellGaps;
-    [self.voiceLengthTextNode measure:constrainedSize];
+    superSize.height += kCellGaps + topSpace;
     return superSize;
 }
 
 - (void)layout {
     [super layout];
+    CGFloat topSpace = 0.0;
+    if (self.showNickname) {
+        topSpace = 18.0;
+    }
     CGFloat backgroundWidth = MAX(88.0, MIN(1.0, [[self voiceMessageInteractor] voiceDuration] / 60.0) * 160.0);
     if ([super actionType] == PCUMessageActionTypeSend) {
         self.backgroundImageNode.image = [[UIImage imageNamed:@"SenderTextNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
-        self.backgroundImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - backgroundWidth, 2.0, backgroundWidth, 54.0);
+        self.backgroundImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - backgroundWidth, 2.0 + topSpace, backgroundWidth, 54.0);
         self.voiceImageNode.image = [UIImage imageNamed:@"SenderVoiceNodePlaying"];
-        self.voiceImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - 18.0 - self.voiceImageNode.image.size.width, 2.0, self.voiceImageNode.image.size.width, 44.0);
-        self.voiceLengthTextNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x - self.voiceLengthTextNode.calculatedSize.width, 22.0, self.voiceLengthTextNode.calculatedSize.width, self.voiceLengthTextNode.calculatedSize.height);
+        self.voiceImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - 18.0 - self.voiceImageNode.image.size.width, 2.0 + topSpace, self.voiceImageNode.image.size.width, 44.0);
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
         self.backgroundImageNode.image = [[UIImage imageNamed:@"ReceiverTextNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
-        self.backgroundImageNode.frame = CGRectMake(kAvatarSize + 10.0, 2.0, backgroundWidth, 54.0);
+        self.backgroundImageNode.frame = CGRectMake(kAvatarSize + 14.0, 2.0 + topSpace, backgroundWidth, 54.0);
         self.voiceImageNode.image = [UIImage imageNamed:@"ReceiverVoiceNodePlaying"];
-        self.voiceImageNode.frame = CGRectMake(kAvatarSize + 10.0 + 18.0, 2.0, self.voiceImageNode.image.size.width, 44.0);
-        self.voiceLengthTextNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + self.backgroundImageNode.frame.size.width, 22.0, self.voiceLengthTextNode.calculatedSize.width, self.voiceLengthTextNode.calculatedSize.height);
+        self.voiceImageNode.frame = CGRectMake(kAvatarSize + 14.0 + 18.0, 2.0 + topSpace, self.voiceImageNode.image.size.width, 44.0);
     }
     else {
         self.backgroundImageNode.hidden = YES;
     }
+    [self updateLayoutWithContentFrame:self.backgroundImageNode.frame];
 }
 
 #pragma mark - PCUVoiceStatus
@@ -148,24 +161,13 @@
     return _voiceImageNode;
 }
 
-- (ASTextNode *)voiceLengthTextNode {
-    if (_voiceLengthTextNode == nil) {
-        _voiceLengthTextNode = [[ASTextNode alloc] init];
-        _voiceLengthTextNode.attributedString = [[NSAttributedString alloc]
-                                                 initWithString:[NSString stringWithFormat:@"%.0f''", [[self voiceMessageInteractor] voiceDuration]]
-                                                 attributes:@{
-                                                              NSFontAttributeName: [UIFont systemFontOfSize:14.0],
-                                                              NSForegroundColorAttributeName: [UIColor grayColor]
-                                                              }];
-    }
-    return _voiceLengthTextNode;
-}
-
 - (ASImageNode *)backgroundImageNode {
     if (_backgroundImageNode == nil) {
         _backgroundImageNode = [[ASImageNode alloc] init];
         _backgroundImageNode.backgroundColor = [UIColor clearColor];
-        [_backgroundImageNode addTarget:self action:@selector(handleVoiceTapped) forControlEvents:ASControlNodeEventTouchUpInside];
+        [_backgroundImageNode addTarget:self
+                                 action:@selector(handleVoiceTapped)
+                       forControlEvents:ASControlNodeEventTouchUpInside];
     }
     return _backgroundImageNode;
 }

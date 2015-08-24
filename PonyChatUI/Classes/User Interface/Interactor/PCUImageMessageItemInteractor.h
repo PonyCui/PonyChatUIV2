@@ -12,6 +12,8 @@
 
 @property (nonatomic, copy) NSString *imageURLString;
 
+@property (nonatomic, copy) NSString *thumbURLString;
+
 @property (nonatomic, assign) double imageWidth;
 
 @property (nonatomic, assign) double imageHeight;

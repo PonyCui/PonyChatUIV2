@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) PCUMainPresenter *eventHandler;
 
+- (CGSize)contentSize;
+
 - (void)reloadData;
 
 - (void)pushData;
@@ -25,5 +27,7 @@
 - (void)insertData;
 
 - (void)autoScroll;
+
+- (void)forceScroll;
 
 @end

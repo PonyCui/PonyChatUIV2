@@ -7,21 +7,30 @@
 //
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "PCUCore.h"
 #import "PCUMainViewController.h"
 #import "PCUMainPresenter.h"
 #import "PCUMessageInteractor.h"
 #import "PCUMessageCell.h"
 
-@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate>
+@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) ASTableView *tableView;
+
+@property (nonatomic, assign) BOOL firstScrolled;
 
 @end
 
 @implementation PCUMainViewController
 
 #pragma mark - Object Life Cycle
+
+- (void)dealloc
+{
+    self.tableView.asyncDataSource = nil;
+    self.tableView.asyncDelegate = nil;
+}
 
 - (instancetype)init
 {
@@ -44,6 +53,10 @@
                                                       blue:235.0/255.0
                                                      alpha:1.0];
     [self.eventHandler updateView];
+    [self.tableView setAlpha:0.0];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView setAlpha:1.0];
+    });
     // Do any additional setup after loading the view.
 }
 
@@ -65,10 +78,17 @@
 
 #pragma mark - ASTableView
 
+- (CGSize)contentSize {
+    return self.tableView.contentSize;
+}
+
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [self.eventHandler.messageInteractor.items count]) {
         PCUMessageCell *cell = [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[indexPath.row]];
         cell.delegate = self.delegate;
+        if ([self.delegate respondsToSelector:@selector(PCUCellShowNickname)]) {
+            cell.showNickname = [self.delegate PCUCellShowNickname];
+        }
         return cell;
     }
     else {
@@ -84,6 +104,11 @@
     return 1;
 }
 
+- (void)tableView:(ASTableView *)tableView willDisplayNodeForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PCUMessageCell *node = (id)[tableView nodeForRowAtIndexPath:indexPath];
+    [node resume];
+}
+
 - (void)reloadData {
     [self.tableView reloadData];
 }
@@ -96,18 +121,20 @@
     [self.tableView beginUpdates];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastItemIndex inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdates];
-    [self autoScroll];
+    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
+        [self autoScroll];
+    }];
 }
 
 - (void)insertData {
     [self.tableView beginUpdates];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdates];
-    if (self.tableView.contentOffset.y == self.tableView.contentSize.height - self.tableView.frame.size.height) {
-        [self forceScroll];
-    }
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
+        if (self.tableView.contentOffset.y == self.tableView.contentSize.height - self.tableView.frame.size.height) {
+            [self forceScroll];
+        }
+    }];
 }
 
 - (void)autoScroll {
@@ -115,9 +142,19 @@
         return;
     }
     else if (self.tableView.contentOffset.y >= self.tableView.contentSize.height - self.tableView.frame.size.height * 2) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
-                                       animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (!self.firstScrolled) {
+                [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
+                                           animated:NO];
+                [UIView animateWithDuration:0.15 animations:^{
+                    [self.tableView setAlpha:1.0];
+                }];
+                self.firstScrolled = YES;
+            }
+            else {
+                [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
+                                           animated:YES];
+            }
         });
     }
 }
@@ -131,11 +168,47 @@
     });
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if ([self.delegate respondsToSelector:@selector(PCUEndEditing)]) {
+        [self.delegate PCUEndEditing];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.tableView.isTracking) {
+        if (self.tableView.contentOffset.y < -22.0) {
+            [self handleFetchingMoreTrigger];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (self.tableView.contentOffset.y < -22.0) {
+        [self handleFetchingMoreTrigger];
+    }
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+    [self handleFetchingMoreTrigger];
+}
+
+- (void)handleFetchingMoreTrigger {
+    if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviouMessages)]) {
+        self.tableView.automaticallyAdjustsContentOffset = YES;
+        [self.delegate PCUChatViewRequestPreviouMessages];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.tableView.automaticallyAdjustsContentOffset = NO;
+        });
+    }
+}
+
 #pragma mark - Getter
 
 - (ASTableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain asyncDataFetching:YES];
+        _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain asyncDataFetching:NO];
         _tableView.contentInset = UIEdgeInsetsMake(8, 0, 8, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.asyncDataSource = self;

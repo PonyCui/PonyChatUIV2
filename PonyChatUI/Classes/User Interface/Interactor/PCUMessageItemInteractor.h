@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PCUMessageEntity.h"
 
 @class PCUMessageEntity;
 
@@ -23,6 +24,8 @@
 @property (nonatomic, copy) NSString *avatarURLString;
 
 @property (nonatomic, copy) NSString *nicknameString;
+
+@property (nonatomic, assign) PCUMessageItemSendingStatus sendingStatus;
 
 - (instancetype)initWithMessageItem:(PCUMessageEntity *)messageItem;
 

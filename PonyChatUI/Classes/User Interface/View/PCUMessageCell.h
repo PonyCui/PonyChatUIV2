@@ -32,12 +32,22 @@ typedef NS_ENUM(NSInteger, PCUMessageActionType) {
 
 #pragma mark - Private
 
+@property (nonatomic, assign) BOOL showNickname;
+
 @property (nonatomic, strong) PCUMessageItemInteractor *messageInteractor;
+
+@property (nonatomic, strong) ASTextNode *upscriptTextNode;
+
+@property (nonatomic, strong) ASTextNode *subscriptTextNode;
 
 - (instancetype)initWithMessageInteractor:(PCUMessageItemInteractor *)messageInteractor;
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize;
 
 - (void)layout;
+
+- (void)updateLayoutWithContentFrame:(CGRect)frame;
+
+- (void)resume;
 
 @end

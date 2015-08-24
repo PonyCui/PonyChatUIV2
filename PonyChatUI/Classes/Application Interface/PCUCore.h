@@ -24,9 +24,14 @@
 @protocol PCUDelegate <NSObject>
 
 @optional
+- (BOOL)PCUCellShowNickname;
+- (void)PCUEndEditing;
+- (void)PCUChatViewRequestPreviouMessages;
+- (void)PCUAvatarTappedWithMessageItem:(PCUMessageEntity *)messageItem;
 - (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem;
 - (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
                       voiceStatus:(id<PCUVoiceStatus>)voiceStatus;
+- (void)PCUFailableMessageItemTapped:(PCUMessageEntity *)messageItem;
 
 @end
 
