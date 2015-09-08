@@ -26,12 +26,18 @@
 @optional
 - (BOOL)PCUCellShowNickname;
 - (void)PCUEndEditing;
-- (void)PCUChatViewRequestPreviouMessages;
+- (BOOL)PCUChatViewRequestPreviouMessages;
 - (void)PCUAvatarTappedWithMessageItem:(PCUMessageEntity *)messageItem;
+- (void)PCUAvatarLongPressedWithMessageItem:(PCUMessageEntity *)messageItem;
 - (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem;
 - (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
                       voiceStatus:(id<PCUVoiceStatus>)voiceStatus;
+- (BOOL)PCUVoiceMessageItemHasPlayed:(PCUVoiceMessageEntity *)messageItem;
 - (void)PCUFailableMessageItemTapped:(PCUMessageEntity *)messageItem;
+- (void)PCURequireDeleteMessageItem:(PCUMessageEntity *)messageItem;
+- (void)PCURequireForwardMessageItem:(PCUMessageEntity *)messageItem;
+- (void)PCURequireOpenURL:(NSURL *)URL;
+- (void)PCURequireSlideToMessageID:(NSString *)messageID;
 
 @end
 

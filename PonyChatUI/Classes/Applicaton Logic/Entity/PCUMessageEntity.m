@@ -10,4 +10,15 @@
 
 @implementation PCUMessageEntity
 
+- (instancetype)initWithForwardMessageItem:(PCUMessageEntity *)messageItem
+{
+    self = [super init];
+    if (self) {
+        self.messageOrder = (double)[[NSDate date] timeIntervalSince1970];
+        self.messageDate = [NSDate date];
+        self.ownSender = YES;
+    }
+    return self;
+}
+
 @end

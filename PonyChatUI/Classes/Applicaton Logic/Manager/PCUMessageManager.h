@@ -12,13 +12,16 @@
 #import "PCUSystemMessageEntity.h"
 #import "PCUImageMessageEntity.h"
 #import "PCUVoiceMessageEntity.h"
+#import "PCUSlideUpEntity.h"
 
-@class PCUMessageEntity;
+@class PCUMessageEntity, PCUSlideUpEntity;
 
 @protocol PCUMessageManagerDelegate <NSObject>
 
 @required
 - (void)messageManagerItemsDidChanged;
+- (void)messageManagerItemDidDeletedWithIndex:(NSUInteger)index;
+- (void)messageManagerSlideUpItemsDidChanged;
 
 @end
 
@@ -28,8 +31,16 @@
 
 @property (nonatomic, copy) NSArray *messageItems;
 
+@property (nonatomic, copy) NSArray *slideUpItems;
+
+- (void)didInsertMessageItem:(PCUMessageEntity *)messageItem nextItem:(PCUMessageEntity *)nextItem;
+
 - (void)didReceiveMessageItem:(PCUMessageEntity *)messageItem;
 
 - (void)didReceiveMessageItems:(NSArray *)messageItems;
+
+- (void)didDeletedMessageItem:(PCUMessageEntity *)messageItem;
+
+- (void)addSlideUpItem:(PCUSlideUpEntity *)slideUpItem;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import "PCUCore.h"
 #import "PCUTextMessageCell.h"
 #import "PCUTextMessageItemInteractor.h"
 #import "PCUPopMenuViewController.h"
@@ -16,7 +17,7 @@ static const CGFloat kTextPaddingRight = 18.0f;
 static const CGFloat kTextPaddingTop = 12.0f;
 static const CGFloat kTextPaddingBottom = 10.0f;
 
-@interface PCUTextMessageCell ()<PCUPopMenuViewControllerDelegate>
+@interface PCUTextMessageCell ()<PCUPopMenuViewControllerDelegate, ASTextNodeDelegate>
 
 @property (nonatomic, strong) ASTextNode *textNode;
 
@@ -140,9 +141,35 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 }
 
 - (void)menuItemDidPressed:(PCUPopMenuViewController *)menuViewController itemIndex:(NSUInteger)itemIndex {
-    if (itemIndex == 0 && [[[self textMessageInteractor] messageText] isKindOfClass:[NSString class]]) {
+    if (itemIndex == 0) {
         [[UIPasteboard generalPasteboard] setPersistent:YES];
         [[UIPasteboard generalPasteboard] setString:[[self textMessageInteractor] messageText]];
+    }
+    else if (itemIndex == 1) {
+        if ([self.delegate respondsToSelector:@selector(PCURequireDeleteMessageItem:)]) {
+            [self.delegate PCURequireDeleteMessageItem:self.messageInteractor.messageItem];
+        }
+    }
+    else if (itemIndex == 2) {
+        if ([self.delegate respondsToSelector:@selector(PCURequireForwardMessageItem:)]) {
+            [self.delegate PCURequireForwardMessageItem:self.messageInteractor.messageItem];
+        }
+    }
+}
+
+#pragma mark - ASTextNodeDelegate
+
+- (BOOL)textNode:(ASTextNode *)textNode shouldHighlightLinkAttribute:(NSString *)attribute value:(id)value atPoint:(CGPoint)point {
+    return YES;
+}
+
+- (BOOL)textNode:(ASTextNode *)textNode shouldLongPressLinkAttribute:(NSString *)attribute value:(id)value atPoint:(CGPoint)point {
+    return NO;
+}
+
+- (void)textNode:(ASTextNode *)textNode tappedLinkAttribute:(NSString *)attribute value:(id)value atPoint:(CGPoint)point textRange:(NSRange)textRange {
+    if ([self.delegate respondsToSelector:@selector(PCURequireOpenURL:)]) {
+        [self.delegate PCURequireOpenURL:value];
     }
 }
 
@@ -160,6 +187,12 @@ static const CGFloat kTextPaddingBottom = 10.0f;
             text = @"";
         }
         _textNode.attributedString = [[NSAttributedString alloc] initWithString:text attributes:[self textStyle]];
+        if ([self hasURLWithString:text]) {
+            _textNode.delegate = self;
+            _textNode.userInteractionEnabled = YES;
+            [_textNode setLinkAttributeNames:@[@"_PCULinkAttributeName"]];
+            _textNode.attributedString = [self linkedAttributesWithAttributedString:_textNode.attributedString];
+        }
     }
     return _textNode;
 }
@@ -191,10 +224,34 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 - (PCUPopMenuViewController *)popMenuViewController {
     if (_popMenuViewController == nil) {
         _popMenuViewController = [[PCUPopMenuViewController alloc] init];
-        _popMenuViewController.titles = @[@"复制"];
+        _popMenuViewController.titles = @[@"复制", @"删除", @"转发"];
         _popMenuViewController.delegate = self;
     }
     return _popMenuViewController;
+}
+
+#pragma mark - Helper
+
+- (BOOL)hasURLWithString:(NSString *)string {
+    NSDataDetector *detector = [[NSDataDetector alloc] initWithTypes:NSTextCheckingTypeLink error:NULL];
+    return [detector numberOfMatchesInString:string options:NSMatchingReportCompletion range:NSMakeRange(0, [string length])] > 0;
+}
+
+- (NSAttributedString *)linkedAttributesWithAttributedString:(NSAttributedString *)attributedString {
+    NSString *string = [attributedString string];
+    string = [string stringByReplacingOccurrencesOfString:@"[^\\x00-\\xff]" withString:@" " options:NSRegularExpressionSearch range:NSMakeRange(0, [string length])];
+    NSMutableAttributedString *mutableString = [attributedString mutableCopy];
+    NSDataDetector *detector = [[NSDataDetector alloc] initWithTypes:NSTextCheckingTypeLink error:NULL];
+    NSArray *matches = [detector matchesInString:string options:NSMatchingReportCompletion range:NSMakeRange(0, [string length])];
+    for (NSTextCheckingResult *result in matches) {
+        if (result.resultType == NSTextCheckingTypeLink) {
+            [mutableString addAttribute:@"_PCULinkAttributeName" value:result.URL range:result.range];
+            [mutableString addAttribute:NSForegroundColorAttributeName
+                                  value:[UIColor colorWithRed:0 green:95.0/255.0 blue:1.0 alpha:1.0]
+                                  range:result.range];
+        }
+    }
+    return [mutableString copy];
 }
 
 @end

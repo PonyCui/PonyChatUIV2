@@ -10,4 +10,14 @@
 
 @implementation PCUImageMessageEntity
 
+- (instancetype)initWithForwardMessageItem:(PCUImageMessageEntity *)messageItem
+{
+    self = [super initWithForwardMessageItem:messageItem];
+    if (self) {
+        self.imageURLString = [messageItem imageURLString];
+        self.imageSize = [messageItem imageSize];
+    }
+    return self;
+}
+
 @end

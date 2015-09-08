@@ -10,4 +10,12 @@
 
 @implementation PCUTextMessageEntity
 
+- (instancetype)initWithForwardMessageItem:(PCUTextMessageEntity *)messageItem {
+    self = [super initWithForwardMessageItem:messageItem];
+    if (self) {
+        self.messageText = messageItem.messageText;
+    }
+    return self;
+}
+
 @end

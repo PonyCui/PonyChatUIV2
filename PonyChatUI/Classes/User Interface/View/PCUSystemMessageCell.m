@@ -40,12 +40,12 @@ static const CGFloat kTextPaddingBottom = 3.0f;
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
     CGSize textSize = [self.textNode measure:CGSizeMake(constrainedSize.width - kTextPaddingLeft - kTextPaddingRight,
                                                         constrainedSize.height)];
-    return CGSizeMake(constrainedSize.width, textSize.height + kTextPaddingTop + kTextPaddingBottom + kCellGaps);
+    return CGSizeMake(constrainedSize.width, textSize.height + kTextPaddingTop + kTextPaddingBottom + kCellGaps * 2);
 }
 
 - (void)layout {
     self.textNode.frame = CGRectMake((self.calculatedSize.width - self.textNode.calculatedSize.width) / 2.0,
-                                     kTextPaddingTop,
+                                     kTextPaddingTop + kCellGaps,
                                      self.textNode.calculatedSize.width,
                                      self.textNode.calculatedSize.height);
     CGRect backgroundFrame = self.textNode.frame;

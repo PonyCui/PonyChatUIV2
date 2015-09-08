@@ -63,6 +63,12 @@
 		6399E4BD1B4BCDE100906EEC /* PCUSystemMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6399E4BB1B4BCDE100906EEC /* PCUSystemMessageCell.m */; };
 		6399E4C01B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6399E4BE1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h */; };
 		6399E4C11B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6399E4BF1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m */; };
+		63B5512F1B9EDAEE001F3568 /* PCUSlideUpCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 63B5512D1B9EDAEE001F3568 /* PCUSlideUpCell.h */; };
+		63B551301B9EDAEE001F3568 /* PCUSlideUpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B5512E1B9EDAEE001F3568 /* PCUSlideUpCell.m */; };
+		63B551331B9EDAFE001F3568 /* PCUSlideUpItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 63B551311B9EDAFE001F3568 /* PCUSlideUpItemInteractor.h */; };
+		63B551341B9EDAFE001F3568 /* PCUSlideUpItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B551321B9EDAFE001F3568 /* PCUSlideUpItemInteractor.m */; };
+		63B551371B9EDB6D001F3568 /* PCUSlideUpEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 63B551351B9EDB6D001F3568 /* PCUSlideUpEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		63B551381B9EDB6D001F3568 /* PCUSlideUpEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B551361B9EDB6D001F3568 /* PCUSlideUpEntity.m */; };
 		63D0DA731B8B15DF00DB24E1 /* PCUImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D0DA711B8B15DF00DB24E1 /* PCUImageManager.h */; };
 		63D0DA741B8B15DF00DB24E1 /* PCUImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D0DA721B8B15DF00DB24E1 /* PCUImageManager.m */; };
 		63D0DA791B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D0DA751B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.h */; };
@@ -180,6 +186,12 @@
 		6399E4BB1B4BCDE100906EEC /* PCUSystemMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSystemMessageCell.m; sourceTree = "<group>"; };
 		6399E4BE1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSystemMessageItemInteractor.h; sourceTree = "<group>"; };
 		6399E4BF1B4BCE1000906EEC /* PCUSystemMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSystemMessageItemInteractor.m; sourceTree = "<group>"; };
+		63B5512D1B9EDAEE001F3568 /* PCUSlideUpCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSlideUpCell.h; sourceTree = "<group>"; };
+		63B5512E1B9EDAEE001F3568 /* PCUSlideUpCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSlideUpCell.m; sourceTree = "<group>"; };
+		63B551311B9EDAFE001F3568 /* PCUSlideUpItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSlideUpItemInteractor.h; sourceTree = "<group>"; };
+		63B551321B9EDAFE001F3568 /* PCUSlideUpItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSlideUpItemInteractor.m; sourceTree = "<group>"; };
+		63B551351B9EDB6D001F3568 /* PCUSlideUpEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSlideUpEntity.h; sourceTree = "<group>"; };
+		63B551361B9EDB6D001F3568 /* PCUSlideUpEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSlideUpEntity.m; sourceTree = "<group>"; };
 		63D0DA711B8B15DF00DB24E1 /* PCUImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUImageManager.h; sourceTree = "<group>"; };
 		63D0DA721B8B15DF00DB24E1 /* PCUImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUImageManager.m; sourceTree = "<group>"; };
 		63D0DA751B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUMessageActivityIndicatorView.h; sourceTree = "<group>"; };
@@ -396,6 +408,8 @@
 				6396A4941B4BDA0E00C2903E /* PCUImageMessageEntity.m */,
 				6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */,
 				6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */,
+				63B551351B9EDB6D001F3568 /* PCUSlideUpEntity.h */,
+				63B551361B9EDB6D001F3568 /* PCUSlideUpEntity.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -426,6 +440,8 @@
 				6396A4981B4BDA6C00C2903E /* PCUImageMessageItemInteractor.m */,
 				6335A9921B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h */,
 				6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */,
+				63B551311B9EDAFE001F3568 /* PCUSlideUpItemInteractor.h */,
+				63B551321B9EDAFE001F3568 /* PCUSlideUpItemInteractor.m */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -458,6 +474,8 @@
 				63D0DA761B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.m */,
 				63D0DA771B8B165A00DB24E1 /* PCUPopMenuViewController.h */,
 				63D0DA781B8B165A00DB24E1 /* PCUPopMenuViewController.m */,
+				63B5512D1B9EDAEE001F3568 /* PCUSlideUpCell.h */,
+				63B5512E1B9EDAEE001F3568 /* PCUSlideUpCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -493,6 +511,7 @@
 				6388BE751B4A82A400F1D4B9 /* PCUMessageManager.h in Headers */,
 				6388BE9D1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h in Headers */,
 				6396A4951B4BDA0E00C2903E /* PCUImageMessageEntity.h in Headers */,
+				63B551371B9EDB6D001F3568 /* PCUSlideUpEntity.h in Headers */,
 				6399E4C01B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h in Headers */,
 				6335A9981B4CD54A001DD64E /* PCUVoiceMessageEntity.h in Headers */,
 				6388BE951B4B743500F1D4B9 /* PCUMessageInteractor.h in Headers */,
@@ -500,6 +519,7 @@
 				6399E4B81B4BCD4C00906EEC /* PCUSystemMessageEntity.h in Headers */,
 				6388BE911B4B741500F1D4B9 /* PCUMessageItemInteractor.h in Headers */,
 				6388BE891B4B6EFB00F1D4B9 /* PCUMessageCell.h in Headers */,
+				63B5512F1B9EDAEE001F3568 /* PCUSlideUpCell.h in Headers */,
 				6388BE791B4A83A800F1D4B9 /* PCUTextMessageEntity.h in Headers */,
 				6335A9941B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h in Headers */,
 				6399E4BC1B4BCDE100906EEC /* PCUSystemMessageCell.h in Headers */,
@@ -510,6 +530,7 @@
 				6388BE431B4A7C5C00F1D4B9 /* PonyChatUI.h in Headers */,
 				63D0DA731B8B15DF00DB24E1 /* PCUImageManager.h in Headers */,
 				6388BE8D1B4B727400F1D4B9 /* PCUTextMessageCell.h in Headers */,
+				63B551331B9EDAFE001F3568 /* PCUSlideUpItemInteractor.h in Headers */,
 				6396A49D1B4BDADA00C2903E /* PCUImageMessageCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -740,7 +761,9 @@
 				63D0DA7A1B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.m in Sources */,
 				6388BE8E1B4B727400F1D4B9 /* PCUTextMessageCell.m in Sources */,
 				6388BE7A1B4A83A800F1D4B9 /* PCUTextMessageEntity.m in Sources */,
+				63B551301B9EDAEE001F3568 /* PCUSlideUpCell.m in Sources */,
 				6388BE821B4A8D9B00F1D4B9 /* PCUWireframe.m in Sources */,
+				63B551381B9EDB6D001F3568 /* PCUSlideUpEntity.m in Sources */,
 				6335A9951B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m in Sources */,
 				6388BE8A1B4B6EFB00F1D4B9 /* PCUMessageCell.m in Sources */,
 				6335A9991B4CD54A001DD64E /* PCUVoiceMessageEntity.m in Sources */,
@@ -756,6 +779,7 @@
 				6388BE921B4B741500F1D4B9 /* PCUMessageItemInteractor.m in Sources */,
 				6388BE961B4B743500F1D4B9 /* PCUMessageInteractor.m in Sources */,
 				6396A4961B4BDA0E00C2903E /* PCUImageMessageEntity.m in Sources */,
+				63B551341B9EDAFE001F3568 /* PCUSlideUpItemInteractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,6 +978,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B145B35D789149B39C8A0C8B /* Pods-PonyChatUI.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -983,6 +1008,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C3D2D087BAB03BC067818C6 /* Pods-PonyChatUI.release.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

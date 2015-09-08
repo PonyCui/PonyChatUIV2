@@ -30,7 +30,6 @@
 
 - (void)updateView {
     isViewDidLoaded = YES;
-    [self.userInterface reloadData];
 }
 
 #pragma mark - PCUMessageInteractorDelegate
@@ -47,9 +46,39 @@
     }
 }
 
+- (void)messageInteractorItemDidDeletedWithIndex:(NSUInteger)index {
+    if (isViewDidLoaded) {
+        [self.userInterface deleteDataWithRow:index];
+    }
+}
+
+- (void)messageInteractorItemDidPushedTwice {
+    if (isViewDidLoaded) {
+        [self.userInterface pushDataTwice];
+    }
+}
+
 - (void)messageInteractorItemDidInserted {
     if (isViewDidLoaded) {
         [self.userInterface insertData];
+    }
+}
+
+- (void)messageInteractorItemDidInsertedTwice {
+    if (isViewDidLoaded) {
+        [self.userInterface insertDataTwice];
+    }
+}
+
+- (void)messageInteractorSlideUpItemsDidChanged {
+    if (isViewDidLoaded) {
+        [self.userInterface reloadSlideUpData];
+    }
+}
+
+- (void)messageInteractorSlideUpItemsDidDeleteWithIndex:(NSUInteger)index {
+    if (isViewDidLoaded) {
+        [self.userInterface deleteSlideUpDataWithRow:index];
     }
 }
 

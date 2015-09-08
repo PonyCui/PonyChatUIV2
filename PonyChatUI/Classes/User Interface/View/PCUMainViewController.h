@@ -22,12 +22,22 @@
 
 - (void)reloadData;
 
+- (void)deleteDataWithRow:(NSUInteger)row;
+
 - (void)pushData;
 
+- (void)pushDataTwice;
+
 - (void)insertData;
+
+- (void)insertDataTwice;
 
 - (void)autoScroll;
 
 - (void)forceScroll;
+
+- (void)reloadSlideUpData;
+
+- (void)deleteSlideUpDataWithRow:(NSUInteger)row;
 
 @end

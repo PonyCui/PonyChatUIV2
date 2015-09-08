@@ -11,12 +11,15 @@
 #import "PCUImageMessageItemInteractor.h"
 #import "PCUCore.h"
 #import "PCUImageManager.h"
+#import "PCUPopMenuViewController.h"
 
-@interface PCUImageMessageCell ()
+@interface PCUImageMessageCell ()<PCUPopMenuViewControllerDelegate>
 
 @property (nonatomic, strong) ASNetworkImageNode *imageNode;
 
 @property (nonatomic, strong) ASImageNode *maskNode;
+
+@property (nonatomic, strong) PCUPopMenuViewController *popMenuViewController;
 
 @end
 
@@ -90,6 +93,33 @@
     }
 }
 
+#pragma mark - PCUPopMenuViewControllerDelegate
+
+- (void)handleBackgroundImageNodeTapped:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        self.imageNode.alpha = 0.5;
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint thePoint = [sender.view.superview convertPoint:sender.view.frame.origin toView:[[UIApplication sharedApplication] keyWindow]];
+        thePoint.x += CGRectGetWidth(sender.view.frame) / 2.0;
+        [self.popMenuViewController presentMenuViewControllerWithReferencePoint:thePoint];
+        self.imageNode.alpha = 1.0;
+    }
+}
+
+- (void)menuItemDidPressed:(PCUPopMenuViewController *)menuViewController itemIndex:(NSUInteger)itemIndex {
+    if (itemIndex == 0) {
+        if ([self.delegate respondsToSelector:@selector(PCURequireDeleteMessageItem:)]) {
+            [self.delegate PCURequireDeleteMessageItem:self.messageInteractor.messageItem];
+        }
+    }
+    else if (itemIndex == 1) {
+        if ([self.delegate respondsToSelector:@selector(PCURequireForwardMessageItem:)]) {
+            [self.delegate PCURequireForwardMessageItem:self.messageInteractor.messageItem];
+        }
+    }
+}
+
 #pragma mark - Getter
 
 - (PCUImageMessageItemInteractor *)imageMessageInteractor {
@@ -113,6 +143,9 @@
             _imageNode.URL = [NSURL URLWithString:[[self imageMessageInteractor] imageURLString]];
         }
         _imageNode.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+        UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundImageNodeTapped:)];
+        gesture.minimumPressDuration = 0.15;
+        [_imageNode.view addGestureRecognizer:gesture];
     }
     return _imageNode;
 }
@@ -122,6 +155,15 @@
         _maskNode = [[ASImageNode alloc] init];
     }
     return _maskNode;
+}
+
+- (PCUPopMenuViewController *)popMenuViewController {
+    if (_popMenuViewController == nil) {
+        _popMenuViewController = [[PCUPopMenuViewController alloc] init];
+        _popMenuViewController.titles = @[@"删除", @"转发"];
+        _popMenuViewController.delegate = self;
+    }
+    return _popMenuViewController;
 }
 
 @end

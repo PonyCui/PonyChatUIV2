@@ -10,4 +10,14 @@
 
 @implementation PCUVoiceMessageEntity
 
+- (instancetype)initWithForwardMessageItem:(PCUVoiceMessageEntity *)messageItem
+{
+    self = [super initWithForwardMessageItem:messageItem];
+    if (self) {
+        self.voiceURLString = [messageItem voiceURLString];
+        self.voiceDuration = [messageItem voiceDuration];
+    }
+    return self;
+}
+
 @end

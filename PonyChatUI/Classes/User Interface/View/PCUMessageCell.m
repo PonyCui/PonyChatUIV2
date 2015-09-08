@@ -86,23 +86,22 @@
     [RACObserve(self.messageInteractor.messageItem, senderNicknameString) subscribeNext:^(id x) {
         @strongify(self);
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *text = @"";
-            if ([[[[self messageInteractor] messageItem] senderNicknameString] isKindOfClass:[NSString class]]) {
-                text = [[[self messageInteractor] messageItem] senderNicknameString];
-            }
+            NSString *text = [[[self messageInteractor] messageItem] senderNicknameString];
             NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
             paragraphStyle.alignment = NSTextAlignmentRight;
             if (self.actionType == PCUMessageActionTypeReceive) {
                 paragraphStyle.alignment = NSTextAlignmentLeft;
             }
-            NSAttributedString *attributedString = [[NSAttributedString alloc]
-                                                    initWithString:text
-                                                    attributes:@{
-                                                                 NSFontAttributeName: [UIFont systemFontOfSize:11.0],
-                                                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                                                 NSParagraphStyleAttributeName: paragraphStyle
-                                                                 }];
-            [_nicknameNode setAttributedString:attributedString];
+            if (text != nil) {
+                NSAttributedString *attributedString = [[NSAttributedString alloc]
+                                                        initWithString:text
+                                                        attributes:@{
+                                                                     NSFontAttributeName: [UIFont systemFontOfSize:11.0],
+                                                                     NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                                                     NSParagraphStyleAttributeName: paragraphStyle
+                                                                     }];
+                [_nicknameNode setAttributedString:attributedString];
+            }
         });
     }];
 }
@@ -118,6 +117,14 @@
 - (void)handleAvatarTapped {
     if ([self.delegate respondsToSelector:@selector(PCUAvatarTappedWithMessageItem:)]) {
         [self.delegate PCUAvatarTappedWithMessageItem:[[self messageInteractor] messageItem]];
+    }
+}
+
+- (void)handleAvatarLongPressed:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateRecognized) {
+        if ([self.delegate respondsToSelector:@selector(PCUAvatarLongPressedWithMessageItem:)]) {
+            [self.delegate PCUAvatarLongPressedWithMessageItem:[[self messageInteractor] messageItem]];
+        }
     }
 }
 
@@ -263,9 +270,14 @@
         _avatarImageNode = [[ASNetworkImageNode alloc] initWithCache:[PCUImageManager sharedInstance]
                                                           downloader:[PCUImageManager sharedInstance]];
         _avatarImageNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
+        _avatarImageNode.layer.cornerRadius = kAvatarSize / 2.0;
+        _avatarImageNode.layer.masksToBounds = YES;
         [_avatarImageNode addTarget:self
                              action:@selector(handleAvatarTapped)
                    forControlEvents:ASControlNodeEventTouchUpInside];
+        UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleAvatarLongPressed:)];
+        longPressGestureRecognizer.minimumPressDuration = 0.25;
+        [_avatarImageNode.view addGestureRecognizer:longPressGestureRecognizer];
     }
     return _avatarImageNode;
 }

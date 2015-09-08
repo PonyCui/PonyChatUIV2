@@ -22,9 +22,13 @@ typedef NS_ENUM(NSInteger, PCUMessageItemSendingStatus) {
 
 @property (nonatomic, copy) NSString *messageID;
 
+@property (nonatomic, strong) NSDate *messageDate;
+
 @property (nonatomic, assign) PCUMessageOrder messageOrder;
 
 @property (nonatomic, assign) BOOL ownSender;
+
+@property (nonatomic, copy) NSString *senderID;//发送者的识别标识
 
 @property (nonatomic, copy) NSString *senderNicknameString;
 
@@ -33,5 +37,7 @@ typedef NS_ENUM(NSInteger, PCUMessageItemSendingStatus) {
 @property (nonatomic, assign) PCUMessageItemSendingStatus sendingStatus;
 
 @property (nonatomic, copy) NSDictionary *attributes;
+
+- (instancetype)initWithForwardMessageItem:(PCUMessageEntity *)messageItem;
 
 @end

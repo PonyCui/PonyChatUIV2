@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PCUMessageItemInteractor.h"
+#import "PCUSlideUpItemInteractor.h"
 
 @class PCUMessageManager;
 
@@ -17,7 +18,17 @@
 
 - (void)messageInteractorItemDidInserted;
 
+- (void)messageInteractorItemDidInsertedTwice;
+
+- (void)messageInteractorItemDidDeletedWithIndex:(NSUInteger)index;
+
 - (void)messageInteractorItemDidPushed;
+
+- (void)messageInteractorItemDidPushedTwice;
+
+- (void)messageInteractorSlideUpItemsDidChanged;
+
+- (void)messageInteractorSlideUpItemsDidDeleteWithIndex:(NSUInteger)index;
 
 @end
 
@@ -27,6 +38,14 @@
 
 @property (nonatomic, strong) PCUMessageManager *messageManager;
 
+/**
+ *  @brief  [PCUMessageItemInteractor]
+ */
 @property (nonatomic, copy) NSArray *items;
+
+/**
+ *  @brief  [PCUSlideUpItemInteractor]
+ */
+@property (nonatomic, copy) NSArray *slideUpItems;
 
 @end

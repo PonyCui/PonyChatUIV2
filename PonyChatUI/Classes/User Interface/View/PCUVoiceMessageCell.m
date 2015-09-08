@@ -10,8 +10,9 @@
 #import "PCUVoiceMessageCell.h"
 #import "PCUVoiceMessageItemInteractor.h"
 #import "PCUVoiceMessageEntity.h"
+#import "PCUPopMenuViewController.h"
 
-@interface PCUVoiceMessageCell ()<PCUVoiceStatus> {
+@interface PCUVoiceMessageCell ()<PCUVoiceStatus, PCUPopMenuViewControllerDelegate> {
     NSInteger currentPlayingFrame;
     BOOL isCurrentPlaying;
 }
@@ -20,7 +21,11 @@
 
 @property (nonatomic, strong) ASImageNode *backgroundImageNode;
 
+@property (nonatomic, strong) ASDisplayNode *badgeNode;
+
 @property (nonatomic, strong) CADisplayLink *displayLink;
+
+@property (nonatomic, strong) PCUPopMenuViewController *popMenuViewController;
 
 @end
 
@@ -37,6 +42,7 @@
     if (self) {
         [self addSubnode:self.backgroundImageNode];
         [self addSubnode:self.voiceImageNode];
+        [self addSubnode:self.badgeNode];
         [self configureScriptNode];
     }
     return self;
@@ -117,12 +123,20 @@
         self.backgroundImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - backgroundWidth, 2.0 + topSpace, backgroundWidth, 54.0);
         self.voiceImageNode.image = [UIImage imageNamed:@"SenderVoiceNodePlaying"];
         self.voiceImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - 18.0 - self.voiceImageNode.image.size.width, 2.0 + topSpace, self.voiceImageNode.image.size.width, 44.0);
+        self.badgeNode.hidden = YES;
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
         self.backgroundImageNode.image = [[UIImage imageNamed:@"ReceiverTextNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
         self.backgroundImageNode.frame = CGRectMake(kAvatarSize + 14.0, 2.0 + topSpace, backgroundWidth, 54.0);
         self.voiceImageNode.image = [UIImage imageNamed:@"ReceiverVoiceNodePlaying"];
         self.voiceImageNode.frame = CGRectMake(kAvatarSize + 14.0 + 18.0, 2.0 + topSpace, self.voiceImageNode.image.size.width, 44.0);
+        self.badgeNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + self.backgroundImageNode.frame.size.width + 22.0, self.backgroundImageNode.frame.origin.y + 8.0, 6.0, 6.0);
+        self.badgeNode.hidden = YES;
+        if ([self.delegate respondsToSelector:@selector(PCUVoiceMessageItemHasPlayed:)]) {
+            if (![self.delegate PCUVoiceMessageItemHasPlayed:(id)self.messageInteractor.messageItem]) {
+                self.badgeNode.hidden = NO;
+            }
+        }
     }
     else {
         self.backgroundImageNode.hidden = YES;
@@ -139,12 +153,41 @@
 - (void)setPlay {
     isCurrentPlaying = YES;
     [self loopPlayingAnimation];
+    self.badgeNode.hidden = YES;
 }
 
 - (void)setPause {
     [self stopPlayingAnimation];
     isCurrentPlaying = NO;
 }
+
+#pragma mark - PCUPopMenuViewControllerDelegate
+
+- (void)handleBackgroundImageNodeTapped:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        self.backgroundImageNode.alpha = 0.5;
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint thePoint = [sender.view.superview convertPoint:sender.view.frame.origin toView:[[UIApplication sharedApplication] keyWindow]];
+        thePoint.x += CGRectGetWidth(sender.view.frame) / 2.0;
+        [self.popMenuViewController presentMenuViewControllerWithReferencePoint:thePoint];
+        self.backgroundImageNode.alpha = 1.0;
+    }
+}
+
+- (void)menuItemDidPressed:(PCUPopMenuViewController *)menuViewController itemIndex:(NSUInteger)itemIndex {
+    if (itemIndex == 0) {
+        if ([self.delegate respondsToSelector:@selector(PCURequireDeleteMessageItem:)]) {
+            [self.delegate PCURequireDeleteMessageItem:self.messageInteractor.messageItem];
+        }
+    }
+    else if (itemIndex == 1) {
+        if ([self.delegate respondsToSelector:@selector(PCURequireForwardMessageItem:)]) {
+            [self.delegate PCURequireForwardMessageItem:self.messageInteractor.messageItem];
+        }
+    }
+}
+
 
 #pragma mark - Getter
 
@@ -168,6 +211,9 @@
         [_backgroundImageNode addTarget:self
                                  action:@selector(handleVoiceTapped)
                        forControlEvents:ASControlNodeEventTouchUpInside];
+        UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundImageNodeTapped:)];
+        gesture.minimumPressDuration = 0.15;
+        [_backgroundImageNode.view addGestureRecognizer:gesture];
     }
     return _backgroundImageNode;
 }
@@ -178,6 +224,25 @@
         _displayLink.frameInterval = 30;
     }
     return _displayLink;
+}
+
+- (ASDisplayNode *)badgeNode {
+    if (_badgeNode == nil) {
+        _badgeNode = [[ASDisplayNode alloc] init];
+        _badgeNode.backgroundColor = [UIColor redColor];
+        _badgeNode.layer.cornerRadius = 3.0;
+        _badgeNode.layer.masksToBounds = YES;
+    }
+    return _badgeNode;
+}
+
+- (PCUPopMenuViewController *)popMenuViewController {
+    if (_popMenuViewController == nil) {
+        _popMenuViewController = [[PCUPopMenuViewController alloc] init];
+        _popMenuViewController.titles = @[@"删除", @"转发"];
+        _popMenuViewController.delegate = self;
+    }
+    return _popMenuViewController;
 }
 
 @end
