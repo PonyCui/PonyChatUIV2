@@ -80,9 +80,9 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     self.tableView.frame = self.view.bounds;
-    self.slideUpTableView.frame = CGRectMake(CGRectGetWidth(self.view.bounds) - 114.0,
+    self.slideUpTableView.frame = CGRectMake(CGRectGetWidth(self.view.bounds) - 164.0,
                                              0.0,
-                                             114.0,
+                                             164.0,
                                              CGRectGetHeight(self.slideUpTableView.frame));
 }
 
@@ -376,10 +376,6 @@
             [self.tableView setTableHeaderView:nil];
         }
     }
-}
-
-- (void)h {
-    
 }
 
 - (void)removeTableViewHeader {

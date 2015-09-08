@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F19a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4b0-Nm-DmE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4b0-Nm-DmE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -8,7 +8,7 @@
         <scene sceneID="Elq-DJ-qPp">
             <objects>
                 <navigationController id="4b0-Nm-DmE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2er-P9-BQZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="2er-P9-BQZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -29,7 +29,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -54,11 +54,11 @@
                         <viewControllerLayoutGuide type="bottom" id="472-kS-gCW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="byW-cJ-16u">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUQ-C7-Fz9">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="492" width="600" height="44"/>
                                 <subviews>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hj2-L4-fVH">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -93,7 +93,13 @@
                             <constraint firstAttribute="trailing" secondItem="KUQ-C7-Fz9" secondAttribute="trailing" id="iZr-Cz-tDX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Turing Robot" id="BLj-Ff-Tn9"/>
+                    <navigationItem key="navigationItem" title="Turing Robot" id="BLj-Ff-Tn9">
+                        <barButtonItem key="rightBarButtonItem" title="More" id="3Sa-3q-C4e">
+                            <connections>
+                                <segue destination="iQP-n6-rzx" kind="show" id="eh1-Dm-Oet"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="textField" destination="5aE-BZ-8XW" id="EtK-BE-nj1"/>
                         <outlet property="toolViewBottomSpaceConstraint" destination="AGs-Q1-N2a" id="kro-CH-oEa"/>
@@ -103,6 +109,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aba-we-DvR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1403" y="478"/>
+        </scene>
+        <!--Turing Robot More-->
+        <scene sceneID="BgN-5e-Y8H">
+            <objects>
+                <viewController id="iQP-n6-rzx" customClass="TuringRobotMoreViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d0N-Ej-xO5"/>
+                        <viewControllerLayoutGuide type="bottom" id="BSR-u1-5dN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nPd-Ta-vKJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEy-Ar-kmb">
+                                <rect key="frame" x="0.0" y="492" width="600" height="44"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGh-Wg-buF">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <items/>
+                                    </toolbar>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJa-PH-G7z">
+                                        <rect key="frame" x="8" y="7" width="584" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="iQP-n6-rzx" id="tag-EE-Au7"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="6nd-aK-yFW"/>
+                                    <constraint firstAttribute="bottom" secondItem="SGh-Wg-buF" secondAttribute="bottom" id="7y5-I7-K28"/>
+                                    <constraint firstAttribute="centerY" secondItem="jJa-PH-G7z" secondAttribute="centerY" id="CUD-WT-uti"/>
+                                    <constraint firstItem="SGh-Wg-buF" firstAttribute="top" secondItem="oEy-Ar-kmb" secondAttribute="top" id="Rne-Zs-wNo"/>
+                                    <constraint firstItem="jJa-PH-G7z" firstAttribute="leading" secondItem="oEy-Ar-kmb" secondAttribute="leading" constant="8" id="Teb-9O-Vwk"/>
+                                    <constraint firstAttribute="trailing" secondItem="SGh-Wg-buF" secondAttribute="trailing" id="XxY-dQ-3gv"/>
+                                    <constraint firstItem="SGh-Wg-buF" firstAttribute="leading" secondItem="oEy-Ar-kmb" secondAttribute="leading" id="Y68-V0-Q13"/>
+                                    <constraint firstAttribute="trailing" secondItem="jJa-PH-G7z" secondAttribute="trailing" constant="8" id="tCF-tQ-m6r"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="oEy-Ar-kmb" firstAttribute="leading" secondItem="nPd-Ta-vKJ" secondAttribute="leading" id="2Mg-MM-haV"/>
+                            <constraint firstItem="BSR-u1-5dN" firstAttribute="top" secondItem="oEy-Ar-kmb" secondAttribute="bottom" id="9t9-bM-xqn"/>
+                            <constraint firstAttribute="trailing" secondItem="oEy-Ar-kmb" secondAttribute="trailing" id="i0c-d6-nWn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Turing Robot More" id="rDQ-bK-QwC"/>
+                    <connections>
+                        <outlet property="textField" destination="jJa-PH-G7z" id="WrK-R1-YF6"/>
+                        <outlet property="toolViewBottomSpaceConstraint" destination="9t9-bM-xqn" id="ZUg-Lr-Qt4"/>
+                        <outlet property="toolViewHeightConstraint" destination="6nd-aK-yFW" id="2E5-QF-m9Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E42-8T-uu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2204" y="478"/>
         </scene>
     </scenes>
 </document>

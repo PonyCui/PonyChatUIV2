@@ -48,9 +48,9 @@
 
 - (void)layout {
     [self.textNode measure:self.calculatedSize];
-    self.contentNode.frame = CGRectMake(84.0 - self.textNode.calculatedSize.width - 10.0, 0.0, 114.0, 50.0);
-    self.backgroundNode.frame = CGRectMake(0.0, 7.0, 114.0 + 17.0, 36.0);
-    self.textNode.frame = CGRectMake(30.0, 7.0 + 9.0, 114.0 - 30.0, 18.0);
+    self.contentNode.frame = CGRectMake(134.0 - self.textNode.calculatedSize.width - 10.0, 0.0, 164.0, 50.0);
+    self.backgroundNode.frame = CGRectMake(0.0, 7.0, 164.0 + 17.0, 36.0);
+    self.textNode.frame = CGRectMake(30.0, 7.0 + 9.0, 164.0 - 30.0, 18.0);
     self.arrowNode.frame = CGRectMake(12.0, 7.0 + 10.0, 14.0, 16.0);
 }
 

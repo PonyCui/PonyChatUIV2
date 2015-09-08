@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class PCUCore;
+
 @interface TuringRobotViewController : UIViewController
+
+@property (nonatomic, readonly) PCUCore *core;
 
 @end
