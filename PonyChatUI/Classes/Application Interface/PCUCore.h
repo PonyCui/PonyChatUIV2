@@ -26,7 +26,7 @@
 @optional
 - (BOOL)PCUCellShowNickname;
 - (void)PCUEndEditing;
-- (BOOL)PCUChatViewRequestPreviouMessages;
+- (BOOL)PCUChatViewRequestPreviouMessages:(void (^)(BOOL noMore))resultBlock;
 - (void)PCUAvatarTappedWithMessageItem:(PCUMessageEntity *)messageItem;
 - (void)PCUAvatarLongPressedWithMessageItem:(PCUMessageEntity *)messageItem;
 - (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem;

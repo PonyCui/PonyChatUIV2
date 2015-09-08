@@ -116,8 +116,8 @@
     NSMutableArray *itemsInteractor = [self.items mutableCopy];
     NSUInteger count = [self.messageManager.messageItems count];
     if (count > 2) {
-        [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:self.messageManager.messageItems[0]] atIndex:0];
         [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:self.messageManager.messageItems[1]] atIndex:0];
+        [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:self.messageManager.messageItems[0]] atIndex:0];
         self.items = itemsInteractor;
         [self.delegate messageInteractorItemDidInsertedTwice];
     }

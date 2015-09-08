@@ -29,7 +29,11 @@
 
 @property (nonatomic, assign) BOOL noMoreMessages;
 
+@property (nonatomic, assign) BOOL isFetchingMore;
+
 @property (nonatomic, assign) BOOL isSliding;
+
+@property (nonatomic, assign) BOOL isInsertingTwice;
 
 @end
 
@@ -106,7 +110,11 @@
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
         if (indexPath.row < [self.eventHandler.messageInteractor.items count]) {
-            PCUMessageCell *cell = [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[indexPath.row]];
+            NSIndexPath *_indexPath = indexPath;
+            if (self.isInsertingTwice) {
+                _indexPath = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:0];
+            }
+            PCUMessageCell *cell = [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[_indexPath.row]];
             cell.delegate = self.delegate;
             if ([self.delegate respondsToSelector:@selector(PCUCellShowNickname)]) {
                 cell.showNickname = [self.delegate PCUCellShowNickname];
@@ -226,15 +234,11 @@
 
 - (void)insertDataTwice {
     [self.tableView beginUpdates];
-    {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    }
-    {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    }
-    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
+    self.isInsertingTwice = YES;
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0],
+                                             [NSIndexPath indexPathForRow:1 inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {        
         if (self.isSliding) {
             [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         }
@@ -353,27 +357,30 @@
 }
 
 - (void)handleFetchingMoreTrigger {
-    if (self.noMoreMessages) {
+    if (self.noMoreMessages || self.isFetchingMore) {
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviouMessages)]) {
-        if ([self.delegate PCUChatViewRequestPreviouMessages]) {
-            NSUInteger nowMessageCount = [self.eventHandler.messageInteractor.items count];
-            [self.tableView setTableHeaderView:self.activityIndicatorView];
-            self.tableView.automaticallyAdjustsContentOffset = YES;
-            self.disableAutoScroll = YES;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.tableView.automaticallyAdjustsContentOffset = NO;
-                NSUInteger fetchedMessageCount = [self.eventHandler.messageInteractor.items count];
-                if (nowMessageCount == fetchedMessageCount) {
-                    self.noMoreMessages = YES;
-                    [self removeTableViewHeader];
-                    self.disableAutoScroll = NO;
-                }
+    if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviouMessages:)]) {
+        self.isFetchingMore = YES;
+        BOOL hasMore = [self.delegate PCUChatViewRequestPreviouMessages:^(BOOL noMore) {
+            if (noMore) {
+//                self.noMoreMessages = YES;
+//                [self removeTableViewHeader];
+            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                self.tableView.automaticallyAdjustsContentOffset = NO;
+//                self.disableAutoScroll = NO;
+//                self.isFetchingMore = NO;
             });
+        }];
+        if (!hasMore) {
+//            self.noMoreMessages = YES;
+//            [self removeTableViewHeader];
         }
         else {
-            [self.tableView setTableHeaderView:nil];
+//            self.tableView.automaticallyAdjustsContentOffset = YES;
+//            self.disableAutoScroll = YES;
+//            [self.tableView setTableHeaderView:self.activityIndicatorView];
         }
     }
 }

@@ -66,54 +66,75 @@
 
 #pragma mark - PCUDelegate
 
-- (BOOL)PCUChatViewRequestPreviouMessages {
+- (BOOL)PCUChatViewRequestPreviouMessages:(void (^)(BOOL))resultBlock {
+    static BOOL doo;
+    if (doo) {
+        return NO;
+    }
+    doo = YES;
     if (self.fakeOrder < 9000) {
         return NO;
     }
-    NSInteger intMessageID = self.fakeOrder - 30;
-    PCUTextMessageEntity *lastItem = nil;
-    for (; self.fakeOrder >= intMessageID; self.fakeOrder--) {
-        PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
-        messageItem.messageID = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
-        messageItem.messageOrder = self.fakeOrder;
-        messageItem.messageDate = [self.fakeDate dateByAddingTimeInterval:-self.fakeDateTimeInterval];
-        messageItem.senderID = @"2";
-        messageItem.senderNicknameString = @"Turing";
-        messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
-        messageItem.messageText = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
-        self.fakeDateTimeInterval += arc4random() % 300;
-        if (lastItem != nil) {
-            [self.core.messageManager didInsertMessageItem:lastItem nextItem:messageItem];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSInteger intMessageID = self.fakeOrder - 10;
+        PCUTextMessageEntity *lastItem = nil;
+        for (; self.fakeOrder > intMessageID; self.fakeOrder--) {
+            PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
+            messageItem.messageID = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
+            messageItem.messageOrder = self.fakeOrder;
+            messageItem.messageDate = [self.fakeDate dateByAddingTimeInterval:-self.fakeDateTimeInterval];
+            messageItem.senderID = @"2";
+            messageItem.senderNicknameString = @"Turing";
+            messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
+            messageItem.messageText = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
+            self.fakeDateTimeInterval += arc4random() % 300;
+            if (lastItem != nil) {
+                [self.core.messageManager didInsertMessageItem:lastItem nextItem:messageItem];
+            }
+            lastItem = messageItem;
         }
-        lastItem = messageItem;
-    }
-    if (lastItem != nil) {
-        [self.core.messageManager didInsertMessageItem:lastItem nextItem:nil];
-    }
+        if (lastItem != nil) {
+            [self.core.messageManager didInsertMessageItem:lastItem nextItem:nil];
+        }
+        resultBlock(self.fakeOrder < 9000);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
+            messageItem.messageID = [NSString stringWithFormat:@"%ld", (long)20000];
+            messageItem.messageOrder = 20000;
+            messageItem.messageDate = [self.fakeDate dateByAddingTimeInterval:300];
+            messageItem.senderID = @"2";
+            messageItem.senderNicknameString = @"Turing";
+            messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
+            messageItem.messageText = [NSString stringWithFormat:@"%ld", (long)20000];
+            [self.core.messageManager didReceiveMessageItem:messageItem];
+        });
+    });
     return YES;
 }
 
 - (void)PCURequireSlideToMessageID:(NSString *)messageID {
-    NSInteger intMessageID = [messageID integerValue];
-    PCUTextMessageEntity *lastItem = nil;
-    for (; self.fakeOrder >= intMessageID; self.fakeOrder--) {
-        PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
-        messageItem.messageID = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
-        messageItem.messageOrder = self.fakeOrder;
-        messageItem.messageDate = [self.fakeDate dateByAddingTimeInterval:-self.fakeDateTimeInterval];
-        messageItem.senderID = @"2";
-        messageItem.senderNicknameString = @"Turing";
-        messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
-        messageItem.messageText = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
-        self.fakeDateTimeInterval += arc4random() % 300;
-        if (lastItem != nil) {
-            [self.core.messageManager didInsertMessageItem:lastItem nextItem:messageItem];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSInteger intMessageID = [messageID integerValue];
+        PCUTextMessageEntity *lastItem = nil;
+        for (; self.fakeOrder >= intMessageID; self.fakeOrder--) {
+            PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
+            messageItem.messageID = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
+            messageItem.messageOrder = self.fakeOrder;
+            messageItem.messageDate = [self.fakeDate dateByAddingTimeInterval:-self.fakeDateTimeInterval];
+            messageItem.senderID = @"2";
+            messageItem.senderNicknameString = @"Turing";
+            messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
+            messageItem.messageText = [NSString stringWithFormat:@"%ld", (long)self.fakeOrder];
+            self.fakeDateTimeInterval += arc4random() % 300;
+            if (lastItem != nil) {
+                [self.core.messageManager didInsertMessageItem:lastItem nextItem:messageItem];
+            }
+            lastItem = messageItem;
         }
-        lastItem = messageItem;
-    }
-    if (lastItem != nil) {
-        [self.core.messageManager didInsertMessageItem:lastItem nextItem:nil];
-    }
+        if (lastItem != nil) {
+            [self.core.messageManager didInsertMessageItem:lastItem nextItem:nil];
+        }
+    });
 }
 
 @end
