@@ -10,7 +10,7 @@
 @import PonyChatUI;
 
 // PonyChatUI 仅仅是一个聊天时间轴界面，不包含底部的输入框，这将带给开发者更多的控制权。
-@interface ViewController ()<PCUDelegate>
+@interface ViewController ()<PCUDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) PCUCore *core;
 

@@ -35,7 +35,7 @@
 		6388BE7A1B4A83A800F1D4B9 /* PCUTextMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE781B4A83A800F1D4B9 /* PCUTextMessageEntity.m */; };
 		6388BE811B4A8D9B00F1D4B9 /* PCUWireframe.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE7F1B4A8D9B00F1D4B9 /* PCUWireframe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6388BE821B4A8D9B00F1D4B9 /* PCUWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE801B4A8D9B00F1D4B9 /* PCUWireframe.m */; };
-		6388BE851B4A8E1F00F1D4B9 /* PCUMainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE831B4A8E1F00F1D4B9 /* PCUMainViewController.h */; };
+		6388BE851B4A8E1F00F1D4B9 /* PCUMainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE831B4A8E1F00F1D4B9 /* PCUMainViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6388BE861B4A8E1F00F1D4B9 /* PCUMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE841B4A8E1F00F1D4B9 /* PCUMainViewController.m */; };
 		6388BE891B4B6EFB00F1D4B9 /* PCUMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6388BE871B4B6EFA00F1D4B9 /* PCUMessageCell.h */; };
 		6388BE8A1B4B6EFB00F1D4B9 /* PCUMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE881B4B6EFB00F1D4B9 /* PCUMessageCell.m */; };
@@ -51,6 +51,7 @@
 		6388BE9E1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */; };
 		6388BEA11B4B86A900F1D4B9 /* PonyChatUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */; };
 		6388BEA21B4B8ACE00F1D4B9 /* PonyChatUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */; };
+		638E6F941B9EEA7F00773A86 /* TuringRobotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638E6F931B9EEA7F00773A86 /* TuringRobotViewController.m */; };
 		6396A4951B4BDA0E00C2903E /* PCUImageMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6396A4931B4BDA0E00C2903E /* PCUImageMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6396A4961B4BDA0E00C2903E /* PCUImageMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6396A4941B4BDA0E00C2903E /* PCUImageMessageEntity.m */; };
 		6396A4991B4BDA6C00C2903E /* PCUImageMessageItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6396A4971B4BDA6C00C2903E /* PCUImageMessageItemInteractor.h */; };
@@ -174,6 +175,8 @@
 		6388BE9B1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUTextMessageItemInteractor.h; sourceTree = "<group>"; };
 		6388BE9C1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUTextMessageItemInteractor.m; sourceTree = "<group>"; };
 		6388BEA01B4B86A900F1D4B9 /* PonyChatUI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PonyChatUI.xcassets; sourceTree = "<group>"; };
+		638E6F921B9EEA7F00773A86 /* TuringRobotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuringRobotViewController.h; sourceTree = "<group>"; };
+		638E6F931B9EEA7F00773A86 /* TuringRobotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuringRobotViewController.m; sourceTree = "<group>"; };
 		6396A4931B4BDA0E00C2903E /* PCUImageMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUImageMessageEntity.h; sourceTree = "<group>"; };
 		6396A4941B4BDA0E00C2903E /* PCUImageMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUImageMessageEntity.m; sourceTree = "<group>"; };
 		6396A4971B4BDA6C00C2903E /* PCUImageMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUImageMessageItemInteractor.h; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				6388BDC71B4A7A3300F1D4B9 /* AppDelegate.m */,
 				6388BDC91B4A7A3300F1D4B9 /* ViewController.h */,
 				6388BDCA1B4A7A3300F1D4B9 /* ViewController.m */,
+				638E6F921B9EEA7F00773A86 /* TuringRobotViewController.h */,
+				638E6F931B9EEA7F00773A86 /* TuringRobotViewController.m */,
 				6388BDCC1B4A7A3300F1D4B9 /* Main.storyboard */,
 				6388BDCF1B4A7A3300F1D4B9 /* Images.xcassets */,
 				6388BDD11B4A7A3300F1D4B9 /* LaunchScreen.xib */,
@@ -504,7 +509,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6388BE851B4A8E1F00F1D4B9 /* PCUMainViewController.h in Headers */,
 				6388BE6B1B4A819500F1D4B9 /* PCUCore.h in Headers */,
 				6396A4991B4BDA6C00C2903E /* PCUImageMessageItemInteractor.h in Headers */,
 				63D0DA791B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.h in Headers */,
@@ -513,6 +517,7 @@
 				6396A4951B4BDA0E00C2903E /* PCUImageMessageEntity.h in Headers */,
 				63B551371B9EDB6D001F3568 /* PCUSlideUpEntity.h in Headers */,
 				6399E4C01B4BCE1000906EEC /* PCUSystemMessageItemInteractor.h in Headers */,
+				6388BE851B4A8E1F00F1D4B9 /* PCUMainViewController.h in Headers */,
 				6335A9981B4CD54A001DD64E /* PCUVoiceMessageEntity.h in Headers */,
 				6388BE951B4B743500F1D4B9 /* PCUMessageInteractor.h in Headers */,
 				63D0DA7B1B8B165A00DB24E1 /* PCUPopMenuViewController.h in Headers */,
@@ -735,6 +740,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				638E6F941B9EEA7F00773A86 /* TuringRobotViewController.m in Sources */,
 				6388BDCB1B4A7A3300F1D4B9 /* ViewController.m in Sources */,
 				6388BDC81B4A7A3300F1D4B9 /* AppDelegate.m in Sources */,
 				6388BDC51B4A7A3300F1D4B9 /* main.m in Sources */,
