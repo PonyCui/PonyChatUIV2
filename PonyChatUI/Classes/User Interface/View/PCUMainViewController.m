@@ -196,6 +196,9 @@
 }
 
 - (void)insertDataWithIndexes:(NSArray *)indexes {
+    if (indexes == nil || [indexes count] == 0) {
+        return;
+    }
     if (!self.hasReloaded) {
         [self.reloadTimer invalidate];
         self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
