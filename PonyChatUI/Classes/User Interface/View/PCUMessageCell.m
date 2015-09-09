@@ -100,7 +100,7 @@
                                                                      NSForegroundColorAttributeName: [UIColor lightGrayColor],
                                                                      NSParagraphStyleAttributeName: paragraphStyle
                                                                      }];
-                [_nicknameNode setAttributedString:attributedString];
+                [self.nicknameNode setAttributedString:attributedString];
             }
         });
     }];

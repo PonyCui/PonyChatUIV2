@@ -14,6 +14,8 @@ target 'PonyChatUI' do
 pod 'AsyncDisplayKit'
 pod 'ReactiveCocoa'
 
+#pod 'CRChecker'
+
 end
 
 target 'PonyChatUITests' do

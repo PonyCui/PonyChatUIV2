@@ -182,6 +182,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 - (ASTextNode *)textNode {
     if (_textNode == nil) {
         _textNode = [[ASTextNode alloc] init];
+        _textNode.placeholderColor = [UIColor clearColor];
         NSString *text = [[self textMessageInteractor] messageText];
         if (text == nil) {
             text = @"";

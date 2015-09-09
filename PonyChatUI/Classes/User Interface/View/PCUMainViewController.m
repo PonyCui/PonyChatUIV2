@@ -81,11 +81,10 @@
                                                      green:235.0/255.0
                                                       blue:235.0/255.0
                                                      alpha:1.0];
-    [self.tableView reloadData];
     [self.eventHandler updateView];
     [self.tableView setAlpha:0.0];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView setAlpha:1.0];
+//        [self.tableView setAlpha:1.0];
         [self.tableView.visibleNodes enumerateObjectsUsingBlock:^(PCUMessageCell *node, NSUInteger idx, BOOL *stop) {
             [self.eventHandler.messageInteractor.slideUpItems enumerateObjectsUsingBlock:^(PCUSlideUpItemInteractor *obj, NSUInteger idx, BOOL *stop) {
                 [obj updateWithMessageID:node.messageInteractor.messageItem.messageID];
@@ -193,9 +192,6 @@
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self forceScroll];
-        [UIView animateWithDuration:0.25 animations:^{
-            self.tableView.alpha = 1.0;
-        }];
     });
 }
 
@@ -221,7 +217,7 @@
         [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
             self.lastRows = [self.tableView numberOfRowsInSection:0];
             if (self.isSliding) {
-                [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+                [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
             }
             else if (isPushing) {
                 [self autoScroll];
@@ -252,6 +248,13 @@
 - (void)forceScroll {
     [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                animated:NO];
+    if (self.tableView.alpha == 0.0) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.25 animations:^{
+                self.tableView.alpha = 1.0;
+            }];
+        });
+    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.010 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                    animated:NO];
