@@ -15,6 +15,10 @@
 #import "PCUMessageCell.h"
 #import "PCUSlideUpCell.h"
 
+@interface PCUTableView : ASTableView
+
+@end
+
 @interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate, PCUSlideUpCellDelegate>
 
 @property (nonatomic, strong) ASTableView *tableView;
@@ -397,7 +401,7 @@
 
 - (ASTableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain asyncDataFetching:NO];
+        _tableView = [[PCUTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain asyncDataFetching:NO];
         _tableView.contentInset = UIEdgeInsetsMake(8, 0, 8, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.asyncDataSource = self;
@@ -429,6 +433,38 @@
         [_activityIndicatorView addSubview:aiView];
     }
     return _activityIndicatorView;
+}
+
+@end
+
+@interface ASTableView (PCUTableView)
+
+- (NSArray *)rangeControllerVisibleNodeIndexPaths:(ASRangeController *)rangeController;
+
+@end
+
+@implementation PCUTableView
+
+- (NSArray *)rangeControllerVisibleNodeIndexPaths:(ASRangeController *)rangeController {
+    NSArray *indexPaths = [super rangeControllerVisibleNodeIndexPaths:rangeController];
+    if ([indexPaths count] > 0) {
+        NSMutableArray *mutableIndexPaths = [indexPaths mutableCopy];
+        NSIndexPath *lastIndexPath = [mutableIndexPaths lastObject];
+        if (lastIndexPath.row + 1 < [self numberOfRowsInSection:0]) {
+            NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:lastIndexPath.row + 1 inSection:0];
+            [mutableIndexPaths addObject:addIndexPath];
+        }
+        if (lastIndexPath.row + 2 < [self numberOfRowsInSection:0]) {
+            NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:lastIndexPath.row + 2 inSection:0];
+            [mutableIndexPaths addObject:addIndexPath];
+        }
+        if (lastIndexPath.row + 3 < [self numberOfRowsInSection:0]) {
+            NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:lastIndexPath.row + 3 inSection:0];
+            [mutableIndexPaths addObject:addIndexPath];
+        }
+        indexPaths = [mutableIndexPaths copy];
+    }
+    return indexPaths;
 }
 
 @end
