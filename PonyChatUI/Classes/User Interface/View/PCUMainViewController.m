@@ -67,11 +67,6 @@
 
 #pragma mark - View Life Cycle
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [UIView setAnimationsEnabled:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
@@ -92,6 +87,13 @@
         }];
     });
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (![UIView areAnimationsEnabled]) {
+        [UIView setAnimationsEnabled:YES];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
