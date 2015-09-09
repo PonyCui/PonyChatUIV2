@@ -19,6 +19,10 @@
 
 @property (nonatomic, strong) ASControlNode *contentNode;
 
+@property (nonatomic, strong) ASDisplayNode *activityNode;
+
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
 @property (nonatomic, strong) ASDisplayNode *backgroundNode;
 
 @property (nonatomic, strong) ASTextNode    *textNode;
@@ -38,6 +42,7 @@
         [self.contentNode addSubnode:self.backgroundNode];
         [self.contentNode addSubnode:self.textNode];
         [self.contentNode addSubnode:self.arrowNode];
+        [self.contentNode addSubnode:self.activityNode];
     }
     return self;
 }
@@ -52,10 +57,13 @@
     self.backgroundNode.frame = CGRectMake(0.0, 7.0, 164.0 + 17.0, 36.0);
     self.textNode.frame = CGRectMake(30.0, 7.0 + 9.0, 164.0 - 30.0, 18.0);
     self.arrowNode.frame = CGRectMake(12.0, 7.0 + 10.0, 14.0, 16.0);
+    self.activityNode.frame = CGRectMake(8.0, 7.0 + 8.0, 14.0, 16.0);
 }
 
 - (void)handleCellTapped {
     [self.delegate slideUpCellTapped:self.itemInteractor];
+    self.arrowNode.hidden = YES;
+    [self.activityView startAnimating];
 }
 
 #pragma mark - Reload
@@ -118,6 +126,27 @@
         }];
     }
     return _arrowNode;
+}
+
+- (ASDisplayNode *)activityNode {
+    if (_activityNode == nil) {
+        _activityNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView *{
+            return self.activityView;
+        }];
+    }
+    return _activityNode;
+}
+
+- (UIActivityIndicatorView *)activityView {
+    if (_activityView == nil) {
+        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityView.color = [UIColor
+                               colorWithRed:240.0/255.0
+                               green:121.0/255.0
+                               blue:97.0/255.0
+                               alpha:1.0];
+    }
+    return _activityView;
 }
 
 @end

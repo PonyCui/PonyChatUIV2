@@ -37,6 +37,8 @@
 
 @property (nonatomic, assign) BOOL isFetchingMore;
 
+@property (nonatomic, strong) NSTimer *fetchTimer;
+
 @property (nonatomic, assign) BOOL isSliding;
 
 @property (nonatomic, assign) BOOL isInsertingTwice;
@@ -64,6 +66,11 @@
 }
 
 #pragma mark - View Life Cycle
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [UIView setAnimationsEnabled:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -184,7 +191,7 @@
         self.hasReloaded = YES;
         self.firstScrolled = YES;
     }];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self forceScroll];
         [UIView animateWithDuration:0.25 animations:^{
             self.tableView.alpha = 1.0;
@@ -213,7 +220,10 @@
         }
         [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
             self.lastRows = [self.tableView numberOfRowsInSection:0];
-            if (isPushing) {
+            if (self.isSliding) {
+                [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+            }
+            else if (isPushing) {
                 [self autoScroll];
             }
         }];
@@ -284,6 +294,7 @@
     }
     else {
         if ([self.delegate respondsToSelector:@selector(PCURequireSlideToMessageID:)]) {
+            self.tableView.automaticallyAdjustsContentOffset = YES;
             [self.delegate PCURequireSlideToMessageID:messageID];
             self.firstScrolled = YES;
             self.isSliding = YES;
@@ -308,8 +319,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
-        if (self.tableView.isTracking) {
-            if (self.tableView.contentOffset.y < 44.0) {
+        if (!self.tableView.isTracking) {
+            if (self.tableView.contentOffset.y < -22.0) {
                 [self handleFetchingMoreTrigger];
             }
         }
@@ -318,7 +329,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
-        if (self.tableView.contentOffset.y < 44.0) {
+        if (self.tableView.contentOffset.y < 88.0) {
             [self handleFetchingMoreTrigger];
         }
     }
@@ -329,11 +340,27 @@
 }
 
 - (void)handleFetchingMoreTrigger {
-    if (self.noMoreMessages || self.isFetchingMore) {
+    if (self.isFetchingMore) {
+        [self.fetchTimer invalidate];
+        self.fetchTimer = [NSTimer scheduledTimerWithTimeInterval:0.30 target:self selector:@selector(handleFetchingMoreTrigger) userInfo:nil repeats:NO];
+        return;
+    }
+    if (self.noMoreMessages) {
         return;
     }
     if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviouMessages:)]) {
         self.isFetchingMore = YES;
+        [self.tableView setTableHeaderView:self.activityIndicatorView];
+        [NSTimer scheduledTimerWithTimeInterval:0.3
+                                         target:self
+                                       selector:@selector(doFetchingMore)
+                                       userInfo:nil
+                                        repeats:NO];
+    }
+}
+
+- (void)doFetchingMore {
+    if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviouMessages:)]) {
         BOOL hasMore = [self.delegate PCUChatViewRequestPreviouMessages:^(BOOL noMore) {
             if (noMore) {
                 self.noMoreMessages = YES;

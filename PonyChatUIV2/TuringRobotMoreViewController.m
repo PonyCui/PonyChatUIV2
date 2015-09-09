@@ -70,7 +70,7 @@
     if (self.fakeOrder < 9000) {
         return NO;
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.100 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSInteger intMessageID = self.fakeOrder - 30;
         PCUTextMessageEntity *lastItem = nil;
         for (; self.fakeOrder > intMessageID; self.fakeOrder--) {
@@ -97,7 +97,7 @@
 }
 
 - (void)PCURequireSlideToMessageID:(NSString *)messageID {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.100 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSInteger intMessageID = [messageID integerValue];
         PCUTextMessageEntity *lastItem = nil;
         for (; self.fakeOrder >= intMessageID; self.fakeOrder--) {
