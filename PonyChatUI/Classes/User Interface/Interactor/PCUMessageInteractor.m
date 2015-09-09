@@ -20,17 +20,21 @@
 - (void)messageManagerItemsDidChanged {
     NSMutableDictionary *tags = [NSMutableDictionary dictionary];
     [self.items enumerateObjectsUsingBlock:^(PCUMessageItemInteractor *obj, NSUInteger idx, BOOL *stop) {
-        [tags setObject:obj forKey:obj.messageItem.messageID];
+        if (obj.messageItem.messageID != nil) {
+            [tags setObject:obj forKey:obj.messageItem.messageID];
+        }
     }];
     NSMutableArray *items = [NSMutableArray array];
     NSMutableArray *indexes = [NSMutableArray array];
     [self.messageManager.messageItems enumerateObjectsUsingBlock:^(PCUMessageEntity *obj, NSUInteger idx, BOOL *stop) {
-        if (tags[obj.messageID] == nil) {
-            [indexes addObject:@(idx)];
-            [items addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:obj]];
-        }
-        else {
-            [items addObject:tags[obj.messageID]];
+        if (obj.messageID != nil) {
+            if (tags[obj.messageID] == nil) {
+                [indexes addObject:@(idx)];
+                [items addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:obj]];
+            }
+            else {
+                [items addObject:tags[obj.messageID]];
+            }
         }
     }];
     self.items = items;
