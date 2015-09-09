@@ -34,39 +34,9 @@
 
 #pragma mark - PCUMessageInteractorDelegate
 
-- (void)messageInteractorItemsDidUpdated {
-    if (isViewDidLoaded) {
-        [self.userInterface reloadData];
-    }
-}
-
-- (void)messageInteractorItemDidPushed {
-    if (isViewDidLoaded) {
-        [self.userInterface pushData];
-    }
-}
-
 - (void)messageInteractorItemDidDeletedWithIndex:(NSUInteger)index {
     if (isViewDidLoaded) {
         [self.userInterface deleteDataWithRow:index];
-    }
-}
-
-- (void)messageInteractorItemDidPushedTwice {
-    if (isViewDidLoaded) {
-        [self.userInterface pushDataTwice];
-    }
-}
-
-- (void)messageInteractorItemDidInserted {
-    if (isViewDidLoaded) {
-        [self.userInterface insertData];
-    }
-}
-
-- (void)messageInteractorItemDidInsertedTwice {
-    if (isViewDidLoaded) {
-        [self.userInterface insertDataTwice];
     }
 }
 
@@ -80,6 +50,18 @@
     if (isViewDidLoaded) {
         [self.userInterface deleteSlideUpDataWithRow:index];
     }
+}
+
+- (void)messageInteractorItemChangedWithIndexes:(NSArray *)indexes {
+    NSArray *sortedIndexes = [indexes sortedArrayUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
+        if ([obj1 unsignedIntegerValue] == [obj2 unsignedIntegerValue]) {
+            return NSOrderedSame;
+        }
+        else {
+            return [obj1 unsignedIntegerValue] < [obj2 unsignedIntegerValue] ? NSOrderedAscending : NSOrderedDescending;
+        }
+    }];
+    [self.userInterface insertDataWithIndexes:sortedIndexes];
 }
 
 @end

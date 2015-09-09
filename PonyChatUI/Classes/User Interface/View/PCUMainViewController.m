@@ -23,6 +23,12 @@
 
 @property (nonatomic, strong) ASTableView *slideUpTableView;
 
+@property (nonatomic, assign) BOOL hasReloaded;
+
+@property (nonatomic, strong) NSTimer *reloadTimer;
+
+@property (nonatomic, assign) NSUInteger lastRows;
+
 @property (nonatomic, assign) BOOL firstScrolled;
 
 @property (nonatomic, assign) BOOL disableAutoScroll;
@@ -112,7 +118,7 @@
         if (indexPath.row < [self.eventHandler.messageInteractor.items count]) {
             NSIndexPath *_indexPath = indexPath;
             if (self.isInsertingTwice) {
-                _indexPath = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:0];
+                _indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             }
             PCUMessageCell *cell = [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[_indexPath.row]];
             cell.delegate = self.delegate;
@@ -173,8 +179,11 @@
 
 - (void)reloadData {
     [self.tableView reloadDataWithCompletion:^{
-        if (self.tableView.alpha == 0.0 &&
-            [self.eventHandler.messageInteractor.messageManager.messageItems count] <= 2) {
+        self.lastRows = [self.tableView numberOfRowsInSection:0];
+        self.hasReloaded = YES;
+        [self forceScroll];
+        self.tableView.alpha = 1.0;
+        if (self.tableView.alpha == 0.0) {
             [UIView animateWithDuration:0.25 animations:^{
                 self.tableView.alpha = 1.0;
             }];
@@ -182,67 +191,39 @@
     }];
 }
 
+- (void)insertDataWithIndexes:(NSArray *)indexes {
+    if (!self.hasReloaded) {
+        [self.reloadTimer invalidate];
+        self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                            target:self
+                                                          selector:@selector(reloadData)
+                                                          userInfo:nil
+                                                           repeats:NO];
+    }
+    else {
+        BOOL isPushing = NO;
+        if ([[indexes lastObject] unsignedIntegerValue] >= self.lastRows) {
+            isPushing = YES;
+        }
+        [self.tableView beginUpdates];
+        for (NSNumber *index in indexes) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[index unsignedIntegerValue] inSection:0];
+            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
+            self.lastRows = [self.tableView numberOfRowsInSection:0];
+            if (isPushing) {
+                [self autoScroll];
+            }
+        }];
+    }
+}
+
 - (void)deleteDataWithRow:(NSUInteger)row {
     [self.tableView beginUpdates];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
     [self.tableView endUpdatesAnimated:YES completion:nil];
-}
-
-- (void)pushData {
-    NSInteger lastItemIndex = [self.eventHandler.messageInteractor.items count] - 1;
-    if (lastItemIndex < 0) {
-        lastItemIndex = 0;
-    }
-    [self.tableView beginUpdates];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastItemIndex inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
-        [self autoScroll];
-    }];
-}
-
-- (void)pushDataTwice {
-    NSInteger lastItemIndex = [self.eventHandler.messageInteractor.items count] - 2;
-    if (lastItemIndex < 0) {
-        lastItemIndex = 0;
-    }
-    [self.tableView beginUpdates];
-    {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastItemIndex inSection:0];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    }
-    {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(lastItemIndex+1) inSection:0];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    }
-    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
-        [self autoScroll];
-    }];
-}
-
-- (void)insertData {
-    [self.tableView beginUpdates];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {
-        if (self.isSliding) {
-            [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
-        }
-    }];
-}
-
-- (void)insertDataTwice {
-    [self.tableView beginUpdates];
-    self.isInsertingTwice = YES;
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0],
-                                             [NSIndexPath indexPathForRow:1 inSection:0]]
-                          withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdatesAnimated:NO completion:^(BOOL completed) {        
-        if (self.isSliding) {
-            [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
-        }
-    }];
 }
 
 - (void)autoScroll {
@@ -364,23 +345,23 @@
         self.isFetchingMore = YES;
         BOOL hasMore = [self.delegate PCUChatViewRequestPreviouMessages:^(BOOL noMore) {
             if (noMore) {
-//                self.noMoreMessages = YES;
-//                [self removeTableViewHeader];
+                self.noMoreMessages = YES;
+                [self removeTableViewHeader];
             }
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                self.tableView.automaticallyAdjustsContentOffset = NO;
-//                self.disableAutoScroll = NO;
-//                self.isFetchingMore = NO;
+                self.tableView.automaticallyAdjustsContentOffset = NO;
+                self.disableAutoScroll = NO;
+                self.isFetchingMore = NO;
             });
         }];
         if (!hasMore) {
-//            self.noMoreMessages = YES;
-//            [self removeTableViewHeader];
+            self.noMoreMessages = YES;
+            [self removeTableViewHeader];
         }
         else {
-//            self.tableView.automaticallyAdjustsContentOffset = YES;
-//            self.disableAutoScroll = YES;
-//            [self.tableView setTableHeaderView:self.activityIndicatorView];
+            self.tableView.automaticallyAdjustsContentOffset = YES;
+            self.disableAutoScroll = YES;
+            [self.tableView setTableHeaderView:self.activityIndicatorView];
         }
     }
 }

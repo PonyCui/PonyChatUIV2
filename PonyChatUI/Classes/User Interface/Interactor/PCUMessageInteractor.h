@@ -14,21 +14,13 @@
 
 @protocol PCUMessageInteractorDelegate <NSObject>
 
-- (void)messageInteractorItemsDidUpdated;
-
-- (void)messageInteractorItemDidInserted;
-
-- (void)messageInteractorItemDidInsertedTwice;
-
 - (void)messageInteractorItemDidDeletedWithIndex:(NSUInteger)index;
-
-- (void)messageInteractorItemDidPushed;
-
-- (void)messageInteractorItemDidPushedTwice;
 
 - (void)messageInteractorSlideUpItemsDidChanged;
 
 - (void)messageInteractorSlideUpItemsDidDeleteWithIndex:(NSUInteger)index;
+
+- (void)messageInteractorItemChangedWithIndexes:(NSArray *)indexes;
 
 @end
 
