@@ -72,7 +72,7 @@
         //create an system message with date and return
         PCUSystemMessageEntity *item = [[PCUSystemMessageEntity alloc] init];
         item.messageID = [NSString stringWithFormat:@"%f", currentItem.messageOrder - 0.05];
-        item.messageOrder = currentItem.messageOrder + 0.000001;
+        item.messageOrder = currentItem.messageOrder - 0.000001;
         item.messageDate = currentItem.messageDate;
         item.messageText = [self dateDescription:item.messageDate];
         return item;
@@ -104,7 +104,7 @@
         }
         [items addObject:obj];
     }];
-    self.messageItems = items;
+    self.messageItems = [self sortedItems:items];
 }
 
 - (NSString *)dateDescription:(NSDate *)date {

@@ -18,34 +18,23 @@
 #pragma mark - PCUMessageManagerDelegate
 
 - (void)messageManagerItemsDidChanged {
-    if ([self.messageManager.messageItems count] <= 2) {
-        [self reloadAllItems];
-    }
-    else if ([self.messageManager.messageItems count] == [self.items count] + 2) {
-        if ([[self.messageManager.messageItems lastObject] messageOrder] > [[self.items lastObject] messageOrder]) {
-            [self pushItemTwice];
-        }
-        else if ([[self.messageManager.messageItems firstObject] messageOrder] < [[self.items firstObject] messageOrder]) {
-            [self insertItemTwice];
-        }
-        else {
-            [self reloadAllItems];
-        }
-    }
-    else if ([self.messageManager.messageItems count] == [self.items count] + 1) {
-        if ([[self.messageManager.messageItems lastObject] messageOrder] > [[self.items lastObject] messageOrder]) {
-            [self pushItem];
-        }
-        else if ([[self.messageManager.messageItems firstObject] messageOrder] < [[self.items firstObject] messageOrder]) {
-            [self insertItem];
+    NSMutableDictionary *tags = [NSMutableDictionary dictionary];
+    [self.items enumerateObjectsUsingBlock:^(PCUMessageItemInteractor *obj, NSUInteger idx, BOOL *stop) {
+        [tags setObject:obj forKey:obj.messageItem.messageID];
+    }];
+    NSMutableArray *items = [NSMutableArray array];
+    NSMutableArray *indexes = [NSMutableArray array];
+    [self.messageManager.messageItems enumerateObjectsUsingBlock:^(PCUMessageEntity *obj, NSUInteger idx, BOOL *stop) {
+        if (tags[obj.messageID] == nil) {
+            [indexes addObject:@(idx)];
+            [items addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:obj]];
         }
         else {
-            [self reloadAllItems];
+            [items addObject:tags[obj.messageID]];
         }
-    }
-    else {
-        [self reloadAllItems];
-    }
+    }];
+    self.items = items;
+    [self.delegate messageInteractorItemChangedWithIndexes:[indexes copy]];
 }
 
 - (void)messageManagerItemDidDeletedWithIndex:(NSUInteger)index {
@@ -75,51 +64,6 @@
         [items removeObject:itemInteractor];
         self.slideUpItems = items;
         [self.delegate messageInteractorSlideUpItemsDidDeleteWithIndex:index];
-    }
-}
-
-- (void)reloadAllItems {
-    NSMutableArray *itemsInteractor = [NSMutableArray array];
-    [self.messageManager.messageItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [itemsInteractor addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:obj]];
-    }];
-    self.items = itemsInteractor;
-    [self.delegate messageInteractorItemsDidUpdated];
-}
-
-- (void)pushItem {
-    NSMutableArray *itemsInteractor = [self.items mutableCopy];
-    [itemsInteractor addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:[self.messageManager.messageItems lastObject]]];
-    self.items = itemsInteractor;
-    [self.delegate messageInteractorItemDidPushed];
-}
-
-- (void)pushItemTwice {
-    NSMutableArray *itemsInteractor = [self.items mutableCopy];
-    NSUInteger count = [self.messageManager.messageItems count];
-    if (count > 2) {
-        [itemsInteractor addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:self.messageManager.messageItems[count - 2]]];
-        [itemsInteractor addObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:self.messageManager.messageItems[count - 1]]];
-        self.items = itemsInteractor;
-        [self.delegate messageInteractorItemDidPushedTwice];
-    }
-}
-
-- (void)insertItem {
-    NSMutableArray *itemsInteractor = [self.items mutableCopy];
-    [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:[self.messageManager.messageItems firstObject]] atIndex:0];
-    self.items = itemsInteractor;
-    [self.delegate messageInteractorItemDidInserted];
-}
-
-- (void)insertItemTwice {
-    NSMutableArray *itemsInteractor = [self.items mutableCopy];
-    NSUInteger count = [self.messageManager.messageItems count];
-    if (count > 2) {
-        [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:self.messageManager.messageItems[0]] atIndex:0];
-        [itemsInteractor insertObject:[PCUMessageItemInteractor itemInteractorWithMessageItem:self.messageManager.messageItems[1]] atIndex:0];
-        self.items = itemsInteractor;
-        [self.delegate messageInteractorItemDidInsertedTwice];
     }
 }
 
