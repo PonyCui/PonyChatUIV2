@@ -66,10 +66,16 @@
 
 #pragma mark - PCUDelegate
 
-- (BOOL)PCUChatViewRequestPreviouMessages:(void (^)(BOOL))resultBlock {
+- (BOOL)PCUChatViewCanRequestPreviousMessages {
     if (self.fakeOrder < 9000) {
         return NO;
     }
+    else {
+        return YES;
+    }
+}
+
+- (void)PCUChatViewRequestPreviousMessages:(void (^)(BOOL))resultBlock {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.100 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSInteger intMessageID = self.fakeOrder - 30;
         PCUTextMessageEntity *lastItem = nil;
@@ -93,7 +99,6 @@
         }
         resultBlock(self.fakeOrder < 9000);
     });
-    return YES;
 }
 
 - (void)PCURequireSlideToMessageID:(NSString *)messageID {

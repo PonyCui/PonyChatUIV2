@@ -354,20 +354,24 @@
     if (self.noMoreMessages) {
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviouMessages:)]) {
-        self.isFetchingMore = YES;
-        [self.tableView setTableHeaderView:self.activityIndicatorView];
-        [NSTimer scheduledTimerWithTimeInterval:0.3
-                                         target:self
-                                       selector:@selector(doFetchingMore)
-                                       userInfo:nil
-                                        repeats:NO];
+    if ([self.delegate respondsToSelector:@selector(PCUChatViewCanRequestPreviousMessages)]) {
+        if ([self.delegate PCUChatViewCanRequestPreviousMessages]) {
+            self.isFetchingMore = YES;
+            [self.tableView setTableHeaderView:self.activityIndicatorView];
+            [NSTimer scheduledTimerWithTimeInterval:0.3
+                                             target:self
+                                           selector:@selector(doFetchingMore)
+                                           userInfo:nil
+                                            repeats:NO];
+        }
     }
 }
 
 - (void)doFetchingMore {
-    if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviouMessages:)]) {
-        BOOL hasMore = [self.delegate PCUChatViewRequestPreviouMessages:^(BOOL noMore) {
+    if ([self.delegate respondsToSelector:@selector(PCUChatViewRequestPreviousMessages:)]) {
+        self.tableView.automaticallyAdjustsContentOffset = YES;
+        self.disableAutoScroll = YES;
+        [self.delegate PCUChatViewRequestPreviousMessages:^(BOOL noMore) {
             if (noMore) {
                 self.noMoreMessages = YES;
                 [self removeTableViewHeader];
@@ -378,15 +382,6 @@
                 self.isFetchingMore = NO;
             });
         }];
-        if (!hasMore) {
-            self.noMoreMessages = YES;
-            [self removeTableViewHeader];
-        }
-        else {
-            self.tableView.automaticallyAdjustsContentOffset = YES;
-            self.disableAutoScroll = YES;
-            [self.tableView setTableHeaderView:self.activityIndicatorView];
-        }
     }
 }
 
