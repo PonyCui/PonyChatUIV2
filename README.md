@@ -5,62 +5,48 @@ PonyChatUI is an easy to use Chatting Flow UI Library. It constructed on AsyncDi
 Almost all open source chatting library have the same issue, that is performance. When messages grow as a large number. The memory and CPU usage rate will be really high.
 PonyChatUI focus on performance and architecture, brings you an in-believable developing experience.
 
+## History
+
+* 2015.09.09 update, add message date, slide up tips and fetch history message activity indicator view, fixed lots of bugs.
+
 ## Preview
+
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/1.gif)
+
+Here is demo, you can talk to Turing Robot, download as zip, and have a nice try.
+
+## Functions
+
+### Text/Image/Voice/System Message Support
 
 ![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/DemoVideo.gif)
 
-## Sample Code
+PonyChatUI provides text/image/voice/system four style message user interface.
+Image and Voice message have delegate method, while user tap these messages, developer could handle it.
 
-A simple way to use PonyChatUI is
+### History messages
 
-```objective-c
-@import PonyChatUI;
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/3.gif)
 
-@interface ViewController ()<PCUDelegate>
+Just implement the delegate method, the history message will insert to PCUChatView.
 
-@property (nonatomic, strong) PCUCore *core;//create a property to store PCUCore, one ViewController should use one core instance
+### Slide Up
 
-@property (nonatomic, strong) UIView *chatView;//create a property to store chatView
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/2.gif)
 
-@end
+You may add a slide up tips, while user tap it, PonyChatUI leads to the specific message.
 
-@implementation ViewController
+### Pop Menu
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        _core = [[PCUCore alloc] init];//init the core
-    }
-    return self;
-}
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/4.png)
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.chatView = [self.core.wireframe addMainViewToViewController:self
-                                                  withMessageManager:self.core.messageManager];//use this method add chatView to self.view
-    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
-    //Debug data
-}
+Long press message, there's some option, user can choose it, and developer can custom it.
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    self.chatView.frame = self.view.bounds;
-}
+## Limitation
 
-- (void)receiveTextMessage {
-    PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
-    textMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
-    textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！Post:%@",
-                                   [[NSDate date] description]];
-    textMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
-    textMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
-    [self.core.messageManager didReceiveMessageItem:textMessageItem];//use this method add an item to chatView
-}
+PonyChatUIV2 only provides an user interface and user interface relation logic, you have to write your Message Networking Service and Message Storage Service. PonyChatUIV2 can run under Parse or LeanCloud perfectely.
 
-@end
-
-```
+The most difficult things of Message Application are user interface and message service, good luck guys.
 
 ## Installation
 
