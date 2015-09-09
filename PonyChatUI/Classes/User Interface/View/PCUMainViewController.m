@@ -74,6 +74,7 @@
                                                      green:235.0/255.0
                                                       blue:235.0/255.0
                                                      alpha:1.0];
+    [self.tableView reloadData];
     [self.eventHandler updateView];
     [self.tableView setAlpha:0.0];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -181,14 +182,14 @@
     [self.tableView reloadDataWithCompletion:^{
         self.lastRows = [self.tableView numberOfRowsInSection:0];
         self.hasReloaded = YES;
-        [self forceScroll];
-        self.tableView.alpha = 1.0;
-        if (self.tableView.alpha == 0.0) {
-            [UIView animateWithDuration:0.25 animations:^{
-                self.tableView.alpha = 1.0;
-            }];
-        }
+        self.firstScrolled = YES;
     }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self forceScroll];
+        [UIView animateWithDuration:0.25 animations:^{
+            self.tableView.alpha = 1.0;
+        }];
+    });
 }
 
 - (void)insertDataWithIndexes:(NSArray *)indexes {
@@ -232,18 +233,8 @@
     }
     else if (self.tableView.contentOffset.y >= self.tableView.contentSize.height - self.tableView.frame.size.height * 2) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (!self.firstScrolled) {
-                [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
-                                           animated:NO];
-                [UIView animateWithDuration:0.25 animations:^{
-                    [self.tableView setAlpha:1.0];
-                }];
-                self.firstScrolled = YES;
-            }
-            else {
                 [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                            animated:YES];
-            }
         });
     }
 }
