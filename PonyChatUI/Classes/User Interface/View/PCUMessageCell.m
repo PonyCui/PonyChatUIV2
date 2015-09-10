@@ -29,6 +29,7 @@
 
 @property (nonatomic, strong) ASNetworkImageNode *avatarImageNode;
 
+@property (nonatomic, strong) ASDisplayNode *sendingActivityNode;
 @property (nonatomic, strong) PCUMessageActivityIndicatorView *sendingActivityIndicatorView;
 
 @property (nonatomic, strong) ASImageNode *sendingErrorNode;
@@ -36,7 +37,6 @@
 @property (nonatomic, strong) RACDisposable *sendingSingal;
 
 @property (nonatomic, strong) ASControlNode *selectionNode;
-
 @property (nonatomic, strong) PCUSelectionShape *selectionShape;
 
 @end
@@ -75,6 +75,7 @@
             [self addSubnode:self.upscriptTextNode];
             [self addSubnode:self.subscriptTextNode];
             [self addSubnode:self.sendingErrorNode];
+            [self addSubnode:self.sendingActivityNode];
             [self configureReacitiveCocoa];
             [self configureSendingStatus];
         }
@@ -230,7 +231,7 @@
                                                   frame.size.height - 26.0 + topSpace,
                                                   self.subscriptTextNode.calculatedSize.width,
                                                   self.subscriptTextNode.calculatedSize.height);
-        self.sendingActivityIndicatorView.frame = CGRectMake(frame.origin.x - 44.0,
+        self.sendingActivityNode.frame = CGRectMake(frame.origin.x - 44.0,
                                                              frame.size.height / 2.0 - 22.0 + topSpace,
                                                              44.0,
                                                              44.0);
@@ -343,13 +344,18 @@
     return _selectionNode;
 }
 
-- (UIActivityIndicatorView *)sendingActivityIndicatorView {
-    if (_sendingActivityIndicatorView == nil) {
-        _sendingActivityIndicatorView = [[PCUMessageActivityIndicatorView alloc] initWithFrame:CGRectZero];
-        _sendingActivityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-        _sendingActivityIndicatorView.hidesWhenStopped = YES;
+- (ASDisplayNode *)sendingActivityNode {
+    if (_sendingActivityNode == nil) {
+        _sendingActivityNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView *{
+            PCUMessageActivityIndicatorView *view = [[PCUMessageActivityIndicatorView alloc]
+                                                     initWithFrame:CGRectMake(0, 0, 44, 44)];
+            view.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+            view.hidesWhenStopped = YES;
+            self.sendingActivityIndicatorView = view;
+            return view;
+        }];
     }
-    return _sendingActivityIndicatorView;
+    return _sendingActivityNode;
 }
 
 @end

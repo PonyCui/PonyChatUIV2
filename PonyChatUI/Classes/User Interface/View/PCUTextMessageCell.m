@@ -64,11 +64,8 @@ static const CGFloat kTextPaddingBottom = 10.0f;
                                           kTextPaddingTop + topSpace,
                                           self.textNode.calculatedSize.width,
                                           self.textNode.calculatedSize.height);
-        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+        if (self.textNode.calculatedSize.height < 19.0) {
             textNodeFrame.origin.y += 8.0;
-        }
-        else if (self.textNode.lineCount == 1) {
-            textNodeFrame.origin.y += 3.0;
         }
         else {
             textNodeFrame.origin.y += 2.0;
@@ -80,11 +77,8 @@ static const CGFloat kTextPaddingBottom = 10.0f;
                                           kTextPaddingTop + topSpace,
                                           self.textNode.calculatedSize.width,
                                           self.textNode.calculatedSize.height);
-        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+        if (self.textNode.calculatedSize.height < 19.0) {
             textNodeFrame.origin.y += 8.0;
-        }
-        else if (self.textNode.lineCount == 1) {
-            textNodeFrame.origin.y += 3.0;
         }
         else {
             textNodeFrame.origin.y += 2.0;
@@ -101,7 +95,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
         frame.origin.y -= kTextPaddingTop;
         frame.size.width += kTextPaddingLeft + kTextPaddingRight;
         frame.size.height += kTextPaddingTop + kTextPaddingBottom + kTextPaddingBottom;
-        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+        if (self.textNode.calculatedSize.height < 19.0) {
             frame.size.height += 6.0;
             frame.origin.y -= 3.0;
         }
@@ -114,7 +108,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
         frame.origin.y -= kTextPaddingTop;
         frame.size.width += kTextPaddingLeft + kTextPaddingRight;
         frame.size.height += kTextPaddingTop + kTextPaddingBottom + kTextPaddingBottom;
-        if (self.textNode.lineCount == 1 && self.textNode.calculatedSize.height < 19.0) {
+        if (self.textNode.calculatedSize.height < 19.0) {
             frame.size.height += 6.0;
             frame.origin.y -= 3.0;
         }
