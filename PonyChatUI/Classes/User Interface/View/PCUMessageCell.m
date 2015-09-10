@@ -21,6 +21,7 @@
 #import "PCUImageMessageCell.h"
 #import "PCUVoiceMessageCell.h"
 #import "PCUMessageActivityIndicatorView.h"
+#import "PCUSelectionShape.h"
 
 @interface PCUMessageCell ()
 
@@ -33,6 +34,10 @@
 @property (nonatomic, strong) ASImageNode *sendingErrorNode;
 
 @property (nonatomic, strong) RACDisposable *sendingSingal;
+
+@property (nonatomic, strong) ASControlNode *selectionNode;
+
+@property (nonatomic, strong) PCUSelectionShape *selectionShape;
 
 @end
 
@@ -61,8 +66,10 @@
     self = [super init];
     if (self) {
         [super setSelectionStyle:UITableViewCellSelectionStyleNone];
+        self.layer.masksToBounds = NO;
         _messageInteractor = messageInteractor;
         if (![self isKindOfClass:[PCUSystemMessageCell class]]) {
+            [self addSubnode:self.selectionNode];
             [self addSubnode:self.nicknameNode];
             [self addSubnode:self.avatarImageNode];
             [self addSubnode:self.upscriptTextNode];
@@ -228,6 +235,10 @@
                                                              44.0,
                                                              44.0);
         self.sendingErrorNode.frame = self.sendingActivityIndicatorView.frame;
+        self.selectionNode.frame = CGRectMake(-36.0,
+                                              frame.size.height / 2.0 - 13.0 + topSpace,
+                                              27.0,
+                                              27.0);
     }
     else if (self.actionType == PCUMessageActionTypeReceive) {
         self.upscriptTextNode.frame = CGRectMake(frame.origin.x + frame.size.width,
@@ -238,6 +249,10 @@
                                                   frame.size.height - 26.0 + topSpace,
                                                   self.subscriptTextNode.calculatedSize.width,
                                                   self.subscriptTextNode.calculatedSize.height);
+        self.selectionNode.frame = CGRectMake(-36.0,
+                                              frame.size.height / 2.0 - 13.0 + topSpace,
+                                              27.0,
+                                              27.0);
     }
 }
 
@@ -316,6 +331,16 @@
                     forControlEvents:ASControlNodeEventTouchUpInside];
     }
     return _sendingErrorNode;
+}
+
+- (ASControlNode *)selectionNode {
+    if (_selectionNode == nil) {
+        _selectionNode = [[ASControlNode alloc] initWithViewBlock:^UIView *{
+            self.selectionShape = [[PCUSelectionShape alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
+            return self.selectionShape;
+        }];
+    }
+    return _selectionNode;
 }
 
 - (UIActivityIndicatorView *)sendingActivityIndicatorView {

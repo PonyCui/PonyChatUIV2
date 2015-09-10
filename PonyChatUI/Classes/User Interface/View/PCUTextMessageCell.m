@@ -225,7 +225,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 - (PCUPopMenuViewController *)popMenuViewController {
     if (_popMenuViewController == nil) {
         _popMenuViewController = [[PCUPopMenuViewController alloc] init];
-        _popMenuViewController.titles = @[@"复制", @"删除", @"转发"];
+        _popMenuViewController.titles = @[@"复制", @"删除", @"转发", @"更多..."];
         _popMenuViewController.delegate = self;
     }
     return _popMenuViewController;

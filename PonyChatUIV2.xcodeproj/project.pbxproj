@@ -13,6 +13,8 @@
 		6335A9951B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */; };
 		6335A9981B4CD54A001DD64E /* PCUVoiceMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6335A9991B4CD54A001DD64E /* PCUVoiceMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */; };
+		636B8F231BA1760000DB5D00 /* PCUSelectionShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 636B8F211BA1760000DB5D00 /* PCUSelectionShape.h */; settings = {ASSET_TAGS = (); }; };
+		636B8F241BA1760000DB5D00 /* PCUSelectionShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B8F221BA1760000DB5D00 /* PCUSelectionShape.m */; settings = {ASSET_TAGS = (); }; };
 		6388BDC51B4A7A3300F1D4B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDC41B4A7A3300F1D4B9 /* main.m */; };
 		6388BDC81B4A7A3300F1D4B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDC71B4A7A3300F1D4B9 /* AppDelegate.m */; };
 		6388BDCB1B4A7A3300F1D4B9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDCA1B4A7A3300F1D4B9 /* ViewController.m */; };
@@ -132,6 +134,8 @@
 		6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageItemInteractor.m; sourceTree = "<group>"; };
 		6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUVoiceMessageEntity.h; sourceTree = "<group>"; };
 		6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageEntity.m; sourceTree = "<group>"; };
+		636B8F211BA1760000DB5D00 /* PCUSelectionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSelectionShape.h; sourceTree = "<group>"; };
+		636B8F221BA1760000DB5D00 /* PCUSelectionShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSelectionShape.m; sourceTree = "<group>"; };
 		6388BDBF1B4A7A3300F1D4B9 /* PonyChatUIV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PonyChatUIV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6388BDC31B4A7A3300F1D4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6388BDC41B4A7A3300F1D4B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -259,6 +263,15 @@
 				9C3D2D087BAB03BC067818C6 /* Pods-PonyChatUI.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		636B8F201BA175BF00DB5D00 /* Shape */ = {
+			isa = PBXGroup;
+			children = (
+				636B8F211BA1760000DB5D00 /* PCUSelectionShape.h */,
+				636B8F221BA1760000DB5D00 /* PCUSelectionShape.m */,
+			);
+			path = Shape;
 			sourceTree = "<group>";
 		};
 		6388BDB61B4A7A3300F1D4B9 = {
@@ -397,6 +410,7 @@
 		6388BE6A1B4A819500F1D4B9 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				636B8F201BA175BF00DB5D00 /* Shape */,
 				6388BE7B1B4A8D8400F1D4B9 /* Interactor */,
 				6388BE7C1B4A8D8400F1D4B9 /* Presenter */,
 				6388BE7D1B4A8D8400F1D4B9 /* View */,
@@ -534,6 +548,7 @@
 				6335A9941B4CD540001DD64E /* PCUVoiceMessageItemInteractor.h in Headers */,
 				6399E4BC1B4BCDE100906EEC /* PCUSystemMessageCell.h in Headers */,
 				6388BE811B4A8D9B00F1D4B9 /* PCUWireframe.h in Headers */,
+				636B8F231BA1760000DB5D00 /* PCUSelectionShape.h in Headers */,
 				6335A9901B4CD53C001DD64E /* PCUVoiceMessageCell.h in Headers */,
 				6388BE711B4A829200F1D4B9 /* PCUMessageEntity.h in Headers */,
 				6388BE991B4B748F00F1D4B9 /* PCUMainPresenter.h in Headers */,
@@ -782,6 +797,7 @@
 				6388BE761B4A82A400F1D4B9 /* PCUMessageManager.m in Sources */,
 				6388BE6C1B4A819500F1D4B9 /* PCUCore.m in Sources */,
 				6388BE721B4A829200F1D4B9 /* PCUMessageEntity.m in Sources */,
+				636B8F241BA1760000DB5D00 /* PCUSelectionShape.m in Sources */,
 				6399E4B91B4BCD4C00906EEC /* PCUSystemMessageEntity.m in Sources */,
 				63D0DA741B8B15DF00DB24E1 /* PCUImageManager.m in Sources */,
 				6388BE9A1B4B748F00F1D4B9 /* PCUMainPresenter.m in Sources */,
