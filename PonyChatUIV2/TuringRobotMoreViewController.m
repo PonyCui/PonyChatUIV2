@@ -59,7 +59,11 @@
     PCUSlideUpEntity *item = [[PCUSlideUpEntity alloc] init];
     item.titleText = @"100条新消息";
     item.messageID = @"9900";
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [self.core.messageManager addSlideUpItem:item];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        PCUSlideUpEntity *item = [[PCUSlideUpEntity alloc] init];
+        item.titleText = @"有人@我";
+        item.messageID = @"9800";
         [self.core.messageManager addSlideUpItem:item];
     });
 }

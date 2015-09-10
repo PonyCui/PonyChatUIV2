@@ -67,6 +67,14 @@
         NSMutableArray *items = [self.slideUpItems mutableCopy];
         [items removeObject:itemInteractor];
         self.slideUpItems = items;
+        NSMutableArray *managerItems = [self.messageManager.slideUpItems mutableCopy];
+        [self.messageManager.slideUpItems enumerateObjectsUsingBlock:^(PCUSlideUpEntity *obj, NSUInteger idx, BOOL *stop) {
+            if ([obj.messageID isEqualToString:itemInteractor.messageID] &&
+                [obj.titleText isEqualToString:itemInteractor.titleText]) {
+                [managerItems removeObject:obj];
+            }
+        }];
+        self.messageManager.slideUpItems = managerItems;
         [self.delegate messageInteractorSlideUpItemsDidDeleteWithIndex:index];
     }
 }

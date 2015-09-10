@@ -276,7 +276,12 @@
     CGRect frame = self.slideUpTableView.frame;
     frame.size.height = 50.0 * [self.eventHandler.messageInteractor.slideUpItems count];
     self.slideUpTableView.frame = frame;
-    [self.slideUpTableView reloadData];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.slideUpTableView reloadData];
+        [UIView animateWithDuration:0.25 animations:^{
+            self.slideUpTableView.alpha = 1.0;
+        }];
+    });
 }
 
 - (void)deleteSlideUpDataWithRow:(NSUInteger)row {
@@ -413,6 +418,7 @@
 - (ASTableView *)slideUpTableView {
     if (_slideUpTableView == nil) {
         _slideUpTableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain asyncDataFetching:NO];
+        _slideUpTableView.alpha = 0.0;
         _slideUpTableView.scrollsToTop = NO;
         _slideUpTableView.scrollEnabled = NO;
         _slideUpTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
