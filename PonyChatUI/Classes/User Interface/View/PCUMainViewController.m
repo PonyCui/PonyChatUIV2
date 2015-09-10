@@ -201,7 +201,7 @@
     });
 }
 
-- (void)insertDataWithIndexes:(NSArray *)indexes {
+- (void)insertDataWithIndexes:(NSArray<NSNumber *> *)indexes {
     if (indexes == nil || [indexes count] == 0) {
         return;
     }

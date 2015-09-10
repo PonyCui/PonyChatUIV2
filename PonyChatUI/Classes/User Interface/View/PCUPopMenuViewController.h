@@ -21,7 +21,7 @@
 
 @property (nonatomic, weak) id<PCUPopMenuViewControllerDelegate> delegate;
 
-@property (nonatomic, copy) NSArray *titles;
+@property (nonatomic, copy) NSArray<NSString *> *titles;
 
 - (void)presentMenuViewControllerWithReferencePoint:(CGPoint)referencePoint;
 

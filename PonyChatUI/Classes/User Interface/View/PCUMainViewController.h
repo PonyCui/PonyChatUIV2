@@ -32,6 +32,6 @@
 
 - (void)deleteSlideUpDataWithRow:(NSUInteger)row;
 
-- (void)insertDataWithIndexes:(NSArray *)indexes;
+- (void)insertDataWithIndexes:(NSArray<NSNumber *> *)indexes;
 
 @end

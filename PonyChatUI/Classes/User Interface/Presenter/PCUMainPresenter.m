@@ -52,8 +52,8 @@
     }
 }
 
-- (void)messageInteractorItemChangedWithIndexes:(NSArray *)indexes {
-    NSArray *sortedIndexes = [indexes sortedArrayUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
+- (void)messageInteractorItemChangedWithIndexes:(NSArray<NSNumber *> *)indexes {
+    NSArray<NSNumber *> *sortedIndexes = [indexes sortedArrayUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
         if ([obj1 unsignedIntegerValue] == [obj2 unsignedIntegerValue]) {
             return NSOrderedSame;
         }

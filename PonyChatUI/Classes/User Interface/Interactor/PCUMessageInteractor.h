@@ -20,7 +20,7 @@
 
 - (void)messageInteractorSlideUpItemsDidDeleteWithIndex:(NSUInteger)index;
 
-- (void)messageInteractorItemChangedWithIndexes:(NSArray *)indexes;
+- (void)messageInteractorItemChangedWithIndexes:(NSArray<NSNumber *> *)indexes;
 
 @end
 
@@ -30,14 +30,8 @@
 
 @property (nonatomic, strong) PCUMessageManager *messageManager;
 
-/**
- *  @brief  [PCUMessageItemInteractor]
- */
-@property (nonatomic, copy) NSArray *items;
+@property (nonatomic, copy) NSArray<PCUMessageItemInteractor *> *items;
 
-/**
- *  @brief  [PCUSlideUpItemInteractor]
- */
-@property (nonatomic, copy) NSArray *slideUpItems;
+@property (nonatomic, copy) NSArray<PCUSlideUpItemInteractor *> *slideUpItems;
 
 @end

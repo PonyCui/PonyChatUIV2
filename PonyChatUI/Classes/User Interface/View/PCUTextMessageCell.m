@@ -243,7 +243,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
     string = [string stringByReplacingOccurrencesOfString:@"[^\\x00-\\xff]" withString:@" " options:NSRegularExpressionSearch range:NSMakeRange(0, [string length])];
     NSMutableAttributedString *mutableString = [attributedString mutableCopy];
     NSDataDetector *detector = [[NSDataDetector alloc] initWithTypes:NSTextCheckingTypeLink error:NULL];
-    NSArray *matches = [detector matchesInString:string options:NSMatchingReportCompletion range:NSMakeRange(0, [string length])];
+    NSArray<NSTextCheckingResult *> *matches = [detector matchesInString:string options:NSMatchingReportCompletion range:NSMakeRange(0, [string length])];
     for (NSTextCheckingResult *result in matches) {
         if (result.resultType == NSTextCheckingTypeLink) {
             [mutableString addAttribute:@"_PCULinkAttributeName" value:result.URL range:result.range];

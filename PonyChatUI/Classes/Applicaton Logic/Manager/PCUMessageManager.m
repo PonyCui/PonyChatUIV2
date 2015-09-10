@@ -37,7 +37,7 @@
     }
 }
 
-- (void)didReceiveMessageItems:(NSArray *)messageItems {
+- (void)didReceiveMessageItems:(NSArray<PCUMessageEntity *> *)messageItems {
     if (messageItems != nil) {
         NSMutableArray *theMessageItems = [self.messageItems mutableCopy];
         [theMessageItems addObjectsFromArray:messageItems];
@@ -130,7 +130,7 @@
     }
 }
 
-- (NSArray *)sortedItems:(NSArray *)items {
+- (NSArray<PCUMessageEntity *> *)sortedItems:(NSArray<PCUMessageEntity *> *)items {
     return [items sortedArrayUsingComparator:^NSComparisonResult(PCUMessageEntity *obj1, PCUMessageEntity *obj2) {
         if (obj1.messageOrder == obj2.messageOrder) {
             return NSOrderedSame;
@@ -141,14 +141,14 @@
     }];
 }
 
-- (NSArray *)messageItems {
+- (NSArray<PCUMessageEntity *> *)messageItems {
     if (_messageItems == nil) {
         _messageItems = @[];
     }
     return _messageItems;
 }
 
-- (NSArray *)slideUpItems {
+- (NSArray<PCUSlideUpEntity *> *)slideUpItems {
     if (_slideUpItems == nil) {
         _slideUpItems = @[];
     }

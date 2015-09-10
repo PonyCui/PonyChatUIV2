@@ -29,15 +29,15 @@
 
 @property (nonatomic, weak) id<PCUMessageManagerDelegate> delegate;
 
-@property (nonatomic, copy) NSArray *messageItems;
+@property (nonatomic, copy) NSArray<PCUMessageEntity *> *messageItems;
 
-@property (nonatomic, copy) NSArray *slideUpItems;
+@property (nonatomic, copy) NSArray<PCUSlideUpEntity *> *slideUpItems;
 
 - (void)didInsertMessageItem:(PCUMessageEntity *)messageItem nextItem:(PCUMessageEntity *)nextItem;
 
 - (void)didReceiveMessageItem:(PCUMessageEntity *)messageItem;
 
-- (void)didReceiveMessageItems:(NSArray *)messageItems;
+- (void)didReceiveMessageItems:(NSArray<PCUMessageEntity *> *)messageItems;
 
 - (void)didDeletedMessageItem:(PCUMessageEntity *)messageItem;
 
