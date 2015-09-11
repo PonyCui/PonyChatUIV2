@@ -14,12 +14,13 @@
 #import "PCUMessageInteractor.h"
 #import "PCUMessageCell.h"
 #import "PCUSlideUpCell.h"
+#import "PCUMainViewController+PCUCellSelection.h"
 
 @interface PCUTableView : ASTableView
 
 @end
 
-@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate, PCUSlideUpCellDelegate, PCUMessageCellDelegate>
+@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate, PCUSlideUpCellDelegate>
 
 @property (nonatomic, strong) ASTableView *tableView;
 
@@ -46,8 +47,6 @@
 @property (nonatomic, assign) BOOL isSliding;
 
 @property (nonatomic, assign) BOOL isInsertingTwice;
-
-@property (nonatomic, assign) BOOL isSelecting;
 
 @end
 
@@ -137,7 +136,7 @@
             }
             PCUMessageCell *cell = [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[_indexPath.row]];
             cell.delegate = self.delegate;
-            cell.cellDelegate = self;
+            cell.cellDelegate = (id)self;
             if ([self.delegate respondsToSelector:@selector(PCUCellShowNickname)]) {
                 cell.showNickname = [self.delegate PCUCellShowNickname];
             }
@@ -333,19 +332,6 @@
     [self slideToMessageWithMessageID:itemInteractor.messageID];
 }
 
-#pragma mark - Selection
-
-- (void)mainViewShouldEnteringSeletionMode {
-    [self setSelecting:YES];
-}
-
-- (void)setSelecting:(BOOL)selecting {
-    self.isSelecting = selecting;
-    [[[self.tableView visibleNodes] copy] enumerateObjectsUsingBlock:^(PCUMessageCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj setSelecting:selecting animated:YES];
-    }];
-}
-
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -459,6 +445,13 @@
         [_activityIndicatorView addSubview:aiView];
     }
     return _activityIndicatorView;
+}
+
+- (NSArray<PCUMessageEntity *> *)selectedItems {
+    if (_selectedItems == nil) {
+        _selectedItems = @[];
+    }
+    return _selectedItems;
 }
 
 @end

@@ -18,13 +18,15 @@ typedef NS_ENUM(NSInteger, PCUMessageActionType) {
     PCUMessageActionTypeReceive
 };
 
-@class PCUMessageItemInteractor;
+@class PCUMessageItemInteractor, PCUMessageCell, PCUMessageEntity;
 
 @protocol PCUDelegate;
 
 @protocol PCUMessageCellDelegate <NSObject>
 
 - (void)mainViewShouldEnteringSeletionMode;
+
+- (void)messageCellShouldToggleSelection:(PCUMessageCell *)cell messageItem:(PCUMessageEntity *)messageItem;
 
 @end
 
@@ -59,5 +61,7 @@ typedef NS_ENUM(NSInteger, PCUMessageActionType) {
 - (void)resume;
 
 - (void)setSelecting:(BOOL)selecting animated:(BOOL)animated;
+
+- (void)setSelected:(BOOL)selected;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class PCUMainPresenter;
+@class PCUMainPresenter, PCUMessageEntity;
 
 @protocol PCUDelegate;
 
@@ -33,5 +33,16 @@
 - (void)deleteSlideUpDataWithRow:(NSUInteger)row;
 
 - (void)insertDataWithIndexes:(NSArray<NSNumber *> *)indexes;
+
+
+#pragma mark - Private 
+
+#pragma mark -> PCUCellSelection
+
+@property (nonatomic, assign) BOOL isSelecting;
+
+@property (nonatomic, copy) NSArray<PCUMessageEntity *> *selectedItems;
+
+@property (nonatomic, strong) UIBarButtonItem *originLeftItem;
 
 @end

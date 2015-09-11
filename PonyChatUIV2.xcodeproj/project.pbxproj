@@ -13,6 +13,8 @@
 		6335A9951B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */; };
 		6335A9981B4CD54A001DD64E /* PCUVoiceMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6335A9991B4CD54A001DD64E /* PCUVoiceMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */; };
+		633ABC251BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = 633ABC231BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h */; settings = {ASSET_TAGS = (); }; };
+		633ABC261BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 633ABC241BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m */; settings = {ASSET_TAGS = (); }; };
 		636B8F231BA1760000DB5D00 /* PCUSelectionShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 636B8F211BA1760000DB5D00 /* PCUSelectionShape.h */; settings = {ASSET_TAGS = (); }; };
 		636B8F241BA1760000DB5D00 /* PCUSelectionShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B8F221BA1760000DB5D00 /* PCUSelectionShape.m */; settings = {ASSET_TAGS = (); }; };
 		6388BDC51B4A7A3300F1D4B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDC41B4A7A3300F1D4B9 /* main.m */; };
@@ -134,6 +136,8 @@
 		6335A9931B4CD540001DD64E /* PCUVoiceMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageItemInteractor.m; sourceTree = "<group>"; };
 		6335A9961B4CD54A001DD64E /* PCUVoiceMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUVoiceMessageEntity.h; sourceTree = "<group>"; };
 		6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageEntity.m; sourceTree = "<group>"; };
+		633ABC231BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCUMainViewController+PCUCellSelection.h"; sourceTree = "<group>"; };
+		633ABC241BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCUMainViewController+PCUCellSelection.m"; sourceTree = "<group>"; };
 		636B8F211BA1760000DB5D00 /* PCUSelectionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSelectionShape.h; sourceTree = "<group>"; };
 		636B8F221BA1760000DB5D00 /* PCUSelectionShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSelectionShape.m; sourceTree = "<group>"; };
 		6388BDBF1B4A7A3300F1D4B9 /* PonyChatUIV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PonyChatUIV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -484,6 +488,8 @@
 			children = (
 				6388BE831B4A8E1F00F1D4B9 /* PCUMainViewController.h */,
 				6388BE841B4A8E1F00F1D4B9 /* PCUMainViewController.m */,
+				633ABC231BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h */,
+				633ABC241BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m */,
 				6388BE871B4B6EFA00F1D4B9 /* PCUMessageCell.h */,
 				6388BE881B4B6EFB00F1D4B9 /* PCUMessageCell.m */,
 				6388BE8B1B4B727400F1D4B9 /* PCUTextMessageCell.h */,
@@ -551,6 +557,7 @@
 				636B8F231BA1760000DB5D00 /* PCUSelectionShape.h in Headers */,
 				6335A9901B4CD53C001DD64E /* PCUVoiceMessageCell.h in Headers */,
 				6388BE711B4A829200F1D4B9 /* PCUMessageEntity.h in Headers */,
+				633ABC251BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h in Headers */,
 				6388BE991B4B748F00F1D4B9 /* PCUMainPresenter.h in Headers */,
 				6388BE431B4A7C5C00F1D4B9 /* PonyChatUI.h in Headers */,
 				63D0DA731B8B15DF00DB24E1 /* PCUImageManager.h in Headers */,
@@ -802,6 +809,7 @@
 				63D0DA741B8B15DF00DB24E1 /* PCUImageManager.m in Sources */,
 				6388BE9A1B4B748F00F1D4B9 /* PCUMainPresenter.m in Sources */,
 				6335A9911B4CD53C001DD64E /* PCUVoiceMessageCell.m in Sources */,
+				633ABC261BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m in Sources */,
 				6399E4BD1B4BCDE100906EEC /* PCUSystemMessageCell.m in Sources */,
 				6396A49E1B4BDADA00C2903E /* PCUImageMessageCell.m in Sources */,
 				6388BE921B4B741500F1D4B9 /* PCUMessageItemInteractor.m in Sources */,

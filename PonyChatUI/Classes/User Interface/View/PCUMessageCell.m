@@ -36,9 +36,10 @@
 
 @property (nonatomic, strong) RACDisposable *sendingSingal;
 
-@property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, assign) BOOL isSelecting;
 @property (nonatomic, strong) ASControlNode *selectionNode;
 @property (nonatomic, strong) PCUSelectionShape *selectionShape;
+@property (nonatomic, strong) ASControlNode *selectionGestureNode;
 
 @end
 
@@ -69,13 +70,13 @@
         [super setSelectionStyle:UITableViewCellSelectionStyleNone];
         _messageInteractor = messageInteractor;
         if (![self isKindOfClass:[PCUSystemMessageCell class]]) {
-            [self addSubnode:self.selectionNode];
             [self addSubnode:self.nicknameNode];
             [self addSubnode:self.avatarImageNode];
             [self addSubnode:self.upscriptTextNode];
             [self addSubnode:self.subscriptTextNode];
             [self addSubnode:self.sendingErrorNode];
             [self addSubnode:self.sendingActivityNode];
+            [self addSubnode:self.selectionNode];
             [self configureReacitiveCocoa];
             [self configureSendingStatus];
         }
@@ -230,7 +231,7 @@
                                                              44.0,
                                                              44.0);
         self.sendingErrorNode.frame = self.sendingActivityIndicatorView.frame;
-        self.selectionNode.frame = CGRectMake(8.0,
+        self.selectionNode.frame = CGRectMake(4.0,
                                               frame.size.height / 2.0 - 13.0 + topSpace,
                                               27.0,
                                               27.0);
@@ -244,7 +245,7 @@
                                                   frame.size.height - 26.0 + topSpace,
                                                   self.subscriptTextNode.calculatedSize.width,
                                                   self.subscriptTextNode.calculatedSize.height);
-        self.selectionNode.frame = CGRectMake(-36.0,
+        self.selectionNode.frame = CGRectMake(-32.0,
                                               frame.size.height / 2.0 - 13.0 + topSpace,
                                               27.0,
                                               27.0);
@@ -268,12 +269,16 @@
     if ([self isKindOfClass:[PCUSystemMessageCell class]]) {
         return;
     }
-    if (self.isSelected == selecting) {
+    if (self.isSelecting == selecting) {
         return;
     }
-    self.isSelected = selecting;
+    self.isSelecting = selecting;
     if (selecting) {
         self.layer.masksToBounds = NO;
+        [self.selectionShape setSelected:NO];
+        [self addSubnode:self.selectionGestureNode];
+        self.selectionGestureNode.frame = self.bounds;
+        self.selectionGestureNode.hidden = NO;
         if (self.actionType == PCUMessageActionTypeReceive) {
             CGRect frame = self.frame;
             frame.origin.x = 44.0;
@@ -305,6 +310,7 @@
         }
     }
     else {
+        self.selectionGestureNode.hidden = YES;
         if (self.actionType == PCUMessageActionTypeReceive) {
             CGRect frame = self.frame;
             frame.origin.x = 0.0;
@@ -335,6 +341,14 @@
             }
         }
     }
+}
+
+- (void)setSelected:(BOOL)selected {
+    [self.selectionShape setSelected:selected];
+}
+
+- (void)handleSelectionNodeTapped {
+    [self.cellDelegate messageCellShouldToggleSelection:self messageItem:self.messageInteractor.messageItem];
 }
 
 #pragma mark - Getter
@@ -405,11 +419,24 @@
     if (_selectionNode == nil) {
         _selectionNode = [[ASControlNode alloc] initWithViewBlock:^UIView *{
             self.selectionShape = [[PCUSelectionShape alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
+            self.selectionShape.userInteractionEnabled = YES;
             return self.selectionShape;
         }];
         _selectionNode.alpha = 0.0;
     }
     return _selectionNode;
+}
+
+- (ASControlNode *)selectionGestureNode {
+    if (_selectionGestureNode == nil) {
+        _selectionGestureNode = [[ASControlNode alloc] init];
+        self.selectionGestureNode.hidden = YES;
+        _selectionGestureNode.backgroundColor = [UIColor clearColor];
+        [_selectionGestureNode addTarget:self
+                                  action:@selector(handleSelectionNodeTapped)
+                        forControlEvents:ASControlNodeEventTouchUpInside];
+    }
+    return _selectionGestureNode;
 }
 
 - (ASDisplayNode *)sendingActivityNode {
