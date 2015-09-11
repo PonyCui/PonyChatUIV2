@@ -9,7 +9,7 @@
 #import "ViewController.h"
 @import PonyChatUI;
 
-#define PressureTest
+//#define PressureTest
 
 // PonyChatUI 仅仅是一个聊天时间轴界面，不包含底部的输入框，这将带给开发者更多的控制权。
 @interface ViewController ()<PCUDelegate, UIActionSheetDelegate>
@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.chatView = [self.core.wireframe addMainViewToViewController:self
-                                                  withMessageManager:self.core.messageManager];
+                                                  withMessageManager:self.core.messageManager];return;
     [self receiveSystemMessage];
     
 #ifdef PressureTest
