@@ -231,7 +231,7 @@
                                                              44.0,
                                                              44.0);
         self.sendingErrorNode.frame = self.sendingActivityIndicatorView.frame;
-        self.selectionNode.frame = CGRectMake(4.0,
+        self.selectionNode.frame = CGRectMake(12.0,
                                               frame.size.height / 2.0 - 13.0 + topSpace,
                                               27.0,
                                               27.0);
