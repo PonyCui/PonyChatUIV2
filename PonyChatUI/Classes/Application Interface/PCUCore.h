@@ -39,6 +39,8 @@
 - (void)PCURequireForwardMessageItem:(PCUMessageEntity *)messageItem;
 - (void)PCURequireOpenURL:(NSURL *)URL;
 - (void)PCURequireSlideToMessageID:(NSString *)messageID;
+- (void)PCURequireBatchOperateWithMessageItems:(NSArray<PCUMessageEntity *> *)items
+                               completionBlock:(void (^)(BOOL finished))completionBlock;
 
 @end
 

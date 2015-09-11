@@ -40,6 +40,10 @@
 
 @property (nonatomic, strong) UIBarButtonItem *originLeftItem;
 
+@property (nonatomic, strong) UIBarButtonItem *originRightItem;
+
+@property (nonatomic, copy)   NSArray *originRightItems;
+
 #pragma mark -> PCUSlideUP
 
 @property (nonatomic, assign) BOOL isSliding;
