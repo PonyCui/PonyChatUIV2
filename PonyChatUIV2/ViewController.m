@@ -9,6 +9,8 @@
 #import "ViewController.h"
 @import PonyChatUI;
 
+#define PressureTest
+
 // PonyChatUI 仅仅是一个聊天时间轴界面，不包含底部的输入框，这将带给开发者更多的控制权。
 @interface ViewController ()<PCUDelegate, UIActionSheetDelegate>
 
@@ -34,10 +36,17 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
+    
+#ifdef PressureTest
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
+#else
     [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
+#endif
 }
 
 - (void)viewWillLayoutSubviews {

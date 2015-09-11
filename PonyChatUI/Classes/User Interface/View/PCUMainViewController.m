@@ -35,6 +35,8 @@
 
 @property (nonatomic, assign) BOOL firstScrolled;
 
+@property (nonatomic, assign) BOOL isAutoScrolling;
+
 @property (nonatomic, assign) BOOL disableAutoScroll;
 
 @property (nonatomic, assign) BOOL noMoreMessages;
@@ -246,13 +248,32 @@
 }
 
 - (void)autoScroll {
+    if (self.isAutoScrolling) {
+        [NSTimer scheduledTimerWithTimeInterval:0.30
+                                         target:self
+                                       selector:@selector(autoScroll)
+                                       userInfo:nil
+                                        repeats:NO];
+        return;
+    }
     if (self.tableView.isTracking || self.disableAutoScroll) {
         return;
     }
     else if (self.tableView.contentOffset.y >= self.tableView.contentSize.height - self.tableView.frame.size.height * 2) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.isAutoScrolling = YES;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.tableView.isTracking || self.disableAutoScroll || self.tableView.contentOffset.y < self.tableView.contentSize.height - self.tableView.frame.size.height * 2) {
+                self.isAutoScrolling = NO;
+                return;
+            }
+            [UIView animateWithDuration:0.30 animations:^{
                 [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
-                                           animated:YES];
+                                           animated:NO];
+            } completion:^(BOOL finished) {
+                [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
+                                           animated:NO];
+                self.isAutoScrolling = NO;
+            }];
         });
     }
 }

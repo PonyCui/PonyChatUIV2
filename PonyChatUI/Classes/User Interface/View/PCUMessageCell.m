@@ -67,7 +67,6 @@
     self = [super init];
     if (self) {
         [super setSelectionStyle:UITableViewCellSelectionStyleNone];
-        self.layer.masksToBounds = NO;
         _messageInteractor = messageInteractor;
         if (![self isKindOfClass:[PCUSystemMessageCell class]]) {
             [self addSubnode:self.selectionNode];
@@ -266,6 +265,9 @@
 }
 
 - (void)setSelecting:(BOOL)selecting animated:(BOOL)animated {
+    if ([self isKindOfClass:[PCUSystemMessageCell class]]) {
+        return;
+    }
     if (self.isSelected == selecting) {
         return;
     }
