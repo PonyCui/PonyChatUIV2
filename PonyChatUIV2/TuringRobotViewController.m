@@ -188,6 +188,7 @@
                 messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
                 messageItem.messageText = text;
                 [self.core.messageManager didReceiveMessageItem:messageItem];
+                NSLog(@"%@, %@", messageItem, messageItem.messageText);
             }
         }
     }
