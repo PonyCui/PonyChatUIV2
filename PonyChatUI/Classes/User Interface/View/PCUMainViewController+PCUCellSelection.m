@@ -46,37 +46,49 @@
 }
 
 - (void)configureNavigationItem {
+    UIViewController *viewController = self;
+    while (viewController.parentViewController != nil) {
+        if ([viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
+            break;
+        }
+        else {
+            viewController = viewController.parentViewController;
+        }
+    }
     if (self.isSelecting) {
         if (self.originLeftItem == nil) {
-            self.originLeftItem = self.parentViewController.navigationItem.leftBarButtonItem;
+            self.originLeftItem = viewController.navigationItem.leftBarButtonItem;
         }
         if (self.originRightItem == nil) {
-            self.originRightItem = self.parentViewController.navigationItem.rightBarButtonItem;
+            self.originRightItem = viewController.navigationItem.rightBarButtonItem;
         }
         if (self.originRightItems == nil) {
-            self.originRightItems = self.parentViewController.navigationItem.rightBarButtonItems;
+            self.originRightItems = viewController.navigationItem.rightBarButtonItems;
         }
-        self.parentViewController.navigationItem.hidesBackButton = YES;
-        self.parentViewController.navigationItem.leftBarButtonItem = [self selectionCancelButtonItem];
-        self.parentViewController.navigationItem.rightBarButtonItem = [self selectionConfirmButtonItem];
+        viewController.navigationItem.hidesBackButton = YES;
+        viewController.navigationItem.leftBarButtonItem = [self selectionCancelButtonItem];
+        if (self.originRightItems != nil) {
+            viewController.navigationItem.rightBarButtonItems = nil;
+        }
+        viewController.navigationItem.rightBarButtonItem = [self selectionConfirmButtonItem];
     }
     else {
-        self.parentViewController.navigationItem.hidesBackButton = NO;
+        viewController.navigationItem.hidesBackButton = NO;
         if (self.originLeftItem != nil) {
-            self.parentViewController.navigationItem.leftBarButtonItem = self.originLeftItem;
+            viewController.navigationItem.leftBarButtonItem = self.originLeftItem;
         }
         else {
-            self.parentViewController.navigationItem.leftBarButtonItem = nil;
+            viewController.navigationItem.leftBarButtonItem = nil;
         }
         if (self.originRightItems != nil) {
-            self.parentViewController.navigationItem.rightBarButtonItems = self.originRightItems;
+            viewController.navigationItem.rightBarButtonItems = self.originRightItems;
         }
         else if (self.originRightItem != nil) {
-            self.parentViewController.navigationItem.rightBarButtonItem = self.originRightItem;
+            viewController.navigationItem.rightBarButtonItem = self.originRightItem;
         }
         else {
-            self.parentViewController.navigationItem.rightBarButtonItem = nil;
-            self.parentViewController.navigationItem.rightBarButtonItems = nil;
+            viewController.navigationItem.rightBarButtonItem = nil;
+            viewController.navigationItem.rightBarButtonItems = nil;
         }
     }
 }

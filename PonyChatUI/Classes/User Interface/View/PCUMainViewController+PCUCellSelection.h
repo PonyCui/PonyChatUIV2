@@ -6,7 +6,9 @@
 //  Copyright © 2015年 PonyCui. All rights reserved.
 //
 
-#import <PonyChatUI/PonyChatUI.h>
+#import <UIKit/UIKit.h>
+#import "PCUCore.h"
+#import "PCUMainViewController.h"
 
 @interface PCUMainViewController (PCUCellSelection)
 

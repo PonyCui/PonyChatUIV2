@@ -6,7 +6,9 @@
 //  Copyright © 2015年 PonyCui. All rights reserved.
 //
 
-#import <PonyChatUI/PonyChatUI.h>
+#import <UIKit/UIKit.h>
+#import "PCUCore.h"
+#import "PCUMainViewController.h"
 #import "PCUSlideUpCell.h"
 
 @class ASCellNode;
@@ -19,6 +21,6 @@
 
 - (void)su_tableView:(ASTableView *)tableView willDisplayNodeForRowAtIndexPath:(NSIndexPath *)indexPath;
 
-- (nonnull ASCellNode *)su_tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (ASCellNode *)su_tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
