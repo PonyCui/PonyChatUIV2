@@ -79,7 +79,7 @@
     [self.eventHandler updateView];
     [self.tableView setAlpha:0.0];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self.tableView setAlpha:1.0];
+        //        [self.tableView setAlpha:1.0];
         [self.tableView.visibleNodes enumerateObjectsUsingBlock:^(PCUMessageCell *node, NSUInteger idx, BOOL *stop) {
             [self.eventHandler.messageInteractor.slideUpItems enumerateObjectsUsingBlock:^(PCUSlideUpItemInteractor *obj, NSUInteger idx, BOOL *stop) {
                 [obj updateWithMessageID:node.messageInteractor.messageItem.messageID];
@@ -178,6 +178,13 @@
     [self.tableView reloadDataWithCompletion:^{
         self.lastRows = [self.tableView numberOfRowsInSection:0];
         self.hasReloaded = YES;
+        if (self.tableView.alpha == 0.0) {
+            [UIView animateKeyframesWithDuration:0.20 delay:0.20 options:kNilOptions animations:^{
+                self.tableView.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                self.tableView.alpha = 1.0;
+            }];
+        }
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self forceScroll];
@@ -243,13 +250,6 @@
 - (void)forceScroll {
     [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                animated:NO];
-    if (self.tableView.alpha == 0.0) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.25 animations:^{
-                self.tableView.alpha = 1.0;
-            }];
-        });
-    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                    animated:NO];
