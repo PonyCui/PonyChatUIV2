@@ -69,6 +69,7 @@
         [super setSelectionStyle:UITableViewCellSelectionStyleNone];
         _messageInteractor = messageInteractor;
         if (![self isKindOfClass:[PCUSystemMessageCell class]]) {
+            self.layer.masksToBounds = NO;
             [self addSubnode:self.selectionNode];
             [self addSubnode:self.nicknameNode];
             [self addSubnode:self.avatarImageNode];

@@ -149,6 +149,9 @@ static const CGFloat kTextPaddingBottom = 10.0f;
             [self.delegate PCURequireForwardMessageItem:self.messageInteractor.messageItem];
         }
     }
+    else if (itemIndex == 3) {
+        [self.cellDelegate mainViewShouldEnteringSeletionMode];
+    }
 }
 
 #pragma mark - ASTextNodeDelegate

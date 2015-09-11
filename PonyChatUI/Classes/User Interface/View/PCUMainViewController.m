@@ -19,7 +19,7 @@
 
 @end
 
-@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate, PCUSlideUpCellDelegate>
+@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate, PCUSlideUpCellDelegate, PCUMessageCellDelegate>
 
 @property (nonatomic, strong) ASTableView *tableView;
 
@@ -139,6 +139,7 @@
             }
             PCUMessageCell *cell = [PCUMessageCell cellForMessageInteractor:self.eventHandler.messageInteractor.items[_indexPath.row]];
             cell.delegate = self.delegate;
+            cell.cellDelegate = self;
             if ([self.delegate respondsToSelector:@selector(PCUCellShowNickname)]) {
                 cell.showNickname = [self.delegate PCUCellShowNickname];
             }
@@ -351,6 +352,10 @@
 }
 
 #pragma mark - Selection
+
+- (void)mainViewShouldEnteringSeletionMode {
+    [self setSelecting:YES];
+}
 
 - (void)setSelecting:(BOOL)selecting {
     self.isSelecting = selecting;

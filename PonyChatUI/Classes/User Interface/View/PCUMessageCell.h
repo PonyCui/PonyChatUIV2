@@ -22,9 +22,17 @@ typedef NS_ENUM(NSInteger, PCUMessageActionType) {
 
 @protocol PCUDelegate;
 
+@protocol PCUMessageCellDelegate <NSObject>
+
+- (void)mainViewShouldEnteringSeletionMode;
+
+@end
+
 @interface PCUMessageCell : ASCellNode
 
 @property (nonatomic, weak) id<PCUDelegate> delegate;
+
+@property (nonatomic, weak) id<PCUMessageCellDelegate> cellDelegate;
 
 @property (nonatomic, assign) PCUMessageActionType actionType;
 

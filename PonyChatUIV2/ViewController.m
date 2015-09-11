@@ -72,6 +72,7 @@
 - (void)receiveTextMessage {
     PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
     textMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
+    textMessageItem.messageDate = [NSDate date];
     textMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
     textMessageItem.messageText = [NSString stringWithFormat:@"这只是一堆用来测试的文字，谢谢！Post:%@",
                                    [[NSDate date] description]];
@@ -83,6 +84,7 @@
 - (void)receivePreviousTextMessage {
     PCUTextMessageEntity *textMessageItem = [[PCUTextMessageEntity alloc] init];
     textMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
+    textMessageItem.messageDate = [NSDate date];
     textMessageItem.messageOrder = -[[NSDate date] timeIntervalSince1970];
     textMessageItem.messageText = [NSString stringWithFormat:@"这段文字来自很多年前，谢谢！Post:%@",
                                    [[NSDate date] description]];
@@ -94,6 +96,7 @@
 - (void)receiveImageMessage {
     PCUImageMessageEntity *imageMessageItem = [[PCUImageMessageEntity alloc] init];
     imageMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
+    imageMessageItem.messageDate = [NSDate date];
     imageMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
     imageMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
     imageMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
@@ -105,6 +108,7 @@
 - (void)receiveVoiceMessage {
     PCUVoiceMessageEntity *voiceMessageItem = [[PCUVoiceMessageEntity alloc] init];
     voiceMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
+    voiceMessageItem.messageDate = [NSDate date];
     voiceMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
     voiceMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
     voiceMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";

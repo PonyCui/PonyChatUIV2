@@ -186,6 +186,9 @@
             [self.delegate PCURequireForwardMessageItem:self.messageInteractor.messageItem];
         }
     }
+    else if (itemIndex == 2) {
+        [self.cellDelegate mainViewShouldEnteringSeletionMode];
+    }
 }
 
 
