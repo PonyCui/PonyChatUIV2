@@ -50,4 +50,6 @@ typedef NS_ENUM(NSInteger, PCUMessageActionType) {
 
 - (void)resume;
 
+- (void)setSelecting:(BOOL)selecting animated:(BOOL)animated;
+
 @end

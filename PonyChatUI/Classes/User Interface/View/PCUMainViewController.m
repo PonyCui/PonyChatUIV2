@@ -47,6 +47,8 @@
 
 @property (nonatomic, assign) BOOL isInsertingTwice;
 
+@property (nonatomic, assign) BOOL isSelecting;
+
 @end
 
 @implementation PCUMainViewController
@@ -180,6 +182,7 @@
     if (tableView == self.tableView) {
         PCUMessageCell *node = (id)[tableView nodeForRowAtIndexPath:indexPath];
         [node resume];
+        [node setSelecting:self.isSelecting animated:NO];
         if (self.firstScrolled) {
             if ([self.eventHandler.messageInteractor.slideUpItems count] > 0) {
                 [self.eventHandler.messageInteractor.slideUpItems enumerateObjectsUsingBlock:^(PCUSlideUpItemInteractor *obj, NSUInteger idx, BOOL *stop) {
@@ -264,7 +267,7 @@
             }];
         });
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.010 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                    animated:NO];
     });
@@ -324,6 +327,15 @@
 
 - (void)slideUpCellTapped:(PCUSlideUpItemInteractor *)itemInteractor {
     [self slideToMessageWithMessageID:itemInteractor.messageID];
+}
+
+#pragma mark - Selection
+
+- (void)setSelecting:(BOOL)selecting {
+    self.isSelecting = selecting;
+    [[[self.tableView visibleNodes] copy] enumerateObjectsUsingBlock:^(PCUMessageCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setSelecting:selecting animated:YES];
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate

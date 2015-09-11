@@ -76,7 +76,7 @@
     //// Oval Drawing
     UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(3, 3, 21, 21)];
     [color setStroke];
-    ovalPath.lineWidth = 2;
+    ovalPath.lineWidth = 1.5;
     [ovalPath stroke];
 }
 
@@ -93,7 +93,7 @@
     [color setFill];
     [ovalPath fill];
     [color setStroke];
-    ovalPath.lineWidth = 2;
+    ovalPath.lineWidth = 1.5;
     [ovalPath stroke];
     
     

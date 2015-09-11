@@ -36,6 +36,7 @@
 
 @property (nonatomic, strong) RACDisposable *sendingSingal;
 
+@property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, strong) ASControlNode *selectionNode;
 @property (nonatomic, strong) PCUSelectionShape *selectionShape;
 
@@ -230,7 +231,7 @@
                                                              44.0,
                                                              44.0);
         self.sendingErrorNode.frame = self.sendingActivityIndicatorView.frame;
-        self.selectionNode.frame = CGRectMake(-36.0,
+        self.selectionNode.frame = CGRectMake(8.0,
                                               frame.size.height / 2.0 - 13.0 + topSpace,
                                               27.0,
                                               27.0);
@@ -261,6 +262,75 @@
     }
     else {
         [self.sendingActivityIndicatorView stopAnimating];
+    }
+}
+
+- (void)setSelecting:(BOOL)selecting animated:(BOOL)animated {
+    if (self.isSelected == selecting) {
+        return;
+    }
+    self.isSelected = selecting;
+    if (selecting) {
+        if (self.actionType == PCUMessageActionTypeReceive) {
+            CGRect frame = self.frame;
+            frame.origin.x = 44.0;
+            if (animated) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.frame = frame;
+                    self.selectionNode.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    self.frame = frame;
+                    self.selectionNode.alpha = 1.0;
+                }];
+            }
+            else {
+                self.frame = frame;
+                self.selectionNode.alpha = 1.0;
+            }
+        }
+        else if (self.actionType == PCUMessageActionTypeSend) {
+            if (animated) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.selectionNode.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    self.selectionNode.alpha = 1.0;
+                }];
+            }
+            else {
+                self.selectionNode.alpha = 1.0;
+            }
+        }
+    }
+    else {
+        if (self.actionType == PCUMessageActionTypeReceive) {
+            CGRect frame = self.frame;
+            frame.origin.x = 0.0;
+            if (animated) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.frame = frame;
+                    self.selectionNode.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    self.frame = frame;
+                    self.selectionNode.alpha = 0.0;
+                }];
+            }
+            else {
+                self.frame = frame;
+                self.selectionNode.alpha = 0.0;
+            }
+        }
+        else if (self.actionType == PCUMessageActionTypeSend) {
+            if (animated) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.selectionNode.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    self.selectionNode.alpha = 0.0;
+                }];
+            }
+            else {
+                self.selectionNode.alpha = 0.0;
+            }
+        }
     }
 }
 
@@ -334,6 +404,7 @@
             self.selectionShape = [[PCUSelectionShape alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
             return self.selectionShape;
         }];
+        _selectionNode.alpha = 0.0;
     }
     return _selectionNode;
 }
