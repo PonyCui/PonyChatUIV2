@@ -178,12 +178,6 @@
 
 #pragma mark - Node
 
-- (void)didLoad {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.view addSubview:self.sendingActivityIndicatorView];
-    });
-}
-
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
     self.sendingActivityIndicatorView.frame = CGRectMake(0, 0, 44, 44);
     return CGSizeMake(constrainedSize.width, kAvatarSize + kCellGaps);
