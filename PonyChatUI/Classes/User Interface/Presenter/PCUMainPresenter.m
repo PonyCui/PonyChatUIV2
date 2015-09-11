@@ -9,6 +9,8 @@
 #import "PCUMainPresenter.h"
 #import "PCUMainViewController.h"
 #import "PCUMessageInteractor.h"
+#import "PCUMainViewController+PCUCellSelection.h"
+#import "PCUMainViewController+PCUSlideUp.h"
 
 @interface PCUMainPresenter ()<PCUMessageInteractorDelegate>{
     BOOL isViewDidLoaded;

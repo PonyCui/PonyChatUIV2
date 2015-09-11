@@ -54,6 +54,7 @@
         self.parentViewController.navigationItem.leftBarButtonItem = [self selectionCancelButtonItem];
     }
     else {
+        self.parentViewController.navigationItem.hidesBackButton = NO;
         if (self.originLeftItem != nil) {
             self.parentViewController.navigationItem.leftBarButtonItem = self.originLeftItem;
         }
@@ -71,6 +72,15 @@
 - (void)handleSelectionCancelButtonItemTapped {
     [self setSelecting:NO];
     self.selectedItems = @[];
+}
+
+#pragma mark - Delegate
+
+- (void)cs_tableView:(ASTableView *)tableView willDisplayNodeForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.tableView) {
+        PCUMessageCell *node = (id)[tableView nodeForRowAtIndexPath:indexPath];
+        [node setSelecting:self.isSelecting animated:NO];
+    }
 }
 
 @end

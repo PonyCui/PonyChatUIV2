@@ -15,6 +15,8 @@
 		6335A9991B4CD54A001DD64E /* PCUVoiceMessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */; };
 		633ABC251BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = 633ABC231BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h */; settings = {ASSET_TAGS = (); }; };
 		633ABC261BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 633ABC241BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m */; settings = {ASSET_TAGS = (); }; };
+		633ABC291BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.h in Headers */ = {isa = PBXBuildFile; fileRef = 633ABC271BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.h */; settings = {ASSET_TAGS = (); }; };
+		633ABC2A1BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 633ABC281BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.m */; settings = {ASSET_TAGS = (); }; };
 		636B8F231BA1760000DB5D00 /* PCUSelectionShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 636B8F211BA1760000DB5D00 /* PCUSelectionShape.h */; settings = {ASSET_TAGS = (); }; };
 		636B8F241BA1760000DB5D00 /* PCUSelectionShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B8F221BA1760000DB5D00 /* PCUSelectionShape.m */; settings = {ASSET_TAGS = (); }; };
 		6388BDC51B4A7A3300F1D4B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388BDC41B4A7A3300F1D4B9 /* main.m */; };
@@ -138,6 +140,8 @@
 		6335A9971B4CD54A001DD64E /* PCUVoiceMessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUVoiceMessageEntity.m; sourceTree = "<group>"; };
 		633ABC231BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCUMainViewController+PCUCellSelection.h"; sourceTree = "<group>"; };
 		633ABC241BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCUMainViewController+PCUCellSelection.m"; sourceTree = "<group>"; };
+		633ABC271BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCUMainViewController+PCUSlideUp.h"; sourceTree = "<group>"; };
+		633ABC281BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCUMainViewController+PCUSlideUp.m"; sourceTree = "<group>"; };
 		636B8F211BA1760000DB5D00 /* PCUSelectionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUSelectionShape.h; sourceTree = "<group>"; };
 		636B8F221BA1760000DB5D00 /* PCUSelectionShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUSelectionShape.m; sourceTree = "<group>"; };
 		6388BDBF1B4A7A3300F1D4B9 /* PonyChatUIV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PonyChatUIV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -490,6 +494,8 @@
 				6388BE841B4A8E1F00F1D4B9 /* PCUMainViewController.m */,
 				633ABC231BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.h */,
 				633ABC241BA2A0AA00AB0430 /* PCUMainViewController+PCUCellSelection.m */,
+				633ABC271BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.h */,
+				633ABC281BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.m */,
 				6388BE871B4B6EFA00F1D4B9 /* PCUMessageCell.h */,
 				6388BE881B4B6EFB00F1D4B9 /* PCUMessageCell.m */,
 				6388BE8B1B4B727400F1D4B9 /* PCUTextMessageCell.h */,
@@ -538,6 +544,7 @@
 				6396A4991B4BDA6C00C2903E /* PCUImageMessageItemInteractor.h in Headers */,
 				63D0DA791B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.h in Headers */,
 				6388BE751B4A82A400F1D4B9 /* PCUMessageManager.h in Headers */,
+				633ABC291BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.h in Headers */,
 				6388BE9D1B4B7ED800F1D4B9 /* PCUTextMessageItemInteractor.h in Headers */,
 				6396A4951B4BDA0E00C2903E /* PCUImageMessageEntity.h in Headers */,
 				63B551371B9EDB6D001F3568 /* PCUSlideUpEntity.h in Headers */,
@@ -795,6 +802,7 @@
 				63D0DA7A1B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.m in Sources */,
 				6388BE8E1B4B727400F1D4B9 /* PCUTextMessageCell.m in Sources */,
 				6388BE7A1B4A83A800F1D4B9 /* PCUTextMessageEntity.m in Sources */,
+				633ABC2A1BA2B65300AB0430 /* PCUMainViewController+PCUSlideUp.m in Sources */,
 				63B551301B9EDAEE001F3568 /* PCUSlideUpCell.m in Sources */,
 				6388BE821B4A8D9B00F1D4B9 /* PCUWireframe.m in Sources */,
 				63B551381B9EDB6D001F3568 /* PCUSlideUpEntity.m in Sources */,

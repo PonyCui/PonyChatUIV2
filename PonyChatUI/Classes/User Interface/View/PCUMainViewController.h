@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class PCUMainPresenter, PCUMessageEntity;
+@class PCUMainPresenter, PCUMessageEntity, ASTableView;
 
 @protocol PCUDelegate;
 
@@ -22,18 +22,13 @@
 
 - (void)reloadData;
 
+- (void)insertDataWithIndexes:(NSArray<NSNumber *> *)indexes;
+
 - (void)deleteDataWithRow:(NSUInteger)row;
 
 - (void)autoScroll;
 
 - (void)forceScroll;
-
-- (void)reloadSlideUpData;
-
-- (void)deleteSlideUpDataWithRow:(NSUInteger)row;
-
-- (void)insertDataWithIndexes:(NSArray<NSNumber *> *)indexes;
-
 
 #pragma mark - Private 
 
@@ -44,5 +39,11 @@
 @property (nonatomic, copy) NSArray<PCUMessageEntity *> *selectedItems;
 
 @property (nonatomic, strong) UIBarButtonItem *originLeftItem;
+
+#pragma mark -> PCUSlideUP
+
+@property (nonatomic, assign) BOOL isSliding;
+
+@property (nonatomic, strong) ASTableView *slideUpTableView;
 
 @end

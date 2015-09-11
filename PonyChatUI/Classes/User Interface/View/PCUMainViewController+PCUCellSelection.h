@@ -10,4 +10,6 @@
 
 @interface PCUMainViewController (PCUCellSelection)
 
+- (void)cs_tableView:(ASTableView *)tableView willDisplayNodeForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end

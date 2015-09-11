@@ -15,26 +15,23 @@
 #import "PCUMessageCell.h"
 #import "PCUSlideUpCell.h"
 #import "PCUMainViewController+PCUCellSelection.h"
+#import "PCUMainViewController+PCUSlideUp.h"
 
 @interface PCUTableView : ASTableView
 
 @end
 
-@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate, PCUSlideUpCellDelegate>
+@interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) ASTableView *tableView;
 
 @property (nonatomic, strong) UIView      *activityIndicatorView;
-
-@property (nonatomic, strong) ASTableView *slideUpTableView;
 
 @property (nonatomic, assign) BOOL hasReloaded;
 
 @property (nonatomic, strong) NSTimer *reloadTimer;
 
 @property (nonatomic, assign) NSUInteger lastRows;
-
-@property (nonatomic, assign) BOOL firstScrolled;
 
 @property (nonatomic, assign) BOOL disableAutoScroll;
 
@@ -43,8 +40,6 @@
 @property (nonatomic, assign) BOOL isFetchingMore;
 
 @property (nonatomic, strong) NSTimer *fetchTimer;
-
-@property (nonatomic, assign) BOOL isSliding;
 
 @property (nonatomic, assign) BOOL isInsertingTwice;
 
@@ -147,15 +142,7 @@
         }
     }
     else if (tableView == self.slideUpTableView) {
-        if (indexPath.row < [self.eventHandler.messageInteractor.slideUpItems count]) {
-            PCUSlideUpCell *cell = [[PCUSlideUpCell alloc] init];
-            cell.delegate = self;
-            [cell updateWithItemInteractor:self.eventHandler.messageInteractor.slideUpItems[indexPath.row]];
-            return cell;
-        }
-        else {
-            return [[PCUSlideUpCell alloc] init];
-        }
+        return [self su_tableView:tableView nodeForRowAtIndexPath:indexPath];
     }
     else {
         return nil;
@@ -182,14 +169,8 @@
     if (tableView == self.tableView) {
         PCUMessageCell *node = (id)[tableView nodeForRowAtIndexPath:indexPath];
         [node resume];
-        [node setSelecting:self.isSelecting animated:NO];
-        if (self.firstScrolled) {
-            if ([self.eventHandler.messageInteractor.slideUpItems count] > 0) {
-                [self.eventHandler.messageInteractor.slideUpItems enumerateObjectsUsingBlock:^(PCUSlideUpItemInteractor *obj, NSUInteger idx, BOOL *stop) {
-                    [obj updateWithMessageID:node.messageInteractor.messageItem.messageID];
-                }];
-            }
-        }
+        [self cs_tableView:tableView willDisplayNodeForRowAtIndexPath:indexPath];
+        [self su_tableView:tableView willDisplayNodeForRowAtIndexPath:indexPath];
     }
 }
 
@@ -197,7 +178,6 @@
     [self.tableView reloadDataWithCompletion:^{
         self.lastRows = [self.tableView numberOfRowsInSection:0];
         self.hasReloaded = YES;
-        self.firstScrolled = YES;
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self forceScroll];
@@ -274,62 +254,6 @@
         [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height - 1, 1, 1)
                                    animated:NO];
     });
-}
-
-#pragma mark - Slide Up
-
-- (void)reloadSlideUpData {
-    CGRect frame = self.slideUpTableView.frame;
-    frame.size.height = 50.0 * [self.eventHandler.messageInteractor.slideUpItems count];
-    self.slideUpTableView.frame = frame;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.slideUpTableView reloadData];
-        [UIView animateWithDuration:0.25 animations:^{
-            self.slideUpTableView.alpha = 1.0;
-        }];
-    });
-}
-
-- (void)deleteSlideUpDataWithRow:(NSUInteger)row {
-    [self.slideUpTableView beginUpdates];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [self.slideUpTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [self.slideUpTableView endUpdatesAnimated:YES completion:nil];
-}
-
-- (void)slideToMessageWithMessageID:(NSString *)messageID {
-    NSUInteger nodeIndex = NSNotFound;
-    CGFloat    nodeOffset = 0.0;
-    NSUInteger nodeCount = [self.tableView numberOfRowsInSection:0];
-    for (NSUInteger i = 0; i < nodeCount; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        PCUMessageCell *cell = (id)[self.tableView nodeForRowAtIndexPath:indexPath];
-        if ([cell.messageInteractor.messageItem.messageID isEqualToString:messageID]) {
-            nodeIndex = i;
-            break;
-        }
-        else {
-            nodeOffset += CGRectGetHeight(cell.frame);
-        }
-    }
-    if (nodeIndex != NSNotFound) {
-        [self.tableView setContentOffset:CGPointMake(0, nodeOffset) animated:YES];
-    }
-    else {
-        if ([self.delegate respondsToSelector:@selector(PCURequireSlideToMessageID:)]) {
-            self.tableView.automaticallyAdjustsContentOffset = YES;
-            [self.delegate PCURequireSlideToMessageID:messageID];
-            self.firstScrolled = YES;
-            self.isSliding = YES;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.isSliding = NO;
-            });
-        }
-    }
-}
-
-- (void)slideUpCellTapped:(PCUSlideUpItemInteractor *)itemInteractor {
-    [self slideToMessageWithMessageID:itemInteractor.messageID];
 }
 
 #pragma mark - UIScrollViewDelegate
