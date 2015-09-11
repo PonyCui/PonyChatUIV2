@@ -24,23 +24,46 @@
 @protocol PCUDelegate <NSObject>
 
 @optional
-- (BOOL)PCUCellShowNickname;
+
+#pragma mark - Event
+
 - (void)PCUEndEditing;
-- (BOOL)PCUChatViewCanRequestPreviousMessages;
-- (void)PCUChatViewRequestPreviousMessages:(void (^)(BOOL noMore))resultBlock;
-- (void)PCUAvatarTappedWithMessageItem:(PCUMessageEntity *)messageItem;
-- (void)PCUAvatarLongPressedWithMessageItem:(PCUMessageEntity *)messageItem;
-- (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem;
-- (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
-                      voiceStatus:(id<PCUVoiceStatus>)voiceStatus;
-- (BOOL)PCUVoiceMessageItemHasPlayed:(PCUVoiceMessageEntity *)messageItem;
-- (void)PCUFailableMessageItemTapped:(PCUMessageEntity *)messageItem;
-- (void)PCURequireDeleteMessageItem:(PCUMessageEntity *)messageItem;
-- (void)PCURequireForwardMessageItem:(PCUMessageEntity *)messageItem;
+
 - (void)PCURequireOpenURL:(NSURL *)URL;
-- (void)PCURequireSlideToMessageID:(NSString *)messageID;
+
+- (void)PCURequireDeleteMessageItem:(PCUMessageEntity *)messageItem;
+
+- (void)PCURequireForwardMessageItem:(PCUMessageEntity *)messageItem;
+
 - (void)PCURequireBatchOperateWithMessageItems:(NSArray<PCUMessageEntity *> *)items
                                completionBlock:(void (^)(BOOL finished))completionBlock;
+
+#pragma mark - Setting
+
+- (BOOL)PCUCellShowNickname;
+
+#pragma mark - History Messages
+
+- (BOOL)PCUChatViewCanRequestPreviousMessages;
+
+- (void)PCUChatViewRequestPreviousMessages:(void (^)(BOOL noMore))resultBlock;
+
+- (void)PCURequireSlideToMessageID:(NSString *)messageID;
+
+#pragma mark - Message Tapped
+
+- (void)PCUAvatarTappedWithMessageItem:(PCUMessageEntity *)messageItem;
+
+- (void)PCUAvatarLongPressedWithMessageItem:(PCUMessageEntity *)messageItem;
+
+- (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem;
+
+- (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
+                      voiceStatus:(id<PCUVoiceStatus>)voiceStatus;
+
+- (BOOL)PCUVoiceMessageItemHasPlayed:(PCUVoiceMessageEntity *)messageItem;
+
+- (void)PCUFailableMessageItemTapped:(PCUMessageEntity *)messageItem;
 
 @end
 
