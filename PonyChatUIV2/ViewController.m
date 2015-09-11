@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.chatView = [self.core.wireframe addMainViewToViewController:self
-                                                  withMessageManager:self.core.messageManager];return;
+                                                  withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
     
 #ifdef PressureTest

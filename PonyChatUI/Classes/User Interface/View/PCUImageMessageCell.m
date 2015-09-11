@@ -98,11 +98,11 @@
 - (void)handleBackgroundImageNodeTapped:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         self.imageNode.alpha = 0.5;
-    }
-    else if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint thePoint = [sender.view.superview convertPoint:sender.view.frame.origin toView:[[UIApplication sharedApplication] keyWindow]];
         thePoint.x += CGRectGetWidth(sender.view.frame) / 2.0;
         [self.popMenuViewController presentMenuViewControllerWithReferencePoint:thePoint];
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded) {
         self.imageNode.alpha = 1.0;
     }
 }
@@ -147,7 +147,7 @@
         }
         _imageNode.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
         UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundImageNodeTapped:)];
-        gesture.minimumPressDuration = 0.15;
+        gesture.minimumPressDuration = 0.35;
         [_imageNode.view addGestureRecognizer:gesture];
     }
     return _imageNode;

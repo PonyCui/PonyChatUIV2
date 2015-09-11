@@ -125,11 +125,11 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 - (void)handleBackgroundImageNodeTapped:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         self.backgroundImageNode.alpha = 0.5;
-    }
-    else if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint thePoint = [sender.view.superview convertPoint:sender.view.frame.origin toView:[[UIApplication sharedApplication] keyWindow]];
         thePoint.x += CGRectGetWidth(sender.view.frame) / 2.0;
         [self.popMenuViewController presentMenuViewControllerWithReferencePoint:thePoint];
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded) {
         self.backgroundImageNode.alpha = 1.0;
     }
 }
@@ -201,7 +201,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
         _backgroundImageNode.backgroundColor = [UIColor clearColor];
         _backgroundImageNode.userInteractionEnabled = YES;
         UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundImageNodeTapped:)];
-        gesture.minimumPressDuration = 0.15;
+        gesture.minimumPressDuration = 0.35;
         [_backgroundImageNode.view addGestureRecognizer:gesture];
     }
     return _backgroundImageNode;
