@@ -69,13 +69,14 @@
     if (self) {
         [super setSelectionStyle:UITableViewCellSelectionStyleNone];
         _messageInteractor = messageInteractor;
+        [self addSubnode:self.contentNode];
         if (![self isKindOfClass:[PCUSystemMessageCell class]]) {
-            [self addSubnode:self.nicknameNode];
-            [self addSubnode:self.avatarImageNode];
-            [self addSubnode:self.upscriptTextNode];
-            [self addSubnode:self.subscriptTextNode];
-            [self addSubnode:self.sendingErrorNode];
-            [self addSubnode:self.sendingActivityNode];
+            [self.contentNode addSubnode:self.nicknameNode];
+            [self.contentNode addSubnode:self.avatarImageNode];
+            [self.contentNode addSubnode:self.upscriptTextNode];
+            [self.contentNode addSubnode:self.subscriptTextNode];
+            [self.contentNode addSubnode:self.sendingErrorNode];
+            [self.contentNode addSubnode:self.sendingActivityNode];
             [self addSubnode:self.selectionNode];
             [self configureReacitiveCocoa];
             [self configureSendingStatus];
@@ -181,6 +182,7 @@
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
     self.sendingActivityIndicatorView.frame = CGRectMake(0, 0, 44, 44);
+    self.contentNode.frame = CGRectMake(0, 0, constrainedSize.width, kAvatarSize + kCellGaps);
     return CGSizeMake(constrainedSize.width, kAvatarSize + kCellGaps);
 }
 
@@ -245,7 +247,7 @@
                                                   frame.size.height - 26.0 + topSpace,
                                                   self.subscriptTextNode.calculatedSize.width,
                                                   self.subscriptTextNode.calculatedSize.height);
-        self.selectionNode.frame = CGRectMake(-32.0,
+        self.selectionNode.frame = CGRectMake(12.0,
                                               frame.size.height / 2.0 - 13.0 + topSpace,
                                               27.0,
                                               27.0);
@@ -274,25 +276,24 @@
     }
     self.isSelecting = selecting;
     if (selecting) {
-        self.layer.masksToBounds = NO;
         [self.selectionShape setSelected:NO];
         [self addSubnode:self.selectionGestureNode];
         self.selectionGestureNode.frame = self.bounds;
         self.selectionGestureNode.hidden = NO;
         if (self.actionType == PCUMessageActionTypeReceive) {
-            CGRect frame = self.frame;
+            CGRect frame = self.contentNode.frame;
             frame.origin.x = 44.0;
             if (animated) {
                 [UIView animateWithDuration:0.25 animations:^{
-                    self.frame = frame;
+                    self.contentNode.frame = frame;
                     self.selectionNode.alpha = 1.0;
                 } completion:^(BOOL finished) {
-                    self.frame = frame;
+                    self.contentNode.frame = frame;
                     self.selectionNode.alpha = 1.0;
                 }];
             }
             else {
-                self.frame = frame;
+                self.contentNode.frame = frame;
                 self.selectionNode.alpha = 1.0;
             }
         }
@@ -312,19 +313,19 @@
     else {
         self.selectionGestureNode.hidden = YES;
         if (self.actionType == PCUMessageActionTypeReceive) {
-            CGRect frame = self.frame;
+            CGRect frame = self.contentNode.frame;
             frame.origin.x = 0.0;
             if (animated) {
                 [UIView animateWithDuration:0.25 animations:^{
-                    self.frame = frame;
+                    self.contentNode.frame = frame;
                     self.selectionNode.alpha = 0.0;
                 } completion:^(BOOL finished) {
-                    self.frame = frame;
+                    self.contentNode.frame = frame;
                     self.selectionNode.alpha = 0.0;
                 }];
             }
             else {
-                self.frame = frame;
+                self.contentNode.frame = frame;
                 self.selectionNode.alpha = 0.0;
             }
         }
@@ -352,6 +353,13 @@
 }
 
 #pragma mark - Getter
+
+- (ASDisplayNode *)contentNode {
+    if (_contentNode == nil) {
+        _contentNode = [[ASDisplayNode alloc] init];
+    }
+    return _contentNode;
+}
 
 - (ASTextNode *)nicknameNode {
     if (_nicknameNode == nil) {

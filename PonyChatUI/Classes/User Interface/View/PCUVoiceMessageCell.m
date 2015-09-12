@@ -40,9 +40,9 @@
 {
     self = [super initWithMessageInteractor:messageInteractor];
     if (self) {
-        [self addSubnode:self.backgroundImageNode];
-        [self addSubnode:self.voiceImageNode];
-        [self addSubnode:self.badgeNode];
+        [self.contentNode addSubnode:self.backgroundImageNode];
+        [self.contentNode addSubnode:self.voiceImageNode];
+        [self.contentNode addSubnode:self.badgeNode];
         [self configureScriptNode];
     }
     return self;
@@ -108,6 +108,7 @@
     }
     CGSize superSize = [super calculateSizeThatFits:constrainedSize];
     superSize.height += kCellGaps + topSpace;
+    self.contentNode.frame = CGRectMake(0, 0, superSize.width, superSize.height);
     return superSize;
 }
 

@@ -33,8 +33,8 @@ static const CGFloat kTextPaddingBottom = 10.0f;
 {
     self = [super initWithMessageInteractor:messageInteractor];
     if (self) {
-        [self addSubnode:self.backgroundImageNode];
-        [self addSubnode:self.textNode];
+        [self.contentNode addSubnode:self.backgroundImageNode];
+        [self.contentNode addSubnode:self.textNode];
     }
     return self;
 }
@@ -50,6 +50,7 @@ static const CGFloat kTextPaddingBottom = 10.0f;
     CGSize textSize = [self.textNode measure:CGSizeMake(constrainedSize.width - kAvatarSize - 10.0 - kTextPaddingLeft - kTextPaddingRight - 60.0,
                                                         constrainedSize.height)];
     CGFloat requiredHeight = MAX(superSize.height, textSize.height + kTextPaddingTop + kTextPaddingBottom);
+    self.contentNode.frame = CGRectMake(0, 0, constrainedSize.width, requiredHeight + kCellGaps + topSpace);
     return CGSizeMake(constrainedSize.width, requiredHeight + kCellGaps + topSpace);
 }
 

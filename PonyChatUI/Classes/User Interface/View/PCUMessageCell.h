@@ -46,6 +46,8 @@ typedef NS_ENUM(NSInteger, PCUMessageActionType) {
 
 @property (nonatomic, strong) PCUMessageItemInteractor *messageInteractor;
 
+@property (nonatomic, strong) ASDisplayNode *contentNode;
+
 @property (nonatomic, strong) ASTextNode *upscriptTextNode;
 
 @property (nonatomic, strong) ASTextNode *subscriptTextNode;

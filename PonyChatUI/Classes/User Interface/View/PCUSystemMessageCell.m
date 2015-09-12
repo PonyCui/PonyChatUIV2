@@ -29,8 +29,8 @@ static const CGFloat kTextPaddingBottom = 3.0f;
 {
     self = [super initWithMessageInteractor:messageInteractor];
     if (self) {
-        [self addSubnode:self.backgroundNode];
-        [self addSubnode:self.textNode];
+        [self.contentNode addSubnode:self.backgroundNode];
+        [self.contentNode addSubnode:self.textNode];
     }
     return self;
 }
@@ -40,6 +40,7 @@ static const CGFloat kTextPaddingBottom = 3.0f;
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
     CGSize textSize = [self.textNode measure:CGSizeMake(constrainedSize.width - kTextPaddingLeft - kTextPaddingRight,
                                                         constrainedSize.height)];
+    self.contentNode.frame = CGRectMake(0, 0, constrainedSize.width, textSize.height + kTextPaddingTop + kTextPaddingBottom + kCellGaps * 2);
     return CGSizeMake(constrainedSize.width, textSize.height + kTextPaddingTop + kTextPaddingBottom + kCellGaps * 2);
 }
 

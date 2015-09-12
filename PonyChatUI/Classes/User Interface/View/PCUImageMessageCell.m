@@ -29,8 +29,8 @@
 {
     self = [super initWithMessageInteractor:messageInteractor];
     if (self) {
-        [self addSubnode:self.imageNode];
-        [self addSubnode:self.maskNode];
+        [self.contentNode addSubnode:self.imageNode];
+        [self.contentNode addSubnode:self.maskNode];
     }
     return self;
 }
@@ -52,7 +52,7 @@
     }
     CGSize superSize = [super calculateSizeThatFits:constrainedSize];
     CGSize imageSize = CGSizeMake([[self imageMessageInteractor] imageWidth], [[self imageMessageInteractor] imageHeight]);
-    
+    self.contentNode.frame = CGRectMake(0, 0, constrainedSize.width, MAX(superSize.height, imageSize.height) + kCellGaps + topSpace);
     return CGSizeMake(constrainedSize.width, MAX(superSize.height, imageSize.height) + kCellGaps + topSpace);
 }
 
