@@ -11,7 +11,7 @@ PonyChatUI focus on performance and architecture, brings you an in-believable de
 
 ## Preview
 
-![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/1.gif)
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/screenshot/1.gif)
 
 Here is demo, you can talk to Turing Robot, download as zip, and have a nice try.
 
@@ -19,28 +19,34 @@ Here is demo, you can talk to Turing Robot, download as zip, and have a nice try
 
 ### Text/Image/Voice/System Message Support
 
-![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/DemoVideo.gif)
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/screenshot/DemoVideo.gif)
 
 PonyChatUI provides text/image/voice/system four style message user interface.
 Image and Voice message have delegate method, while user tap these messages, developer could handle it.
 
 ### History messages
 
-![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/3.gif)
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/screenshot/3.gif)
 
 Just implement the delegate method, the history message will insert to PCUChatView.
 
 ### Slide Up
 
-![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/2.gif)
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/screenshot/2.gif)
 
 You may add a slide up tips, while user tap it, PonyChatUI leads to the specific message.
 
 ### Pop Menu
 
-![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/4.png)
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/screenshot/4.png)
 
 Long press message, there's some option, user can choose it, and developer can custom it.
+
+### Multiple Selection
+
+![](https://raw.githubusercontent.com/PonyGroup/PonyChatUIV2/master/screenshot/5.png)
+
+Long press message, choose more action, user can select more than one message.
 
 ## Limitation
 
