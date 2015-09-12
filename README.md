@@ -15,7 +15,7 @@ PonyChatUI focus on performance and architecture, brings you an in-believable de
 
 Here is demo, you can talk to Turing Robot, download as zip, and have a nice try.
 
-## Functions
+## Features
 
 ### Text/Image/Voice/System Message Support
 
