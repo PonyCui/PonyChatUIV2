@@ -7,6 +7,8 @@
 //
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import <FLAnimatedImage/FLAnimatedImageView.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
 #import "PCUImageMessageCell.h"
 #import "PCUImageMessageItemInteractor.h"
 #import "PCUCore.h"
@@ -16,6 +18,8 @@
 @interface PCUImageMessageCell ()<PCUPopMenuViewControllerDelegate>
 
 @property (nonatomic, strong) ASNetworkImageNode *imageNode;
+
+@property (nonatomic, strong) ASDisplayNode *animatingImageNode;
 
 @property (nonatomic, strong) ASImageNode *maskNode;
 
@@ -29,8 +33,13 @@
 {
     self = [super initWithMessageInteractor:messageInteractor];
     if (self) {
-        [self.contentNode addSubnode:self.imageNode];
-        [self.contentNode addSubnode:self.maskNode];
+        if ([[self imageMessageInteractor] isGIF]) {
+            [self.contentNode addSubnode:self.animatingImageNode];
+        }
+        else {
+            [self.contentNode addSubnode:self.imageNode];
+            [self.contentNode addSubnode:self.maskNode];
+        }
     }
     return self;
 }
@@ -64,9 +73,11 @@
     [super layout];
     if ([super actionType] == PCUMessageActionTypeSend) {
         self.imageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.animatingImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
         self.imageNode.frame = CGRectMake(kAvatarSize + 14.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.animatingImageNode.frame = CGRectMake(kAvatarSize + 14.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
     }
     else {
         self.imageNode.hidden = YES;
@@ -129,10 +140,36 @@
     return (id)[super messageInteractor];
 }
 
+- (ASDisplayNode *)animatingImageNode {
+    if (_animatingImageNode == nil) {
+        _animatingImageNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView *{
+            FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
+            if ([[self imageMessageInteractor] isGIF] &&
+                [[self imageMessageInteractor] imageURLString] != nil) {
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[self imageMessageInteractor] imageURLString]] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
+                [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+                    if (connectionError == nil && data != nil) {
+                        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:data];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [imageView setAnimatedImage:image];
+                        });
+                    }
+                }];
+                imageView.frame = CGRectMake(0, 0, [[self imageMessageInteractor] imageWidth], [[self imageMessageInteractor] imageHeight]);
+            }
+            return imageView;
+        }];
+    }
+    return _animatingImageNode;
+}
+
 - (ASNetworkImageNode *)imageNode {
     if (_imageNode == nil) {
         _imageNode = [[ASNetworkImageNode alloc] initWithCache:[PCUImageManager sharedInstance]
                                                     downloader:[PCUImageManager sharedInstance]];
+        if ([[self imageMessageInteractor] isGIF]) {
+            return _imageNode;
+        }
         [_imageNode addTarget:self action:@selector(handleImageNodeTapped) forControlEvents:ASControlNodeEventTouchUpInside];
         _imageNode.contentMode = UIViewContentModeScaleAspectFit;
         if ([[[self imageMessageInteractor] imageURLString] hasPrefix:@"/"]) {

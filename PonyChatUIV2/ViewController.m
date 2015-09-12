@@ -37,14 +37,17 @@
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
     
+    [self receiveAnimatingMessage];
+    
 #ifdef PressureTest
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveAnimatingMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 #else
+    [NSTimer scheduledTimerWithTimeInterval:12.0 target:self selector:@selector(receiveAnimatingMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(receivePreviousTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 #endif
 }
@@ -91,6 +94,19 @@
     textMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
     textMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
     [self.core.messageManager didReceiveMessageItem:textMessageItem];
+}
+
+- (void)receiveAnimatingMessage {
+    PCUImageMessageEntity *imageMessageItem = [[PCUImageMessageEntity alloc] init];
+    imageMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
+    imageMessageItem.messageDate = [NSDate date];
+    imageMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
+    imageMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
+    imageMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
+    imageMessageItem.imageURLString = [NSString stringWithFormat:@"http://pics.sc.chinaz.com/Files/pic/faces/3708/%u.gif", arc4random() % 15 + 1];
+    imageMessageItem.imageSize = CGSizeMake(75, 75);
+    imageMessageItem.isGIF = YES;
+    [self.core.messageManager didReceiveMessageItem:imageMessageItem];
 }
 
 - (void)receiveImageMessage {

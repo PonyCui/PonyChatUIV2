@@ -18,6 +18,7 @@
         _thumbURLString = [(PCUImageMessageEntity *)messageItem thumbURLString];
         _imageWidth = [(PCUImageMessageEntity *)messageItem imageSize].width;
         _imageHeight = [(PCUImageMessageEntity *)messageItem imageSize].height;
+        _isGIF = [(PCUImageMessageEntity *)messageItem isGIF];
         if ([(PCUImageMessageEntity *)messageItem imageSize].width > 120.0) {
             _imageWidth = 120.0;
             _imageHeight = 120.0 * [(PCUImageMessageEntity *)messageItem imageSize].height / [(PCUImageMessageEntity *)messageItem imageSize].width;

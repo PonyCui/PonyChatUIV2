@@ -16,4 +16,6 @@
 
 @property (nonatomic, assign) CGSize imageSize;
 
+@property (nonatomic, assign) BOOL   isGIF;
+
 @end

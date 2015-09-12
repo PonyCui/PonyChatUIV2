@@ -18,4 +18,6 @@
 
 @property (nonatomic, assign) double imageHeight;
 
+@property (nonatomic, assign) BOOL isGIF;
+
 @end

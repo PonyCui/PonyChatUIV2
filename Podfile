@@ -13,6 +13,7 @@ target 'PonyChatUI' do
 
 pod 'AsyncDisplayKit'
 pod 'ReactiveCocoa'
+pod 'FLAnimatedImage'
 
 #pod 'CRChecker'
 
