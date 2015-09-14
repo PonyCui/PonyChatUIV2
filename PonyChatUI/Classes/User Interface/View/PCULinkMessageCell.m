@@ -18,6 +18,9 @@
 #define kLargerLinkLRSpace 16.0f
 #define kLargerContentLRSpace 12.0f
 #define kLargerThumbImageRatio 16.0f/9.0f
+#define kNormalContentLRSpace 16.0f
+#define kNormalContentTBSpace 12.0f
+#define kNormalThumbImageWidth 60.0f
 
 @interface PCULinkMessageCell ()<PCUPopMenuViewControllerDelegate>
 
@@ -69,12 +72,18 @@
         self.contentNode.frame = CGRectMake(0, kLinkCellTBSpace, constrainedSize.width, contentHeight);
         return CGSizeMake(constrainedSize.width, contentHeight + kCellGaps + kLinkCellTBSpace * 2);
     }
+    else {
+        CGFloat contentWidth = constrainedSize.width - kAvatarSize - 10.0 - 60.0;
+        [self.titleNode measure:CGSizeMake(contentWidth - kNormalContentLRSpace * 2, CGFLOAT_MAX)];
+        [self.subTitleNode measure:CGSizeMake(contentWidth - kNormalContentLRSpace * 2 - 8.0 - kNormalThumbImageWidth, kNormalThumbImageWidth)];
+        return CGSizeMake(constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 12.0 + kNormalContentTBSpace * 2 + kCellGaps);
+    }
     return constrainedSize;
 }
 
 - (void)layout {
-    self.backgroundImageNode.frame = CGRectMake(kLargerLinkLRSpace, 0, self.calculatedSize.width - kLargerLinkLRSpace * 2, self.calculatedSize.height - kCellGaps - kLinkCellTBSpace * 2);
     if ([[self linkMessageInteractor] largerLink]) {
+        self.backgroundImageNode.frame = CGRectMake(kLargerLinkLRSpace, 0, self.calculatedSize.width - kLargerLinkLRSpace * 2, self.calculatedSize.height - kCellGaps - kLinkCellTBSpace * 2);
         self.titleNode.frame = CGRectMake(kLargerLinkLRSpace + kLargerContentLRSpace,
                                           14,
                                           self.titleNode.calculatedSize.width,
@@ -93,6 +102,23 @@
                                              self.thumbImageNode.frame.origin.y + self.thumbImageNode.frame.size.height + 10.0,
                                              self.subTitleNode.calculatedSize.width,
                                              self.subTitleNode.calculatedSize.height);
+    }
+    else {
+        [super layout];
+        CGFloat contentWidth = self.calculatedSize.width - kAvatarSize - 10.0 - 60.0;
+        if (self.actionType == PCUMessageActionTypeSend) {
+            self.backgroundImageNode.image = [[UIImage imageNamed:@"SenderLinkNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
+            self.backgroundImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - contentWidth, 0.0, contentWidth, self.calculatedSize.height - kCellGaps);
+            self.titleNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + kNormalContentLRSpace,
+                                              kNormalContentTBSpace,
+                                              self.titleNode.calculatedSize.width,
+                                              self.titleNode.calculatedSize.height);
+            self.thumbImageNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + kNormalContentLRSpace, self.titleNode.frame.origin.y + self.titleNode.frame.size.height + 8.0, kNormalThumbImageWidth, kNormalThumbImageWidth);
+            self.subTitleNode.frame = CGRectMake(self.thumbImageNode.frame.origin.x + self.thumbImageNode.frame.size.width + 8.0, self.thumbImageNode.frame.origin.y + 2.0, self.subTitleNode.calculatedSize.width, self.subTitleNode.calculatedSize.height);
+        }
+        else if (self.actionType == PCUMessageActionTypeReceive) {
+            
+        }
     }
     [self updateLayoutWithContentFrame:self.backgroundImageNode.frame];
 }
@@ -146,6 +172,7 @@
 - (ASTextNode *)titleNode {
     if (_titleNode == nil) {
         _titleNode = [[ASTextNode alloc] init];
+        _titleNode.userInteractionEnabled = NO;
         if ([self linkMessageInteractor].titleString != nil) {
             if ([[self linkMessageInteractor] largerLink]) {
                 NSAttributedString *attributedString = [[NSAttributedString alloc]
@@ -154,6 +181,15 @@
                                                         NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0],
                                                         NSForegroundColorAttributeName: [UIColor blackColor]
                                                         }];
+                _titleNode.attributedString = attributedString;
+            }
+            else {
+                NSAttributedString *attributedString = [[NSAttributedString alloc]
+                                                        initWithString:[self linkMessageInteractor].titleString
+                                                        attributes:@{
+                                                                     NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0],
+                                                                     NSForegroundColorAttributeName: [UIColor blackColor]
+                                                                     }];
                 _titleNode.attributedString = attributedString;
             }
         }
@@ -184,6 +220,7 @@
     if (_thumbImageNode == nil) {
         _thumbImageNode = [[ASNetworkImageNode alloc] initWithCache:[PCUImageManager sharedInstance]
                                                          downloader:[PCUImageManager sharedInstance]];
+        _thumbImageNode.userInteractionEnabled = NO;
         _thumbImageNode.contentMode = UIViewContentModeScaleAspectFill;
         _thumbImageNode.layer.masksToBounds = YES;
         if ([[self linkMessageInteractor] thumbURLString] != nil) {
@@ -199,14 +236,27 @@
 - (ASTextNode *)subTitleNode {
     if (_subTitleNode == nil) {
         _subTitleNode = [[ASTextNode alloc] init];
+        _subTitleNode.userInteractionEnabled = NO;
         if ([self linkMessageInteractor].subTitleString != nil) {
-            NSAttributedString *attributedString = [[NSAttributedString alloc]
-                                                    initWithString:[self linkMessageInteractor].subTitleString
-                                                    attributes:@{
-                                                                 NSFontAttributeName: [UIFont systemFontOfSize:15.0],
-                                                                 NSForegroundColorAttributeName: [UIColor grayColor]
-                                                                 }];
-            _subTitleNode.attributedString = attributedString;
+            if ([[self linkMessageInteractor] largerLink]) {
+                NSAttributedString *attributedString = [[NSAttributedString alloc]
+                                                        initWithString:[self linkMessageInteractor].subTitleString
+                                                        attributes:@{
+                                                                     NSFontAttributeName: [UIFont systemFontOfSize:15.0],
+                                                                     NSForegroundColorAttributeName: [UIColor grayColor]
+                                                                     }];
+                _subTitleNode.attributedString = attributedString;
+            }
+            else {
+                NSAttributedString *attributedString = [[NSAttributedString alloc]
+                                                        initWithString:[self linkMessageInteractor].subTitleString
+                                                        attributes:@{
+                                                                     NSFontAttributeName: [UIFont systemFontOfSize:15.0],
+                                                                     NSForegroundColorAttributeName: [UIColor grayColor]
+                                                                     }];
+                _subTitleNode.attributedString = attributedString;
+                [_subTitleNode setTruncationMode:NSLineBreakByTruncatingTail];
+            }
         }
     }
     return _subTitleNode;
@@ -220,16 +270,19 @@
             _backgroundImageNode.layer.cornerRadius = 8.0f;
             _backgroundImageNode.layer.borderWidth = 0.35f;
             _backgroundImageNode.layer.borderColor = [UIColor grayColor].CGColor;
-            _backgroundImageNode.userInteractionEnabled = YES;
-            UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc]
-                                                     initWithTarget:self
-                                                     action:@selector(handleBackgroundImageNodeLongPress:)];
-            gesture.minimumPressDuration = 0.35;
-            [_backgroundImageNode.view addGestureRecognizer:gesture];
-            [_backgroundImageNode addTarget:self
-                                     action:@selector(handleBackgroundImageNodeTapped)
-                           forControlEvents:ASControlNodeEventTouchUpInside];
         }
+        else {
+            _backgroundImageNode = [[ASImageNode alloc] init];
+        }
+        _backgroundImageNode.userInteractionEnabled = YES;
+        UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc]
+                                                 initWithTarget:self
+                                                 action:@selector(handleBackgroundImageNodeLongPress:)];
+        gesture.minimumPressDuration = 0.35;
+        [_backgroundImageNode.view addGestureRecognizer:gesture];
+        [_backgroundImageNode addTarget:self
+                                 action:@selector(handleBackgroundImageNodeTapped)
+                       forControlEvents:ASControlNodeEventTouchUpInside];
     }
     return _backgroundImageNode;
 }

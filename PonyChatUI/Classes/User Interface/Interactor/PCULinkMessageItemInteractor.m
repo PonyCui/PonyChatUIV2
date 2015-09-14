@@ -18,7 +18,7 @@
         _subTitleString = messageItem.descriptionText;
         _thumbURLString = messageItem.thumbURLString;
         _linkURLString = messageItem.linkURLString;
-        _largerLink = YES;
+//        _largerLink = YES;
     }
     return self;
 }

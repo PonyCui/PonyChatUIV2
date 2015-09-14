@@ -36,7 +36,7 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
-    [self performSelector:@selector(receiveLinkMessage) withObject:nil afterDelay:18.0];
+    [self performSelector:@selector(receiveLinkMessage) withObject:nil afterDelay:4.0];
     [self receiveAnimatingMessage];
     
 #ifdef PressureTest
@@ -48,7 +48,7 @@
     [NSTimer scheduledTimerWithTimeInterval:12.0 target:self selector:@selector(receiveAnimatingMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 #endif
 }
 
@@ -74,6 +74,7 @@
 
 - (void)receiveLinkMessage {
     PCULinkMessageEntity *linkMessageItem = [[PCULinkMessageEntity alloc] init];
+    linkMessageItem.ownSender = YES;
     linkMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
     linkMessageItem.messageDate = [NSDate date];
     linkMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
@@ -81,6 +82,7 @@
     linkMessageItem.descriptionText = @"SE于今天公开了PS4、XboxOne、PC三平台上的最新冒险游戏《奇异人生》的最新截图和一段日文解说的宣传视频。";
     linkMessageItem.thumbURLString = @"http://img3.dwstatic.com/ps4/1509/306164780504/1442210084834.jpg";
     linkMessageItem.linkURLString = @"http://ps4.duowan.com/1509/306164780504.html";
+    linkMessageItem.senderAvatarURLString = @"http://tp4.sinaimg.cn/1651799567/180/1290860930/1";
     [self.core.messageManager didReceiveMessageItem:linkMessageItem];
 }
 
