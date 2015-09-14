@@ -31,4 +31,9 @@
  */
 @property (nonatomic, copy) NSString *linkURLString;
 
+/**
+ *  @brief  显示全屏消息
+ */
+@property (nonatomic, assign) BOOL largerLink;
+
 @end

@@ -36,7 +36,6 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
-    [self performSelector:@selector(receiveLinkMessage) withObject:nil afterDelay:4.0];
     [self receiveAnimatingMessage];
     
 #ifdef PressureTest
@@ -45,6 +44,7 @@
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 #else
+    [NSTimer scheduledTimerWithTimeInterval:8.0 target:self selector:@selector(receiveLinkMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:12.0 target:self selector:@selector(receiveAnimatingMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
@@ -74,7 +74,8 @@
 
 - (void)receiveLinkMessage {
     PCULinkMessageEntity *linkMessageItem = [[PCULinkMessageEntity alloc] init];
-    linkMessageItem.ownSender = YES;
+    linkMessageItem.ownSender = arc4random() % 5 == 0 ? YES : NO;
+    linkMessageItem.largerLink = arc4random() % 2 == 0 ? YES : NO;
     linkMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
     linkMessageItem.messageDate = [NSDate date];
     linkMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];

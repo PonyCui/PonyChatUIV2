@@ -76,7 +76,8 @@
         CGFloat contentWidth = constrainedSize.width - kAvatarSize - 10.0 - 60.0;
         [self.titleNode measure:CGSizeMake(contentWidth - kNormalContentLRSpace * 2, CGFLOAT_MAX)];
         [self.subTitleNode measure:CGSizeMake(contentWidth - kNormalContentLRSpace * 2 - 8.0 - kNormalThumbImageWidth, kNormalThumbImageWidth)];
-        return CGSizeMake(constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 12.0 + kNormalContentTBSpace * 2 + kCellGaps);
+        self.contentNode.frame = CGRectMake(0, 8.0, constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 12.0);
+        return CGSizeMake(constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 12.0 + 8.0 + kNormalContentTBSpace * 2 + kCellGaps);
     }
     return constrainedSize;
 }
@@ -108,7 +109,7 @@
         CGFloat contentWidth = self.calculatedSize.width - kAvatarSize - 10.0 - 60.0;
         if (self.actionType == PCUMessageActionTypeSend) {
             self.backgroundImageNode.image = [[UIImage imageNamed:@"SenderLinkNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
-            self.backgroundImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - contentWidth, 0.0, contentWidth, self.calculatedSize.height - kCellGaps);
+            self.backgroundImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - contentWidth - 4.0, 0.0, contentWidth, self.calculatedSize.height - kCellGaps);
             self.titleNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + kNormalContentLRSpace,
                                               kNormalContentTBSpace,
                                               self.titleNode.calculatedSize.width,
@@ -117,7 +118,14 @@
             self.subTitleNode.frame = CGRectMake(self.thumbImageNode.frame.origin.x + self.thumbImageNode.frame.size.width + 8.0, self.thumbImageNode.frame.origin.y + 2.0, self.subTitleNode.calculatedSize.width, self.subTitleNode.calculatedSize.height);
         }
         else if (self.actionType == PCUMessageActionTypeReceive) {
-            
+            self.backgroundImageNode.image = [[UIImage imageNamed:@"ReceiverTextNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
+            self.backgroundImageNode.frame = CGRectMake(kAvatarSize + 10.0 + 4.0, 0.0, contentWidth, self.calculatedSize.height - kCellGaps);
+            self.titleNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + 4.0 + kNormalContentLRSpace,
+                                              kNormalContentTBSpace,
+                                              self.titleNode.calculatedSize.width,
+                                              self.titleNode.calculatedSize.height);
+            self.thumbImageNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + 4.0 + kNormalContentLRSpace, self.titleNode.frame.origin.y + self.titleNode.frame.size.height + 8.0, kNormalThumbImageWidth, kNormalThumbImageWidth);
+            self.subTitleNode.frame = CGRectMake(self.thumbImageNode.frame.origin.x + self.thumbImageNode.frame.size.width + 8.0, self.thumbImageNode.frame.origin.y + 2.0, self.subTitleNode.calculatedSize.width, self.subTitleNode.calculatedSize.height);
         }
     }
     [self updateLayoutWithContentFrame:self.backgroundImageNode.frame];
