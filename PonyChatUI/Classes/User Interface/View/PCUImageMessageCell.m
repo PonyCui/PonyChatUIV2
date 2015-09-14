@@ -21,8 +21,6 @@
 
 @property (nonatomic, strong) ASDisplayNode *animatingImageNode;
 
-@property (nonatomic, strong) ASImageNode *maskNode;
-
 @property (nonatomic, strong) PCUPopMenuViewController *popMenuViewController;
 
 @end
@@ -38,7 +36,6 @@
         }
         else {
             [self.contentNode addSubnode:self.imageNode];
-            [self.contentNode addSubnode:self.maskNode];
         }
     }
     return self;
@@ -72,28 +69,23 @@
     }
     [super layout];
     if ([super actionType] == PCUMessageActionTypeSend) {
-        self.imageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.imageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 8.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
         self.animatingImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
-        self.imageNode.frame = CGRectMake(kAvatarSize + 14.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.imageNode.frame = CGRectMake(kAvatarSize + 8.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
         self.animatingImageNode.frame = CGRectMake(kAvatarSize + 14.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
     }
     else {
         self.imageNode.hidden = YES;
     }
     if ([super actionType] == PCUMessageActionTypeSend) {
-        self.maskNode.image = [[UIImage imageNamed:@"SenderTextNodeBkgReversed"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 30, 15, 30) resizingMode:UIImageResizingModeStretch];
-        self.maskNode.frame = self.imageNode.frame;
+        self.imageNode.layer.mask = [self senderShapeLayerWithSize:self.imageNode.frame.size];
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
-        self.maskNode.image = [[UIImage imageNamed:@"ReceiverTextNodeBkgReversed"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 30, 15, 30) resizingMode:UIImageResizingModeStretch];
-        self.maskNode.frame = self.imageNode.frame;
+        self.imageNode.layer.mask = [self receiverShapeLayerWithSize:self.imageNode.frame.size];
     }
-    else {
-        self.maskNode.hidden = YES;
-    }
-    [self updateLayoutWithContentFrame:self.maskNode.frame];
+    [self updateLayoutWithContentFrame:self.imageNode.frame];
 }
 
 - (void)resume {
@@ -190,11 +182,57 @@
     return _imageNode;
 }
 
-- (ASImageNode *)maskNode {
-    if (_maskNode == nil) {
-        _maskNode = [[ASImageNode alloc] init];
-    }
-    return _maskNode;
+- (CAShapeLayer *)senderShapeLayerWithSize:(CGSize)size {
+    
+    //// Bezier Drawing
+    UIBezierPath* bezierPath = [[UIBezierPath alloc] init];
+    
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(10,
+                                                                                      2,
+                                                                                      size.width - 28,
+                                                                                      size.height - 4)
+                                                             cornerRadius: 8];
+    [bezierPath appendPath:rectanglePath];
+    
+    UIBezierPath* drawPath = [[UIBezierPath alloc] init];
+    [drawPath moveToPoint: CGPointMake(size.width - 34.0, 6.5)];
+    [drawPath addLineToPoint: CGPointMake(size.width - 10.0, 28.5)];
+    [drawPath addLineToPoint: CGPointMake(size.width - 34.0, 51.5)];
+    [drawPath addLineToPoint: CGPointMake(size.width - 34.0, 6.5)];
+    
+    [bezierPath appendPath:drawPath];
+    [bezierPath closePath];
+    
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = bezierPath.CGPath;
+    return maskLayer;
+}
+
+- (CAShapeLayer *)receiverShapeLayerWithSize:(CGSize)size {
+    
+    //// Bezier Drawing
+    UIBezierPath* bezierPath = [[UIBezierPath alloc] init];
+    
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(19,
+                                                                                      2,
+                                                                                      size.width - 28,
+                                                                                      size.height - 4)
+                                                             cornerRadius: 8];
+    [bezierPath appendPath:rectanglePath];
+    
+    UIBezierPath* drawPath = [[UIBezierPath alloc] init];
+    [drawPath moveToPoint: CGPointMake(19, 22.5)];
+    [drawPath addLineToPoint: CGPointMake(10, 30.5)];
+    [drawPath addLineToPoint: CGPointMake(19, 39.5)];
+    [drawPath addLineToPoint: CGPointMake(19, 22.5)];
+    [drawPath closePath];
+    
+    [bezierPath appendPath:drawPath];
+    [bezierPath closePath];
+    
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = bezierPath.CGPath;
+    return maskLayer;
 }
 
 - (PCUPopMenuViewController *)popMenuViewController {
