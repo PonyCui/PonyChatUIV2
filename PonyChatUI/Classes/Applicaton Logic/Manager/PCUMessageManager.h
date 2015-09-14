@@ -12,6 +12,7 @@
 #import "PCUSystemMessageEntity.h"
 #import "PCUImageMessageEntity.h"
 #import "PCUVoiceMessageEntity.h"
+#import "PCULinkMessageEntity.h"
 #import "PCUSlideUpEntity.h"
 
 @class PCUMessageEntity, PCUSlideUpEntity;

@@ -15,11 +15,13 @@
 #import "PCUSystemMessageItemInteractor.h"
 #import "PCUImageMessageItemInteractor.h"
 #import "PCUVoiceMessageItemInteractor.h"
+#import "PCULinkMessageItemInteractor.h"
 #import "PCUMessageCell.h"
 #import "PCUTextMessageCell.h"
 #import "PCUSystemMessageCell.h"
 #import "PCUImageMessageCell.h"
 #import "PCUVoiceMessageCell.h"
+#import "PCULinkMessageCell.h"
 #import "PCUMessageActivityIndicatorView.h"
 #import "PCUSelectionShape.h"
 
@@ -57,6 +59,9 @@
     }
     else if ([messageInteractor isKindOfClass:[PCUVoiceMessageItemInteractor class]]) {
         return [[PCUVoiceMessageCell alloc] initWithMessageInteractor:messageInteractor];
+    }
+    else if ([messageInteractor isKindOfClass:[PCULinkMessageItemInteractor class]]) {
+        return [[PCULinkMessageCell alloc] initWithMessageInteractor:messageInteractor];
     }
     else {
         return [[PCUMessageCell alloc] initWithMessageInteractor:messageInteractor];

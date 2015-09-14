@@ -36,7 +36,7 @@
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];
-    
+    [self performSelector:@selector(receiveLinkMessage) withObject:nil afterDelay:18.0];
     [self receiveAnimatingMessage];
     
 #ifdef PressureTest
@@ -70,6 +70,18 @@
     systemMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
     systemMessageItem.messageText = @"Hello, World!";
     [self.core.messageManager didReceiveMessageItem:systemMessageItem];
+}
+
+- (void)receiveLinkMessage {
+    PCULinkMessageEntity *linkMessageItem = [[PCULinkMessageEntity alloc] init];
+    linkMessageItem.messageID = [NSString stringWithFormat:@"%u", arc4random()];
+    linkMessageItem.messageDate = [NSDate date];
+    linkMessageItem.messageOrder = [[NSDate date] timeIntervalSince1970];
+    linkMessageItem.messageText = @"美国乡村奇怪事件 《奇异人生》最新截图视频";
+    linkMessageItem.descriptionText = @"SE于今天公开了PS4、XboxOne、PC三平台上的最新冒险游戏《奇异人生》的最新截图和一段日文解说的宣传视频。";
+    linkMessageItem.thumbURLString = @"http://img3.dwstatic.com/ps4/1509/306164780504/1442210084834.jpg";
+    linkMessageItem.linkURLString = @"http://ps4.duowan.com/1509/306164780504.html";
+    [self.core.messageManager didReceiveMessageItem:linkMessageItem];
 }
 
 - (void)receiveTextMessage {
@@ -155,6 +167,10 @@
     else {
         [voiceStatus setPause];
     }
+}
+
+- (void)PCURequireOpenURL:(NSURL *)URL {
+    [[UIApplication sharedApplication] openURL:URL];
 }
 
 @end
