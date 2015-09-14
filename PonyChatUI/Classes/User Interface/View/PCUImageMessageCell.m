@@ -69,12 +69,12 @@
     }
     [super layout];
     if ([super actionType] == PCUMessageActionTypeSend) {
-        self.imageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 8.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
-        self.animatingImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 14.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.imageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 4.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.animatingImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 20.0 - [self imageMessageInteractor].imageWidth, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
-        self.imageNode.frame = CGRectMake(kAvatarSize + 8.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
-        self.animatingImageNode.frame = CGRectMake(kAvatarSize + 14.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.imageNode.frame = CGRectMake(kAvatarSize + 4.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
+        self.animatingImageNode.frame = CGRectMake(kAvatarSize + 20.0, 0.0 + topSpace, [self imageMessageInteractor].imageWidth, [self imageMessageInteractor].imageHeight);
     }
     else {
         self.imageNode.hidden = YES;
@@ -193,14 +193,14 @@
                                                                                       2,
                                                                                       size.width - 36,
                                                                                       size.height - 4)
-                                                             cornerRadius: 8];
+                                                             cornerRadius: 4];
     [bezierPath appendPath:rectanglePath];
     
     UIBezierPath* drawPath = [[UIBezierPath alloc] init];
-    [drawPath moveToPoint: CGPointMake(size.width - 34.0, 6.5)];
-    [drawPath addLineToPoint: CGPointMake(size.width - 10.0, 28.5)];
-    [drawPath addLineToPoint: CGPointMake(size.width - 34.0, 51.5)];
-    [drawPath addLineToPoint: CGPointMake(size.width - 34.0, 6.5)];
+    [drawPath moveToPoint: CGPointMake(size.width - 17.0, 22.5)];
+    [drawPath addLineToPoint: CGPointMake(size.width - 11.0, 28.15)];
+    [drawPath addLineToPoint: CGPointMake(size.width - 17.0, 34.5)];
+    [drawPath addLineToPoint: CGPointMake(size.width - 17.0, 22.5)];
     
     [bezierPath appendPath:drawPath];
     [bezierPath closePath];
@@ -219,13 +219,13 @@
                                                                                       2,
                                                                                       size.width - 28,
                                                                                       size.height - 4)
-                                                             cornerRadius: 8];
+                                                             cornerRadius: 4];
     [bezierPath appendPath:rectanglePath];
     
     UIBezierPath* drawPath = [[UIBezierPath alloc] init];
     [drawPath moveToPoint: CGPointMake(19, 22.5)];
-    [drawPath addLineToPoint: CGPointMake(10, 30.5)];
-    [drawPath addLineToPoint: CGPointMake(19, 39.5)];
+    [drawPath addLineToPoint: CGPointMake(13, 28.15)];
+    [drawPath addLineToPoint: CGPointMake(19, 34.5)];
     [drawPath addLineToPoint: CGPointMake(19, 22.5)];
     [drawPath closePath];
     

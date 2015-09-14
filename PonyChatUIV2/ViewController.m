@@ -48,7 +48,7 @@
     [NSTimer scheduledTimerWithTimeInterval:12.0 target:self selector:@selector(receiveAnimatingMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(receiveVoiceMessage) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(receiveTextMessage) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(receiveImageMessage) userInfo:nil repeats:YES];
 #endif
 }
 
