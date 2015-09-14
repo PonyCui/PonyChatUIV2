@@ -81,9 +81,11 @@
     }
     if ([super actionType] == PCUMessageActionTypeSend) {
         self.imageNode.layer.mask = [self senderShapeLayerWithSize:self.imageNode.frame.size];
+        self.imageNode.layer.masksToBounds = YES;
     }
     else if ([super actionType] == PCUMessageActionTypeReceive) {
         self.imageNode.layer.mask = [self receiverShapeLayerWithSize:self.imageNode.frame.size];
+        self.imageNode.layer.masksToBounds = YES;
     }
     [self updateLayoutWithContentFrame:self.imageNode.frame];
 }
@@ -163,7 +165,7 @@
             return _imageNode;
         }
         [_imageNode addTarget:self action:@selector(handleImageNodeTapped) forControlEvents:ASControlNodeEventTouchUpInside];
-        _imageNode.contentMode = UIViewContentModeScaleAspectFit;
+        _imageNode.contentMode = UIViewContentModeScaleAspectFill;
         if ([[[self imageMessageInteractor] imageURLString] hasPrefix:@"/"]) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[self imageMessageInteractor] imageURLString]];
             _imageNode.image = image;
@@ -187,9 +189,9 @@
     //// Bezier Drawing
     UIBezierPath* bezierPath = [[UIBezierPath alloc] init];
     
-    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(10,
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(19,
                                                                                       2,
-                                                                                      size.width - 28,
+                                                                                      size.width - 36,
                                                                                       size.height - 4)
                                                              cornerRadius: 8];
     [bezierPath appendPath:rectanglePath];
