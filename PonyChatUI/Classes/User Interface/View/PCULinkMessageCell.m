@@ -231,6 +231,9 @@
         _thumbImageNode.userInteractionEnabled = NO;
         _thumbImageNode.contentMode = UIViewContentModeScaleAspectFill;
         _thumbImageNode.layer.masksToBounds = YES;
+        if (![[self linkMessageInteractor] largerLink]) {
+            [_thumbImageNode setImage:[UIImage imageNamed:@"PCULinkThumbPlaceHolder"]];
+        }
         if ([[self linkMessageInteractor] thumbURLString] != nil) {
             [(ASNetworkImageNode *)_thumbImageNode
              setURL:[NSURL URLWithString:[[self linkMessageInteractor] thumbURLString]]];
