@@ -76,8 +76,8 @@
         CGFloat contentWidth = constrainedSize.width - kAvatarSize - 10.0 - 60.0;
         [self.titleNode measure:CGSizeMake(contentWidth - kNormalContentLRSpace * 2, CGFLOAT_MAX)];
         [self.subTitleNode measure:CGSizeMake(contentWidth - kNormalContentLRSpace * 2 - 8.0 - kNormalThumbImageWidth, kNormalThumbImageWidth)];
-        self.contentNode.frame = CGRectMake(0, 8.0, constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 12.0);
-        return CGSizeMake(constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 12.0 + 8.0 + kNormalContentTBSpace * 2 + kCellGaps);
+        self.contentNode.frame = CGRectMake(0, 8.0, constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 8.0);
+        return CGSizeMake(constrainedSize.width, self.titleNode.calculatedSize.height + 8.0 + kNormalThumbImageWidth + 8.0 + 8.0 + kNormalContentTBSpace * 2 + kCellGaps);
     }
     return constrainedSize;
 }
