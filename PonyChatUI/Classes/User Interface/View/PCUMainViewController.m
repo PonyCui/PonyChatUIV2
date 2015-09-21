@@ -21,6 +21,8 @@
 
 @end
 
+static UIWindow *renderWindow;
+
 @interface PCUMainViewController ()<ASTableViewDataSource, ASTableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) ASTableView *tableView;
@@ -46,6 +48,32 @@
 @end
 
 @implementation PCUMainViewController
+
++ (void)load {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        renderWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        [renderWindow setBackgroundColor:[UIColor yellowColor]];
+        [renderWindow setWindowLevel:UIWindowLevelAlert+1];
+        [renderWindow setHidden:NO];
+        PCUMainViewController *mainViewController = [[PCUMainViewController alloc] init];
+        NSMutableArray *items = [NSMutableArray array];
+        for (int i = 10000 ; i > 9970; i--) {
+            PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
+            messageItem.messageID = [NSString stringWithFormat:@"%ld", (long)i];
+            messageItem.messageOrder = i;
+            messageItem.messageDate = [NSDate date];
+            messageItem.senderID = @"2";
+            messageItem.senderNicknameString = @"Turing";
+            messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
+            messageItem.messageText = [NSString stringWithFormat:@"%ld", (long)i];
+            [items addObject:messageItem];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [mainViewController.eventHandler.messageInteractor.messageManager addInitalizeMessageItems:items];
+        });
+        [renderWindow setRootViewController:mainViewController];
+    });
+}
 
 #pragma mark - Object Life Cycle
 
@@ -77,7 +105,7 @@
                                                       blue:235.0/255.0
                                                      alpha:1.0];
     [self.eventHandler updateView];
-    [self.tableView setAlpha:0.0];
+//    [self.tableView setAlpha:0.0];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //        [self.tableView setAlpha:1.0];
         [self.tableView.visibleNodes enumerateObjectsUsingBlock:^(PCUMessageCell *node, NSUInteger idx, BOOL *stop) {

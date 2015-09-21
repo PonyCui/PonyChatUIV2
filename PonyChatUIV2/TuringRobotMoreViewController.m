@@ -50,9 +50,10 @@
         [items addObject:messageItem];
         self.fakeDateTimeInterval += arc4random() % 300;
     }
-    [items enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self.core.messageManager didReceiveMessageItem:obj];
-    }];
+    [self.core.messageManager addInitalizeMessageItems:items];
+//    [items enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        [self.core.messageManager didReceiveMessageItem:obj];
+//    }];
 }
 
 - (void)configureSlideUp {

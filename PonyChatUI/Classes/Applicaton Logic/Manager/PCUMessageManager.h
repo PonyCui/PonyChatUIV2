@@ -34,6 +34,8 @@
 
 @property (nonatomic, copy) NSArray<PCUSlideUpEntity *> *slideUpItems;
 
+- (void)addInitalizeMessageItems:(NSArray<PCUMessageEntity *> *)messageItems;
+
 - (void)didInsertMessageItem:(PCUMessageEntity *)messageItem nextItem:(PCUMessageEntity *)nextItem;
 
 - (void)didReceiveMessageItem:(PCUMessageEntity *)messageItem;

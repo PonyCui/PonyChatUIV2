@@ -14,6 +14,10 @@
 
 @implementation PCUMessageManager
 
+- (void)addInitalizeMessageItems:(NSArray<PCUMessageEntity *> *)messageItems {
+    [self didReceiveMessageItems:messageItems];
+}
+
 - (void)didInsertMessageItem:(PCUMessageEntity *)messageItem nextItem:(PCUMessageEntity *)nextItem {
     if (messageItem != nil && ![self.messageItems containsObject:messageItem]) {
         NSMutableArray *messageItems = [self.messageItems mutableCopy];
