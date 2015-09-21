@@ -51,28 +51,38 @@ static UIWindow *renderWindow;
 
 + (void)load {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        renderWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        [renderWindow setBackgroundColor:[UIColor yellowColor]];
-        [renderWindow setWindowLevel:UIWindowLevelAlert+1];
+        CGRect bounds = [UIScreen mainScreen].bounds;
+        bounds.size.height -= 108.0;
+        renderWindow = [[UIWindow alloc] initWithFrame:bounds];
+        [renderWindow setWindowLevel:UIWindowLevelNormal - 1000];
         [renderWindow setHidden:NO];
-        PCUMainViewController *mainViewController = [[PCUMainViewController alloc] init];
-        NSMutableArray *items = [NSMutableArray array];
-        for (int i = 10000 ; i > 9970; i--) {
-            PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
-            messageItem.messageID = [NSString stringWithFormat:@"%ld", (long)i];
-            messageItem.messageOrder = i;
-            messageItem.messageDate = [NSDate date];
-            messageItem.senderID = @"2";
-            messageItem.senderNicknameString = @"Turing";
-            messageItem.senderAvatarURLString = @"http://tp2.sinaimg.cn/1756627157/180/40029973996/1";
-            messageItem.messageText = [NSString stringWithFormat:@"%ld", (long)i];
-            [items addObject:messageItem];
-        }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [mainViewController.eventHandler.messageInteractor.messageManager addInitalizeMessageItems:items];
-        });
-        [renderWindow setRootViewController:mainViewController];
+        [self resetRenderViewController];
     });
+}
+
++ (void)resetRenderViewController {
+    PCUMainViewController *renderViewController = [[PCUMainViewController alloc] init];
+    [renderWindow setRootViewController:renderViewController];
+}
+
++ (PCUMainViewController *)mainViewControllerWithInitializeItems:(NSArray<PCUMessageEntity *> *)items
+                                                  messageManager:(PCUMessageManager *)messageManager
+                                                 completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock {
+    PCUMainViewController *renderViewController = (id)renderWindow.rootViewController;
+    renderViewController.eventHandler.messageInteractor.messageManager = messageManager;
+    [renderViewController.eventHandler.messageInteractor.messageManager addInitalizeMessageItems:items];
+    [renderViewController.tableView reloadDataWithCompletion:^{
+        renderViewController.lastRows = [renderViewController.tableView numberOfRowsInSection:0];
+        renderViewController.hasReloaded = YES;
+        [renderViewController forceScroll];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [PCUMainViewController resetRenderViewController];
+            if (completionBlock) {
+                completionBlock(renderViewController);
+            }
+        });
+    }];
+    return renderViewController;
 }
 
 #pragma mark - Object Life Cycle

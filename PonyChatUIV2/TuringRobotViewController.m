@@ -7,14 +7,12 @@
 //
 
 #import "TuringRobotViewController.h"
+#import "TuringRobotMoreViewController.h"
 @import PonyChatUI;
 
 @interface TuringRobotViewController ()<PCUDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) PCUCore *core;
-
-@property (nonatomic, strong) PCUMainViewController *chatViewController;
-@property (nonatomic, strong) UIView *chatView;
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *toolViewHeightConstraint;
@@ -48,6 +46,13 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     [self layoutChatView];
+}
+
+- (IBAction)handleMoreButtonTapped:(id)sender {
+    TuringRobotMoreViewController *robotViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TuringRobotMoreViewController"];
+    [robotViewController fetchHistoryDataWithCompletionBlock:^{
+        [self.navigationController pushViewController:robotViewController animated:YES];
+    }];
 }
 
 #pragma mark - ChatView

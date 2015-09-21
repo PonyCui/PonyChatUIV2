@@ -23,4 +23,21 @@
     return mainViewController.view;
 }
 
+- (void)addMainViewToViewController:(UIViewController<PCUDelegate> *)viewController
+                       messageItems:(NSArray<PCUMessageEntity *> *)messageItems
+                 withMessageManager:(PCUMessageManager *)messageManager
+              waitUntilRendFinished:(void (^)(UIView *))finishedBlock {
+    [PCUMainViewController
+     mainViewControllerWithInitializeItems:messageItems
+     messageManager:messageManager
+     completionBlock:^(PCUMainViewController *mainViewController) {
+         mainViewController.delegate = viewController;
+         [viewController addChildViewController:mainViewController];
+         [viewController.view addSubview:mainViewController.view];
+         if (finishedBlock) {
+             finishedBlock(mainViewController.view);
+         }
+     }];
+}
+
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class PCUMainPresenter, PCUMessageEntity, ASTableView;
+@class PCUMainPresenter, PCUMessageEntity, ASTableView, PCUMessageManager;
 
 @protocol PCUDelegate;
 
@@ -17,6 +17,10 @@
 @property (nonatomic, weak) id<PCUDelegate> delegate;
 
 @property (nonatomic, strong) PCUMainPresenter *eventHandler;
+
++ (PCUMainViewController *)mainViewControllerWithInitializeItems:(NSArray<PCUMessageEntity *> *)items
+                                                  messageManager:(PCUMessageManager *)messageManager
+                                                 completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock;
 
 - (CGSize)contentSize;
 

@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class PCUCore;
+@class PCUCore, PCUMainViewController;
 
 @interface TuringRobotViewController : UIViewController
 
 @property (nonatomic, readonly) PCUCore *core;
+
+@property (nonatomic, strong) UIView *chatView;
+@property (nonatomic, strong) PCUMainViewController *chatViewController;
 
 @end
