@@ -108,20 +108,20 @@
         [super layout];
         CGFloat contentWidth = self.calculatedSize.width - kAvatarSize - 10.0 - 60.0;
         if (self.actionType == PCUMessageActionTypeSend) {
-            self.backgroundImageNode.image = [[UIImage imageNamed:@"SenderLinkNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
+            self.backgroundImageNode.image = [[UIImage imageNamed:@"SenderTextNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(23, 20, 20, 20) resizingMode:UIImageResizingModeStretch];
             self.backgroundImageNode.frame = CGRectMake(self.calculatedSize.width - kAvatarSize - 10.0 - contentWidth - 4.0, 0.0, contentWidth, self.calculatedSize.height - kCellGaps);
-            self.titleNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + kNormalContentLRSpace,
-                                              kNormalContentTBSpace,
+            self.titleNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + kNormalContentLRSpace + 4.0,
+                                              kNormalContentTBSpace + 2.0,
                                               self.titleNode.calculatedSize.width,
                                               self.titleNode.calculatedSize.height);
-            self.thumbImageNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + kNormalContentLRSpace, self.titleNode.frame.origin.y + self.titleNode.frame.size.height + 8.0, kNormalThumbImageWidth, kNormalThumbImageWidth);
+            self.thumbImageNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + kNormalContentLRSpace + 4.0, self.titleNode.frame.origin.y + self.titleNode.frame.size.height + 8.0, kNormalThumbImageWidth, kNormalThumbImageWidth);
             self.subTitleNode.frame = CGRectMake(self.thumbImageNode.frame.origin.x + self.thumbImageNode.frame.size.width + 8.0, self.thumbImageNode.frame.origin.y + 2.0, self.subTitleNode.calculatedSize.width, self.subTitleNode.calculatedSize.height);
         }
         else if (self.actionType == PCUMessageActionTypeReceive) {
-            self.backgroundImageNode.image = [[UIImage imageNamed:@"ReceiverTextNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
+            self.backgroundImageNode.image = [[UIImage imageNamed:@"ReceiverTextNodeBkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(23, 20, 20, 20) resizingMode:UIImageResizingModeStretch];
             self.backgroundImageNode.frame = CGRectMake(kAvatarSize + 10.0 + 4.0, 0.0, contentWidth, self.calculatedSize.height - kCellGaps);
             self.titleNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + 4.0 + kNormalContentLRSpace,
-                                              kNormalContentTBSpace,
+                                              kNormalContentTBSpace + 2.0,
                                               self.titleNode.calculatedSize.width,
                                               self.titleNode.calculatedSize.height);
             self.thumbImageNode.frame = CGRectMake(self.backgroundImageNode.frame.origin.x + 4.0 + kNormalContentLRSpace, self.titleNode.frame.origin.y + self.titleNode.frame.size.height + 8.0, kNormalThumbImageWidth, kNormalThumbImageWidth);
@@ -231,9 +231,6 @@
         _thumbImageNode.userInteractionEnabled = NO;
         _thumbImageNode.contentMode = UIViewContentModeScaleAspectFill;
         _thumbImageNode.layer.masksToBounds = YES;
-        if (![[self linkMessageInteractor] largerLink]) {
-            [_thumbImageNode setImage:[UIImage imageNamed:@"PCULinkThumbPlaceHolder"]];
-        }
         if ([[self linkMessageInteractor] thumbURLString] != nil) {
             [(ASNetworkImageNode *)_thumbImageNode
              setURL:[NSURL URLWithString:[[self linkMessageInteractor] thumbURLString]]];

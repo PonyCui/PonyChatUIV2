@@ -47,6 +47,9 @@
     if ([self.delegate respondsToSelector:@selector(PCUImageMessageItemTapped:)]) {
         [self.delegate PCUImageMessageItemTapped:(id)self.messageInteractor.messageItem];
     }
+    if ([self.delegate respondsToSelector:@selector(PCUImageMessageItemTapped:imageView:)]) {
+        [self.delegate PCUImageMessageItemTapped:(id)self.messageInteractor.messageItem imageView:self.imageNode];
+    }
 }
 
 #pragma mark - Node

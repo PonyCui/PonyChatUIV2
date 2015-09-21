@@ -10,7 +10,7 @@
 #import "PCUMessageManager.h"
 #import "PCUWireframe.h"
 
-@class PCUImageMessageEntity, PCUVoiceMessageEntity;
+@class PCUImageMessageEntity, PCUVoiceMessageEntity, ASImageNode;
 
 @protocol PCUVoiceStatus <NSObject>
 
@@ -57,6 +57,8 @@
 - (void)PCUAvatarLongPressedWithMessageItem:(PCUMessageEntity *)messageItem;
 
 - (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem;
+
+- (void)PCUImageMessageItemTapped:(PCUImageMessageEntity *)messageItem imageView:(ASImageNode *)imageView;
 
 - (void)PCUVoiceMessageItemTapped:(PCUVoiceMessageEntity *)messageItem
                       voiceStatus:(id<PCUVoiceStatus>)voiceStatus;

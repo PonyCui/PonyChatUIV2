@@ -22,6 +22,7 @@
 @implementation PCUMainViewController (PCUSlideUp)
 
 - (void)reloadSlideUpData {
+    [self.slideUpTableView reloadData];
     CGRect frame = self.slideUpTableView.frame;
     frame.size.height = 50.0 * [self.eventHandler.messageInteractor.slideUpItems count];
     self.slideUpTableView.frame = frame;

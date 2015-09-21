@@ -51,8 +51,8 @@
 
 - (void)dealloc
 {
-    self.tableView.asyncDataSource = nil;
-    self.tableView.asyncDelegate = nil;
+    _tableView.asyncDataSource = nil;
+    _tableView.asyncDelegate = nil;
 }
 
 - (instancetype)init
