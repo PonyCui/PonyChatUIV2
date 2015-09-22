@@ -52,6 +52,7 @@ static UIWindow *renderWindow;
         CGRect bounds = [UIScreen mainScreen].bounds;
         bounds.size.height -= 108.0;
         renderWindow = [[UIWindow alloc] initWithFrame:bounds];
+        renderWindow.layer.masksToBounds = YES;
         [renderWindow setWindowLevel:UIWindowLevelNormal - 1000];
         [renderWindow setHidden:NO];
         [self resetRenderViewController];
@@ -61,18 +62,25 @@ static UIWindow *renderWindow;
 + (void)resetRenderViewController {
     PCUMainViewController *renderViewController = [[PCUMainViewController alloc] init];
     [renderWindow setRootViewController:renderViewController];
+    renderViewController.view.frame = renderWindow.bounds;
 }
 
 + (PCUMainViewController *)mainViewControllerWithMessageManager:(PCUMessageManager *)messageManager
+                                                       delegate:(id<PCUDelegate>)delegate
                                                 completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock {
     PCUMainViewController *renderViewController = (id)renderWindow.rootViewController;
+    renderViewController.delegate = delegate;;
     renderViewController.eventHandler.messageInteractor.messageManager = messageManager;
     [renderViewController.eventHandler.messageInteractor reloadAllItems];
     [renderViewController.tableView reloadDataWithCompletion:^{
         renderViewController.lastRows = [renderViewController.tableView numberOfRowsInSection:0];
         renderViewController.hasReloaded = YES;
         [renderViewController forceScroll];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSTimeInterval timeWait = 0.10;
+        if ([[[UIDevice currentDevice] systemVersion] integerValue] < 8) {
+            timeWait = 0.25;
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeWait * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [PCUMainViewController resetRenderViewController];
             if (completionBlock) {
                 completionBlock(renderViewController);

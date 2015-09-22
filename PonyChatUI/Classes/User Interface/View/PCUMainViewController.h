@@ -19,6 +19,7 @@
 @property (nonatomic, strong) PCUMainPresenter *eventHandler;
 
 + (PCUMainViewController *)mainViewControllerWithMessageManager:(PCUMessageManager *)messageManager
+                                                       delegate:(id<PCUDelegate>)delegate
                                                 completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock;
 
 - (CGSize)contentSize;

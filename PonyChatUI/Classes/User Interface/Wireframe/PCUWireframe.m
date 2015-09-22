@@ -27,8 +27,7 @@
                      messageManager:(PCUMessageManager *)messageManager
               waitUntilRendFinished:(void (^)(UIView *mainView))finishedBlock {
     [[[UIApplication sharedApplication] keyWindow] setUserInteractionEnabled:NO];
-    [PCUMainViewController mainViewControllerWithMessageManager:messageManager completionBlock:^(PCUMainViewController *mainViewController) {
-        mainViewController.delegate = viewController;
+    [PCUMainViewController mainViewControllerWithMessageManager:messageManager delegate:viewController completionBlock:^(PCUMainViewController *mainViewController) {
         [viewController addChildViewController:mainViewController];
         [viewController.view addSubview:mainViewController.view];
         if (finishedBlock) {
