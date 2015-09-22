@@ -41,8 +41,6 @@ static UIWindow *renderWindow;
 
 @property (nonatomic, assign) BOOL isFetchingMore;
 
-@property (nonatomic, strong) NSTimer *fetchTimer;
-
 @property (nonatomic, assign) BOOL isInsertingTwice;
 
 @end
@@ -325,8 +323,6 @@ static UIWindow *renderWindow;
 
 - (void)handleFetchingMoreTrigger {
     if (self.isFetchingMore) {
-        [self.fetchTimer invalidate];
-        self.fetchTimer = [NSTimer scheduledTimerWithTimeInterval:0.30 target:self selector:@selector(handleFetchingMoreTrigger) userInfo:nil repeats:NO];
         return;
     }
     if (self.noMoreMessages) {
