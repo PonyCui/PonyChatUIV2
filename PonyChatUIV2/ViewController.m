@@ -33,6 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    return;
     self.chatView = [self.core.wireframe addMainViewToViewController:self
                                                   withMessageManager:self.core.messageManager];
     [self receiveSystemMessage];

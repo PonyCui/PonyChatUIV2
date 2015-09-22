@@ -15,6 +15,10 @@
 
 @implementation PCUMessageInteractor
 
+- (void)reloadAllItems {
+    [self messageManagerItemsDidChanged];
+}
+
 #pragma mark - PCUMessageManagerDelegate
 
 - (void)messageManagerItemsDidChanged {

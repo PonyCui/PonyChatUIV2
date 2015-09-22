@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '6.0'
+platform :ios, '7.0'
 
 target 'PonyChatUIV2' do
 
@@ -12,8 +12,9 @@ end
 target 'PonyChatUI' do
 
 pod 'AsyncDisplayKit'
-pod 'ReactiveCocoa'
+pod 'ReactiveCocoa', '2.4.7'
 pod 'FLAnimatedImage'
+pod 'SDWebImage'
 
 #pod 'CRChecker'
 

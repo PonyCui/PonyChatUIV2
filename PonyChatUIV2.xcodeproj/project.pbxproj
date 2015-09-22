@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		261A8B734D21BC0039FFA16E /* libPods-PonyChatUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 542B5CC32DCB9B76B81701D2 /* libPods-PonyChatUI.a */; };
 		6303CA231BA69FDD007D5BEC /* PCULinkMessageItemInteractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6303CA211BA69FDD007D5BEC /* PCULinkMessageItemInteractor.h */; settings = {ASSET_TAGS = (); }; };
 		6303CA241BA69FDD007D5BEC /* PCULinkMessageItemInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303CA221BA69FDD007D5BEC /* PCULinkMessageItemInteractor.m */; settings = {ASSET_TAGS = (); }; };
 		6303CA271BA6A013007D5BEC /* PCULinkMessageEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6303CA251BA6A013007D5BEC /* PCULinkMessageEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,7 +89,6 @@
 		63D0DA7A1B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D0DA761B8B165A00DB24E1 /* PCUMessageActivityIndicatorView.m */; };
 		63D0DA7B1B8B165A00DB24E1 /* PCUPopMenuViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D0DA771B8B165A00DB24E1 /* PCUPopMenuViewController.h */; };
 		63D0DA7C1B8B165A00DB24E1 /* PCUPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D0DA781B8B165A00DB24E1 /* PCUPopMenuViewController.m */; };
-		A8343E9E5243B6417103DBB9 /* libPods-PonyChatUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */; };
 		F07E94741B9F1E500079C310 /* TuringRobotMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07E94731B9F1E500079C310 /* TuringRobotMoreViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +138,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		542B5CC32DCB9B76B81701D2 /* libPods-PonyChatUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PonyChatUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6303CA211BA69FDD007D5BEC /* PCULinkMessageItemInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCULinkMessageItemInteractor.h; sourceTree = "<group>"; };
 		6303CA221BA69FDD007D5BEC /* PCULinkMessageItemInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCULinkMessageItemInteractor.m; sourceTree = "<group>"; };
 		6303CA251BA6A013007D5BEC /* PCULinkMessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCULinkMessageEntity.h; sourceTree = "<group>"; };
@@ -230,7 +231,6 @@
 		B145B35D789149B39C8A0C8B /* Pods-PonyChatUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PonyChatUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PonyChatUI/Pods-PonyChatUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F07E94721B9F1E500079C310 /* TuringRobotMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuringRobotMoreViewController.h; sourceTree = "<group>"; };
 		F07E94731B9F1E500079C310 /* TuringRobotMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuringRobotMoreViewController.m; sourceTree = "<group>"; };
-		F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PonyChatUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,7 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8343E9E5243B6417103DBB9 /* libPods-PonyChatUI.a in Frameworks */,
+				261A8B734D21BC0039FFA16E /* libPods-PonyChatUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +271,7 @@
 		0FEA162B1AF87FED238F2045 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F0B66FB56BFDE6A11F31E171 /* libPods-PonyChatUI.a */,
+				542B5CC32DCB9B76B81701D2 /* libPods-PonyChatUI.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

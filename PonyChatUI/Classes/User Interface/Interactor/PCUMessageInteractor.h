@@ -34,4 +34,6 @@
 
 @property (nonatomic, copy) NSArray<PCUSlideUpItemInteractor *> *slideUpItems;
 
+- (void)reloadAllItems;
+
 @end

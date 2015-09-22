@@ -21,12 +21,19 @@
 
 @implementation TuringRobotMoreViewController
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.fakeOrder = 10000;
+        self.fakeDate = [NSDate date];
+        self.fakeDateTimeInterval = 100;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.fakeOrder = 10000;
-    self.fakeDate = [NSDate date];
-    self.fakeDateTimeInterval = 100;
-    [self fetchHistoryData];
     [self configureSlideUp];
     // Do any additional setup after loading the view.
 }
@@ -36,7 +43,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)fetchHistoryData {
+- (void)fetchHistoryDataWithCompletionBlock:(void (^)())completionBlock {
     NSMutableArray *items = [NSMutableArray array];
     for (; self.fakeOrder > 9970; self.fakeOrder--) {
         PCUTextMessageEntity *messageItem = [[PCUTextMessageEntity alloc] init];
@@ -50,9 +57,27 @@
         [items addObject:messageItem];
         self.fakeDateTimeInterval += arc4random() % 300;
     }
-    [items enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self.core.messageManager didReceiveMessageItem:obj];
+    [self.core.messageManager addInitalizeMessageItems:items];
+    [self.core.wireframe addMainViewToViewController:self messageManager:self.core.messageManager waitUntilRendFinished:^(UIView *mainView) {
+        self.chatView = mainView;
+        [self configureChatView];
+        if (completionBlock) {
+            completionBlock();
+        }
     }];
+}
+
+- (void)configureChatView {
+    [self.chatView addGestureRecognizer:[[UITapGestureRecognizer alloc]
+                                         initWithTarget:self
+                                         action:@selector(handleChatViewTapped)]];
+    for (id viewController in [self childViewControllers]) {
+        if ([viewController isKindOfClass:[PCUMainViewController class]]) {
+            self.chatViewController = viewController;
+            break;
+        }
+    }
+    [self.view sendSubviewToBack:self.chatView];
 }
 
 - (void)configureSlideUp {

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class PCUMessageManager;
+@class PCUMessageManager, PCUMessageEntity;
 
 @protocol PCUDelegate;
 
@@ -17,5 +17,9 @@
 
 - (UIView *)addMainViewToViewController:(UIViewController<PCUDelegate> *)viewController
                      withMessageManager:(PCUMessageManager *)messageManager;
+
+- (void)addMainViewToViewController:(UIViewController<PCUDelegate> *)viewController
+                     messageManager:(PCUMessageManager *)messageManager
+              waitUntilRendFinished:(void (^)(UIView *mainView))finishedBlock;
 
 @end

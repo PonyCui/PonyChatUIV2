@@ -23,4 +23,23 @@
     return mainViewController.view;
 }
 
+- (void)addMainViewToViewController:(UIViewController<PCUDelegate> *)viewController
+                     messageManager:(PCUMessageManager *)messageManager
+              waitUntilRendFinished:(void (^)(UIView *mainView))finishedBlock {
+    [[[UIApplication sharedApplication] keyWindow] setUserInteractionEnabled:NO];
+    [PCUMainViewController mainViewControllerWithMessageManager:messageManager completionBlock:^(PCUMainViewController *mainViewController) {
+        mainViewController.delegate = viewController;
+        [viewController addChildViewController:mainViewController];
+        [viewController.view addSubview:mainViewController.view];
+        if (finishedBlock) {
+            finishedBlock(mainViewController.view);
+        }
+        [[[UIApplication sharedApplication] keyWindow] setUserInteractionEnabled:YES];
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //timeout
+        [[[UIApplication sharedApplication] keyWindow] setUserInteractionEnabled:YES];
+    });
+}
+
 @end

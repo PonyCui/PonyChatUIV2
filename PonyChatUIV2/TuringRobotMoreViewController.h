@@ -10,4 +10,6 @@
 
 @interface TuringRobotMoreViewController : TuringRobotViewController
 
+- (void)fetchHistoryDataWithCompletionBlock:(void (^)())completionBlock;
+
 @end
