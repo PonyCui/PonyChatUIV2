@@ -18,9 +18,8 @@
 
 @property (nonatomic, strong) PCUMainPresenter *eventHandler;
 
-+ (PCUMainViewController *)mainViewControllerWithInitializeItems:(NSArray<PCUMessageEntity *> *)items
-                                                  messageManager:(PCUMessageManager *)messageManager
-                                                 completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock;
++ (PCUMainViewController *)mainViewControllerWithMessageManager:(PCUMessageManager *)messageManager
+                                                completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock;
 
 - (CGSize)contentSize;
 

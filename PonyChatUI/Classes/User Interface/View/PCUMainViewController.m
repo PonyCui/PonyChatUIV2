@@ -65,12 +65,11 @@ static UIWindow *renderWindow;
     [renderWindow setRootViewController:renderViewController];
 }
 
-+ (PCUMainViewController *)mainViewControllerWithInitializeItems:(NSArray<PCUMessageEntity *> *)items
-                                                  messageManager:(PCUMessageManager *)messageManager
-                                                 completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock {
++ (PCUMainViewController *)mainViewControllerWithMessageManager:(PCUMessageManager *)messageManager
+                                                completionBlock:(void (^)(PCUMainViewController *mainViewController))completionBlock {
     PCUMainViewController *renderViewController = (id)renderWindow.rootViewController;
     renderViewController.eventHandler.messageInteractor.messageManager = messageManager;
-    [renderViewController.eventHandler.messageInteractor.messageManager addInitalizeMessageItems:items];
+    [renderViewController.eventHandler.messageInteractor reloadAllItems];
     [renderViewController.tableView reloadDataWithCompletion:^{
         renderViewController.lastRows = [renderViewController.tableView numberOfRowsInSection:0];
         renderViewController.hasReloaded = YES;

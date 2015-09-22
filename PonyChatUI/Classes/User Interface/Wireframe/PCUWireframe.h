@@ -19,8 +19,7 @@
                      withMessageManager:(PCUMessageManager *)messageManager;
 
 - (void)addMainViewToViewController:(UIViewController<PCUDelegate> *)viewController
-                       messageItems:(NSArray<PCUMessageEntity *> *)messageItems
-                 withMessageManager:(PCUMessageManager *)messageManager
+                     messageManager:(PCUMessageManager *)messageManager
               waitUntilRendFinished:(void (^)(UIView *mainView))finishedBlock;
 
 @end

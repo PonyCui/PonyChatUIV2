@@ -57,7 +57,8 @@
         [items addObject:messageItem];
         self.fakeDateTimeInterval += arc4random() % 300;
     }
-    [self.core.wireframe addMainViewToViewController:self messageItems:items withMessageManager:self.core.messageManager waitUntilRendFinished:^(UIView *mainView) {
+    [self.core.messageManager addInitalizeMessageItems:items];
+    [self.core.wireframe addMainViewToViewController:self messageManager:self.core.messageManager waitUntilRendFinished:^(UIView *mainView) {
         self.chatView = mainView;
         [self configureChatView];
         if (completionBlock) {
